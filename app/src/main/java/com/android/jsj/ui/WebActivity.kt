@@ -1,0 +1,21 @@
+package com.android.jsj.ui
+
+import android.os.Bundle
+import com.android.jsj.JSJApplication
+import com.android.jsj.R
+import com.android.shuizu.myutillibrary.MyBaseActivity
+import com.android.shuizu.myutillibrary.initActionBar
+import kotlinx.android.synthetic.main.activity_web.*
+
+/**
+ * ChaYin
+ * Created by ${蔡雨峰} on 2018/11/6/006.
+ */
+class WebActivity:MyBaseActivity(){
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setContentView(R.layout.activity_web)
+        initActionBar(this,"注册协议")
+        contents.loadData(JSJApplication.systemInfo.zcxy,"text/html; charset=UTF-8", null)
+    }
+}
