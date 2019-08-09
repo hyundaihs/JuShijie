@@ -95,7 +95,7 @@ class KevinRequest private constructor(val context: Context) {
         return this
     }
 
-    fun request() {
+    fun request(){
         dialog?.show()
         context.doAsync {
             val request = Request.Builder().url(requestUrl).addHeader("cookie", sessionId).build()
@@ -104,6 +104,31 @@ class KevinRequest private constructor(val context: Context) {
             val response = call.execute()
             if (response.isSuccessful) {
                 val string = response.body().string()
+                getSession(response)
+                D("requestResult = $string")
+                uiThread {
+                    dialog?.dismiss()
+                    successCallback?.onSuccess(context, string)
+                }
+            } else {
+                uiThread {
+                    dialog?.dismiss()
+                    errorCallback?.onError(context, response.message())
+                }
+            }
+        }
+    }
+
+    fun getRequest() {
+        dialog?.show()
+        context.doAsync {
+            val request = Request.Builder().url(requestUrl).addHeader("cookie", sessionId).build()
+            val call = mOkHttpClient.newCall(request)
+            //请求加入调度
+            val response = call.execute()
+            if (response.isSuccessful) {
+                val string = response.body().string()
+                D("requestResult = $string")
                 getSession(response)
                 val res = Gson().fromJson(string, RequestResult::class.java)
                 if (res.retInt == 1) {
@@ -144,9 +169,9 @@ class KevinRequest private constructor(val context: Context) {
                 val response = mOkHttpClient.newCall(request).execute()
                 if (response.isSuccessful) {
                     val string = response.body().string()
+                    D("requestResult = $string")
                     getSession(response)
                     val res: RequestResult = Gson().fromJson(string, RequestResult::class.java)
-                    D("requestResult = $string")
                     if (res.retInt == 1) {
                         uiThread {
                             dialog?.dismiss()

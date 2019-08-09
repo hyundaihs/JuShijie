@@ -3,18 +3,30 @@ package com.android.jsj.ui
 import android.content.Context
 import android.content.DialogInterface
 import android.content.Intent
+import android.graphics.Color
 import android.os.Bundle
 import android.view.View
 import com.android.jsj.R
-import com.android.jsj.entity.REG
-import com.android.jsj.entity.SEND_VERF
-import com.android.jsj.entity.getInterface
+import com.android.jsj.entity.*
 import com.android.shuizu.myutillibrary.MyBaseActivity
+import com.android.shuizu.myutillibrary.request.KevinRequest
 import com.android.shuizu.myutillibrary.request.MySimpleRequest
+import com.android.shuizu.myutillibrary.request.getLoadingDialog
 import org.jetbrains.anko.toast
 import com.android.shuizu.myutillibrary.utils.LoginErrDialog
+import com.cazaea.sweetalert.SweetAlertDialog
 import com.google.gson.Gson
 import kotlinx.android.synthetic.main.activity_registration.*
+import android.widget.Toast
+import com.android.jsj.MainActivity
+import com.android.shuizu.myutillibrary.D
+import com.android.shuizu.myutillibrary.E
+import com.bigkoo.pickerview.listener.OnOptionsSelectChangeListener
+import com.bigkoo.pickerview.view.OptionsPickerView
+import com.bigkoo.pickerview.listener.OnOptionsSelectListener
+import com.bigkoo.pickerview.builder.OptionsPickerBuilder
+import com.google.gson.JsonParser
+
 
 /**
  * ChaYin
@@ -27,6 +39,10 @@ class RegistrationActivity : MyBaseActivity() {
     }
 
     var isRegister = false
+    private val provInfoList = ArrayList<ProvInfo>()
+    private var prov = ""
+    private var city = ""
+    private var area = ""
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -34,6 +50,7 @@ class RegistrationActivity : MyBaseActivity() {
         isRegister = intent.getBooleanExtra(PAGE_KEY, true)
         if (isRegister) {
             initRegistration()
+            getAreas()
         } else {
             initFindPswd()
         }
@@ -53,20 +70,64 @@ class RegistrationActivity : MyBaseActivity() {
         goLogin.setOnClickListener {
             finish()
         }
-        contract.setOnClickListener {
-            startActivity(Intent(it.context, WebActivity::class.java))
+
+        address.setOnClickListener {
+            PickerUtil.show(this
+            ) { options1, options2, options3, v ->
+                //返回的分别是三个级别的选中位置
+                prov = provInfoList[options1].title
+                city = provInfoList[options1].lists[options2].title
+                area = provInfoList[options1].lists[options2].lists[options3].title
+                address.setText("$prov-$city-$area")
+            }
+        }
+    }
+
+    private fun getAreas() {
+        KevinRequest.build(this).apply {
+            setRequestUrl(AREA)
+            setErrorCallback(object : KevinRequest.ErrorCallback {
+                override fun onError(context: Context, error: String) {
+                    SweetAlertDialog(context, SweetAlertDialog.ERROR_TYPE).apply {
+                        titleText = "地区信息获取失败，请检查网络后重试！"
+                        setCancelable(false)
+                        confirmText = "确定"
+                        setConfirmClickListener {
+                            finish()
+                        }
+                    }
+                }
+            })
+            setSuccessCallback(object : KevinRequest.SuccessCallback {
+                override fun onSuccess(context: Context, result: String) {
+                    //Json的解析类对象
+                    val parser = JsonParser()
+                    //将JSON的String 转成一个JsonArray对象
+                    val jsonArray = parser.parse(result).asJsonArray
+                    for (user in jsonArray) {
+                        //使用GSON，直接转成Bean对象
+                        val userBean = Gson().fromJson(user, ProvInfo::class.java)
+                        provInfoList.add(userBean)
+                    }
+                    PickerUtil.init(provInfoList)
+                }
+            })
+            setDialog()
+            request()
         }
     }
 
     private fun initRegistration() {
         goLogin.visibility = View.VISIBLE
-        layout_1.visibility = View.VISIBLE
+        address.visibility = View.VISIBLE
+        addressLine.visibility = View.VISIBLE
         submit.text = "注  册"
     }
 
     private fun initFindPswd() {
         goLogin.visibility = View.GONE
-        layout_1.visibility = View.GONE
+        address.visibility = View.GONE
+        addressLine.visibility = View.GONE
         submit.text = "提  交"
     }
 
@@ -80,6 +141,9 @@ class RegistrationActivity : MyBaseActivity() {
         } else if (verifyCode.text.isEmpty()) {
             verifyCode.error = "验证码不能为空"
             return false
+        } else if (address.text.isEmpty() && isRegister) {
+            address.error = "注册区域不能为空"
+            return false
         } else {
             return true
         }
@@ -87,45 +151,48 @@ class RegistrationActivity : MyBaseActivity() {
 
     private fun getVerifyCode() {
         val map = mapOf(Pair("phone", phone.text.toString()))
-        MySimpleRequest(object : MySimpleRequest.RequestCallBack {
-            override fun onSuccess(context: Context, result: String) {
-            }
-
-            override fun onError(context: Context, error: String) {
-                toast(error)
-            }
-
-            override fun onLoginErr(context: Context) {
-                LoginErrDialog(DialogInterface.OnClickListener { _, _ ->
-                    val intent = Intent(context, LoginActivity::class.java)
-                    startActivity(intent)
-                })
-            }
-
-        }).postRequest(this, SEND_VERF.getInterface(Gson().toJson(map)), map)
+        KevinRequest.build(this).apply {
+            setRequestUrl(SEND_VERF.getInterface(Gson().toJson(map)))
+            setErrorCallback(object : KevinRequest.ErrorCallback {
+                override fun onError(context: Context, error: String) {
+                    toast(error)
+                }
+            })
+            setSuccessCallback(object : KevinRequest.SuccessCallback {
+                override fun onSuccess(context: Context, result: String) {
+                    toast("已发送短信")
+                }
+            })
+            setDataMap(map)
+            postRequest()
+        }
     }
 
     private fun submit() {
-        val map = mapOf(Pair("phone", phone.text.toString()),
-                Pair("msgverf", verifyCode.text.toString()),
-                Pair("password", password.text.toString()))
-        MySimpleRequest(object : MySimpleRequest.RequestCallBack {
-            override fun onSuccess(context: Context, result: String) {
-                toast("注册成功")
-                finish()
-            }
-
-            override fun onError(context: Context, error: String) {
-                toast(error)
-            }
-
-            override fun onLoginErr(context: Context) {
-                LoginErrDialog(DialogInterface.OnClickListener { _, _ ->
-                    val intent = Intent(context, LoginActivity::class.java)
-                    startActivity(intent)
-                })
-            }
-
-        }).postRequest(this, REG.getInterface(Gson().toJson(map)), map)
+        val map = mapOf(
+            Pair("phone", phone.text.toString()),
+            Pair("msgverf", verifyCode.text.toString()),
+            Pair("password", password.text.toString()),
+            Pair("province", prov),
+            Pair("city", city),
+            Pair("area", area)
+        )
+        KevinRequest.build(this).apply {
+            setRequestUrl(REG.getInterface(Gson().toJson(map)))
+            setErrorCallback(object : KevinRequest.ErrorCallback {
+                override fun onError(context: Context, error: String) {
+                    toast(error)
+                }
+            })
+            setSuccessCallback(object : KevinRequest.SuccessCallback {
+                override fun onSuccess(context: Context, result: String) {
+                    toast("注册成功")
+                    finish()
+                }
+            })
+            setDataMap(map)
+            setDialog()
+            postRequest()
+        }
     }
 }
