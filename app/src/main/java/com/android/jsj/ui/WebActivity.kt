@@ -12,10 +12,14 @@ import kotlinx.android.synthetic.main.activity_web.*
  * Created by ${蔡雨峰} on 2018/11/6/006.
  */
 class WebActivity:MyBaseActivity(){
+    companion object {
+        var pageTitle = ""
+        var pageContent = ""
+    }
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_web)
-        initActionBar(this,"注册协议")
-        contents.loadData(JSJApplication.systemInfo.zcxy,"text/html; charset=UTF-8", null)
+        initActionBar(this,pageTitle)
+        contents.loadData(pageContent,"text/html; charset=UTF-8", null)
     }
 }

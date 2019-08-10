@@ -53,7 +53,7 @@ class KevinRequest private constructor(val context: Context) {
     private var downloadSuccessCallback: DownloadSuccessCallback? = null
     private var requestUrl: String = ""
     private var dialog: Dialog? = null
-    private var map = mapOf(Pair("", ""))
+    private var map : Map<String,Any>? = null
 
     fun setRequestUrl(url: String): KevinRequest {
         requestUrl = url
@@ -90,7 +90,7 @@ class KevinRequest private constructor(val context: Context) {
         return this
     }
 
-    fun setDataMap(m: Map<String, String>): KevinRequest {
+    fun setDataMap(m: Map<String, Any>): KevinRequest {
         map = m
         return this
     }
@@ -208,7 +208,11 @@ class KevinRequest private constructor(val context: Context) {
     fun uploadFile(files: ArrayList<String>) {
         dialog?.show()
         doAsync {
-            val name = "uploadedfile[]"
+            val name = if(files.size > 1){
+                "uploadedfile[]"
+            }else{
+                "uploadedfile"
+            }
             val requestBodyBuilder = MultipartBody.Builder().setType(MultipartBody.FORM)
             for (i in 0 until files.size) {
                 val file = File(files[i])
@@ -368,10 +372,20 @@ fun Context.getLoadingDialog(): SweetAlertDialog {
     }
 }
 
-fun Any.getErrorDialog(context: Context, error: String): SweetAlertDialog {
+fun Any.getSuccessDialog(context: Context,meesage:String,listener: SweetAlertDialog.OnSweetClickListener? = null):SweetAlertDialog {
+    return SweetAlertDialog(context, SweetAlertDialog.SUCCESS_TYPE).apply {
+        titleText = meesage
+        confirmText = "确定"
+        setConfirmClickListener(listener)
+        show()
+    }
+}
+
+fun Any.getErrorDialog(context: Context, error: String,listener: SweetAlertDialog.OnSweetClickListener? = null): SweetAlertDialog {
     return SweetAlertDialog(context, SweetAlertDialog.ERROR_TYPE).apply {
         titleText = error
         confirmText = "确定"
+        setConfirmClickListener(listener)
         show()
     }
 }

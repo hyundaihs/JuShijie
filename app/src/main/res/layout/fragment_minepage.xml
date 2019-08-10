@@ -2,7 +2,8 @@
 <android.support.constraint.ConstraintLayout
         xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:app="http://schemas.android.com/apk/res-auto"
-        android:layout_width="match_parent" android:layout_height="match_parent">
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
 
     <LinearLayout
             android:id="@+id/layout_2"
@@ -20,6 +21,7 @@
                 android:layout_weight="1"
                 android:gravity="end|bottom"
                 android:orientation="horizontal">
+
             <ImageView
                     android:id="@+id/setting"
                     android:layout_width="wrap_content"
@@ -48,6 +50,7 @@
                     android:orientation="horizontal">
 
                 <de.hdodenhof.circleimageview.CircleImageView
+                        android:id="@+id/userPhoto"
                         android:layout_width="80dp"
                         android:layout_height="80dp"
                         app:civ_border_width="1dp"
@@ -61,22 +64,26 @@
                         android:layout_marginStart="10dp"
                         android:orientation="vertical">
 
-                    <TextView android:layout_width="wrap_content"
-                              android:layout_height="wrap_content"
-                              android:text="毛晓彤"
-                              android:textColor="@android:color/white"
-                              android:textSize="20sp"/>
+                    <TextView
+                            android:id="@+id/userName"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="毛晓彤"
+                            android:textColor="@android:color/white"
+                            android:textSize="20sp"/>
 
-                    <TextView android:layout_width="wrap_content"
-                              android:layout_height="wrap_content"
-                              android:text="申请成为商家"
-                              android:paddingStart="15dp"
-                              android:paddingEnd="15dp"
-                              android:paddingTop="2dp"
-                              android:paddingBottom="2dp"
-                              android:background="@drawable/rect_corners_white"
-                              android:textColor="@android:color/black"
-                              android:textSize="16sp"/>
+                    <TextView
+                            android:id="@+id/applyToMerchant"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="申请成为商家"
+                            android:paddingStart="15dp"
+                            android:paddingEnd="15dp"
+                            android:paddingTop="2dp"
+                            android:paddingBottom="2dp"
+                            android:background="@drawable/rect_corners_white"
+                            android:textColor="@android:color/black"
+                            android:textSize="16sp"/>
                 </LinearLayout>
             </LinearLayout>
 
@@ -96,7 +103,7 @@
                         android:layout_weight="1">
 
                     <de.hdodenhof.circleimageview.CircleImageView
-                            android:id="@+id/image_merchant"
+                            android:id="@+id/merchantPhoto"
                             android:layout_width="0dp"
                             android:layout_height="0dp"
                             app:civ_border_width="1dp"
@@ -109,28 +116,32 @@
                             android:src="@mipmap/ic_launcher"/>
 
 
-                    <TextView android:layout_width="wrap_content"
-                              android:layout_height="wrap_content"
-                              android:text="东鹏陶瓷"
-                              android:layout_marginStart="10dp"
-                              app:layout_constraintLeft_toRightOf="@+id/image_merchant"
-                              app:layout_constraintTop_toTopOf="@+id/image_merchant"
-                              android:textColor="@android:color/white"
-                              android:textSize="16sp"/>
+                    <TextView
+                            android:id="@+id/merchantName"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="东鹏陶瓷"
+                            android:layout_marginStart="10dp"
+                            app:layout_constraintLeft_toRightOf="@+id/merchantPhoto"
+                            app:layout_constraintTop_toTopOf="@+id/merchantPhoto"
+                            android:textColor="@android:color/white"
+                            android:textSize="16sp"/>
 
-                    <TextView android:layout_width="wrap_content"
-                              android:layout_height="wrap_content"
-                              android:text="桂林市东鹏陶瓷科技有限公司  >"
-                              android:paddingStart="10dp"
-                              android:layout_marginStart="10dp"
-                              android:paddingEnd="10dp"
-                              app:layout_constraintLeft_toRightOf="@+id/image_merchant"
-                              app:layout_constraintBottom_toBottomOf="@+id/image_merchant"
-                              android:paddingTop="5dp"
-                              android:paddingBottom="5dp"
-                              android:background="@drawable/rect_corners_white_tranl"
-                              android:textColor="@android:color/white"
-                              android:textSize="14sp"/>
+                    <TextView
+                            android:id="@+id/merchantCompany"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="桂林市东鹏陶瓷科技有限公司  >"
+                            android:paddingStart="10dp"
+                            android:layout_marginStart="10dp"
+                            android:paddingEnd="10dp"
+                            app:layout_constraintLeft_toRightOf="@+id/merchantPhoto"
+                            app:layout_constraintBottom_toBottomOf="@+id/merchantPhoto"
+                            android:paddingTop="5dp"
+                            android:paddingBottom="5dp"
+                            android:background="@drawable/rect_corners_white_tranl"
+                            android:textColor="@android:color/white"
+                            android:textSize="14sp"/>
 
 
                 </android.support.constraint.ConstraintLayout>
@@ -143,44 +154,50 @@
                         android:paddingTop="20dp"
                         android:orientation="horizontal">
 
-                    <LinearLayout android:layout_width="0dp"
-                                  android:layout_weight="1"
-                                  android:gravity="center"
-                                  android:background="@color/bg_4"
-                                  android:layout_height="match_parent">
+                    <LinearLayout
+                            android:layout_width="0dp"
+                            android:layout_weight="1"
+                            android:gravity="center"
+                            android:background="@color/bg_4"
+                            android:layout_height="match_parent">
 
-                        <TextView android:layout_width="wrap_content"
-                                  android:layout_height="wrap_content"
-                                  android:text="申请直播间"
-                                  android:paddingStart="15dp"
-                                  android:drawablePadding="5dp"
-                                  android:drawableStart="@mipmap/apply_alive"
-                                  android:paddingEnd="15dp"
-                                  android:paddingTop="2dp"
-                                  android:paddingBottom="2dp"
-                                  android:background="@drawable/rect_corners_white"
-                                  android:textColor="@color/text_2"
-                                  android:textSize="14sp"/>
+                        <TextView
+                                android:id="@+id/applyLiveRoom"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="申请直播间"
+                                android:paddingStart="15dp"
+                                android:drawablePadding="5dp"
+                                android:drawableStart="@mipmap/apply_alive"
+                                android:paddingEnd="15dp"
+                                android:paddingTop="2dp"
+                                android:paddingBottom="2dp"
+                                android:background="@drawable/rect_corners_white"
+                                android:textColor="@color/text_2"
+                                android:textSize="14sp"/>
                     </LinearLayout>
 
-                    <LinearLayout android:layout_width="0dp"
-                                  android:layout_weight="1"
-                                  android:gravity="center"
-                                  android:background="@color/bg_4"
-                                  android:layout_height="match_parent">
+                    <LinearLayout
+                            android:layout_width="0dp"
+                            android:layout_weight="1"
+                            android:gravity="center"
+                            android:background="@color/bg_4"
+                            android:layout_height="match_parent">
 
-                        <TextView android:layout_width="wrap_content"
-                                  android:layout_height="wrap_content"
-                                  android:text="申请VIP商家"
-                                  android:drawablePadding="5dp"
-                                  android:drawableStart="@mipmap/apply_vip"
-                                  android:paddingStart="15dp"
-                                  android:paddingEnd="15dp"
-                                  android:paddingTop="2dp"
-                                  android:paddingBottom="2dp"
-                                  android:background="@drawable/rect_corners_white"
-                                  android:textColor="@color/text_2"
-                                  android:textSize="14sp"/>
+                        <TextView
+                                android:id="@+id/applyVIPMerchant"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="申请VIP商家"
+                                android:drawablePadding="5dp"
+                                android:drawableStart="@mipmap/apply_vip"
+                                android:paddingStart="15dp"
+                                android:paddingEnd="15dp"
+                                android:paddingTop="2dp"
+                                android:paddingBottom="2dp"
+                                android:background="@drawable/rect_corners_white"
+                                android:textColor="@color/text_2"
+                                android:textSize="14sp"/>
                     </LinearLayout>
 
                 </LinearLayout>

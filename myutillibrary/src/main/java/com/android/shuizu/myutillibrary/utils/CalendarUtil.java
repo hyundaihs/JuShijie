@@ -27,6 +27,7 @@ public class CalendarUtil {
     public static final String YYYY_MM_DD_HH_MM = "yyyy-MM-dd HH:mm";
     public static final String YYYYMMDD = "yyyyMMdd";
     public static final String YY_MM_DD_HH_MM = "yy/MM/dd\nHH:mm";
+    public static final String MM_DD_HH_MM = "MM/dd HH:mm";
 
     private Calendar c;
 

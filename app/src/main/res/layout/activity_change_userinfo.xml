@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+    <include layout="@layout/layout_toolbar"/>
+
+    <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:padding="10dp"
+            android:orientation="vertical">
+
+        <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+            <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="头像"
+                    android:textSize="16sp"
+                    android:textColor="@color/black"/>
+
+            <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="(点击下方图片修改头像)"
+                    android:textSize="14sp"
+                    android:textColor="@color/bg_9"/>
+        </LinearLayout>
+
+        <ImageView
+                android:id="@+id/userInfoPhoto"
+                android:layout_width="80dp"
+                android:layout_height="80dp"
+                android:layout_marginTop="20dp"
+                android:contentDescription="@null"
+                android:src="@mipmap/ic_launcher"/>
+
+        <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="昵称："
+                android:layout_marginTop="20dp"
+                android:layout_marginBottom="10dp"
+                android:textSize="16sp"
+                android:textColor="@color/black"/>
+
+        <EditText
+                android:id="@+id/userInfoName"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@android:color/transparent"
+                android:drawablePadding="5dp"
+                android:hint="请输入新的昵称"
+                android:imeActionId="6"
+                android:imeOptions="actionUnspecified"
+                android:inputType="text"
+                android:maxLines="1"
+                android:singleLine="true"
+                android:textSize="14sp"/>
+
+        <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@color/gray_1"
+                android:layout_marginTop="10dp"/>
+
+        <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:padding="40dp"
+                android:gravity="center">
+
+            <TextView
+                    android:id="@+id/userInfoSubmit"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/rect_round_purple"
+                    android:gravity="center"
+                    android:textColor="@android:color/white"
+                    android:text="提  交"
+                    android:padding="10dp"
+                    android:textSize="16sp"/>
+        </LinearLayout>
+
+    </LinearLayout>
+</LinearLayout>

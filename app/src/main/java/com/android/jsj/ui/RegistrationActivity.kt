@@ -21,6 +21,7 @@ import android.widget.Toast
 import com.android.jsj.MainActivity
 import com.android.shuizu.myutillibrary.D
 import com.android.shuizu.myutillibrary.E
+import com.android.shuizu.myutillibrary.request.getErrorDialog
 import com.bigkoo.pickerview.listener.OnOptionsSelectChangeListener
 import com.bigkoo.pickerview.view.OptionsPickerView
 import com.bigkoo.pickerview.listener.OnOptionsSelectListener
@@ -88,14 +89,9 @@ class RegistrationActivity : MyBaseActivity() {
             setRequestUrl(AREA)
             setErrorCallback(object : KevinRequest.ErrorCallback {
                 override fun onError(context: Context, error: String) {
-                    SweetAlertDialog(context, SweetAlertDialog.ERROR_TYPE).apply {
-                        titleText = "地区信息获取失败，请检查网络后重试！"
-                        setCancelable(false)
-                        confirmText = "确定"
-                        setConfirmClickListener {
-                            finish()
-                        }
-                    }
+                    getErrorDialog(context,"地区信息获取失败，请检查网络后重试！", SweetAlertDialog.OnSweetClickListener {
+                        finish()
+                    })
                 }
             })
             setSuccessCallback(object : KevinRequest.SuccessCallback {
@@ -152,10 +148,10 @@ class RegistrationActivity : MyBaseActivity() {
     private fun getVerifyCode() {
         val map = mapOf(Pair("phone", phone.text.toString()))
         KevinRequest.build(this).apply {
-            setRequestUrl(SEND_VERF.getInterface(Gson().toJson(map)))
+            setRequestUrl(SEND_VERF.getInterface(map))
             setErrorCallback(object : KevinRequest.ErrorCallback {
                 override fun onError(context: Context, error: String) {
-                    toast(error)
+                    getErrorDialog(context,error)
                 }
             })
             setSuccessCallback(object : KevinRequest.SuccessCallback {
@@ -178,7 +174,7 @@ class RegistrationActivity : MyBaseActivity() {
             Pair("area", area)
         )
         KevinRequest.build(this).apply {
-            setRequestUrl(REG.getInterface(Gson().toJson(map)))
+            setRequestUrl(REG.getInterface(map))
             setErrorCallback(object : KevinRequest.ErrorCallback {
                 override fun onError(context: Context, error: String) {
                     toast(error)

@@ -40,11 +40,9 @@ class LoginActivity : MyBaseActivity() {
             startActivity(intent)
         }
         loginBtn.setOnClickListener {
-            //            if (checkData()) {
-//                login()
-//            }
-            startActivity(Intent(this@LoginActivity, HomeActivity::class.java))
-            finish()
+            if (checkData()) {
+                login()
+            }
         }
         getSystemInfo()
     }
@@ -53,12 +51,7 @@ class LoginActivity : MyBaseActivity() {
         if (!login_verf.isEmpty()) {
             val map = mapOf(Pair("login_verf", login_verf))
             KevinRequest.build(this).apply {
-                setRequestUrl(VERF_LOGIN.getInterface(Gson().toJson(map)))
-                setErrorCallback(object : KevinRequest.ErrorCallback {
-                    override fun onError(context: Context, error: String) {
-
-                    }
-                })
+                setRequestUrl(VERF_LOGIN.getInterface(map))
                 setSuccessCallback(object : KevinRequest.SuccessCallback {
                     override fun onSuccess(context: Context, result: String) {
                         val loginInfoRes = Gson().fromJson(result, LoginInfoRes::class.java)
@@ -96,16 +89,19 @@ class LoginActivity : MyBaseActivity() {
             Pair("password", password.text.toString())
         )
         KevinRequest.build(this).apply {
-            setRequestUrl(LOGIN.getInterface(Gson().toJson(map)))
+            setRequestUrl(LOGIN.getInterface(map))
             setErrorCallback(object : KevinRequest.ErrorCallback {
                 override fun onError(context: Context, error: String) {
-
+                    getErrorDialog(context, error)
                 }
-
             })
             setSuccessCallback(object : KevinRequest.SuccessCallback {
                 override fun onSuccess(context: Context, result: String) {
-
+                    val loginInfoRes = Gson().fromJson(result, LoginInfoRes::class.java)
+                    val loginInfo = loginInfoRes.retRes
+                    login_verf = loginInfo.login_verf
+                    startActivity(Intent(this@LoginActivity, HomeActivity::class.java))
+                    finish()
                 }
 
             })
@@ -116,14 +112,13 @@ class LoginActivity : MyBaseActivity() {
     }
 
     private fun getSystemInfo() {
-        val map = mapOf(
-            Pair("", "")
-        )
         KevinRequest.build(this).apply {
-            setRequestUrl(SYS_INFO.getInterface(Gson().toJson(map)))
+            setRequestUrl(SYS_INFO.getInterface())
             setErrorCallback(object : KevinRequest.ErrorCallback {
                 override fun onError(context: Context, error: String) {
-                    getErrorDialog(context, error)
+                    getErrorDialog(context, error, SweetAlertDialog.OnSweetClickListener {
+                        finish()
+                    })
                 }
             })
             setSuccessCallback(object : KevinRequest.SuccessCallback {

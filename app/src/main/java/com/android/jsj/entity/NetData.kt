@@ -3,6 +3,7 @@ package com.android.jsj.entity
 import android.text.TextUtils
 import android.util.Log
 import com.android.shuizu.myutillibrary.utils.CalendarUtil
+import com.google.gson.Gson
 import java.security.MessageDigest
 
 /**
@@ -21,7 +22,11 @@ fun String.getImageUrl(): String {
     return if (this.contains("http")) this else ROOT_URL + "/" + this
 }
 
-fun String.getInterface(jsonStr: String): String {
+fun String.getInterface(map: Map<String, Any>? = null): String {
+    var jsonStr = ""
+    if(map != null){
+        jsonStr = Gson().toJson(map)
+    }
     val keyStr = getKeyStr(jsonStr, this)
     Log.d("md",keyStr)
     return ROOT_URL + INTERFACE_INDEX + this + FROM + KEY_STR + keyStr
@@ -49,8 +54,7 @@ private fun md5(string: String): String {
     return result
 }
 
-const val UPFILE = "upfile"//文件上传
-const val UPFILE_LISTS = "upfilelists"//文件上传
+const val UPLOADFILE = "uploadfile"//文件上传
 /*phone：手机号码*/
 const val SEND_VERF = "sendverf" //发送短信验证码
 
@@ -80,5 +84,18 @@ const val SET_INFO = "setinfo" //修改用户信息
 
 const val SYS_INFO = "sysinfo" //获取系统介绍信息
 
-const val BANNER = "banner" //获取系统介绍信息
+const val BANNER = "banner" //获取Banner图片
+
+const val BANNERINFO = "bannerinfo" //获取banner详情
+
+const val ONLINEINFO = "onlineinfo" //在线人数
+
+const val CHANGEPCA = "changepca" //修改地址
+
+const val SJLB = "sjlb" //商家列表
+
+const val MSGLISTS = "msglists" //系统通知列表
+const val MSGINFO = "msginfo" //系统通知详情
+const val SETINFO = "setinfo" //设置用户信息
+const val TJSJSQ = "tjsjsq" //提交商家申请
 

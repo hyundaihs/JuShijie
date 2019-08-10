@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingTop="10dp"
+        android:paddingBottom="10dp">
+
+    <CheckBox
+            android:id="@+id/isRead"
+            android:layout_width="10dp"
+            android:layout_height="10dp"
+            android:button="@null"
+            android:background="@drawable/circle_orange"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/msgFrom"
+            app:layout_constraintBottom_toBottomOf="@+id/msgFrom"
+            android:contentDescription="@null"/>
+
+    <TextView
+            android:id="@+id/msgFrom"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="系统通知"
+            android:layout_marginStart="10dp"
+            android:textSize="16sp"
+            android:textColor="@color/black"
+            app:layout_constraintLeft_toRightOf="@+id/isRead"
+            />
+
+    <TextView
+            android:id="@+id/msgType"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="登录成功!"
+            android:textSize="14sp"
+            android:textColor="@color/text_4"
+            app:layout_constraintLeft_toLeftOf="@+id/msgFrom"
+            app:layout_constraintTop_toBottomOf="@+id/msgFrom"/>
+
+    <TextView
+            android:id="@+id/createTime"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:drawableStart="@mipmap/icon_pulish_time"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/msgFrom"
+            app:layout_constraintBottom_toBottomOf="@+id/msgFrom"
+            android:textColor="@color/text_5"
+            android:textSize="12sp"/>
+
+</android.support.constraint.ConstraintLayout>

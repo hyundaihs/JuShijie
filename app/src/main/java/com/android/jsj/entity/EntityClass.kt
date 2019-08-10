@@ -127,6 +127,7 @@ data class UserInfo(
     val id: Int,
     var account: String,
     var type_id: Int,
+    var title: String,
     var file_url: String,
     var area: String,
     var city: String,
@@ -151,7 +152,8 @@ data class AreaInfo(val code: String, val title: String, val ykt: Int)
 
 data class CityInfo(val code: String, val title: String, val ykt: Int, var lists: ArrayList<AreaInfo>)
 
-data class ProvInfo(val code: String, val title: String, val ykt: Int, var lists: ArrayList<CityInfo>) : IPickerViewData {
+data class ProvInfo(val code: String, val title: String, val ykt: Int, var lists: ArrayList<CityInfo>) :
+    IPickerViewData {
     override fun getPickerViewText(): String {
         return title
     }
@@ -184,3 +186,77 @@ data class UploadInfo(var file_url: String)
 data class UploadInfoRes(var retRes: UploadInfo) : RequestResult()
 
 data class UploadInfoListRes(var retRes: ArrayList<String>) : RequestResult()
+
+/*
+[province] => 当前省
+[city] => 当前市
+[area] => 当前区
+[all_num] => 总在线人数
+[online_num] => 当前市在线人数*/
+
+data class OnlineNumInfo(
+    val province: String,
+    val city: String,
+    val area: String,
+    val all_num: Int,
+    val online_num: Int
+)
+
+data class OnlineNumInfoRes(var retRes: OnlineNumInfo) : RequestResult()
+
+/*[id] => 账号id
+[title] => 昵称/公司简称
+[pp_title] => 品牌名
+[file_url] => 头像
+[gz_nums] => 关注数
+[zan_nums] => 点赞数
+[ft_nums] => 发帖数
+[pp_id] => 品牌id
+[pp_title] => 品牌名称
+[pp_file_url] => 品牌logo
+[tags] => 标签（世界500强,优秀企业  ,隔开）*/
+data class MerchantInfo(
+    val id: Int, val title: String, val file_url: String, val gz_nums: Int, val zan_nums: Int,
+    val ft_nums: Int, val pp_id: Int, val pp_title: String, val pp_file_url: String, val tags: String
+)
+
+data class MerchantInfoListRes(val retRes: ArrayList<MerchantInfo>) : RequestResult()
+
+/*[id] => 通知id
+[type_str] => 通知类型（登录成功）
+[from_title] => 通知来源（系统通知）
+[title] => 通知标题（登录成功！）
+[contents] => 通知详情
+[is_read] => 是否已读（0|1）
+[create_time] => 时间戳*/
+
+data class MessageInfo(
+    val id: Int,
+    val type_str: String,
+    val from_title: String,
+    val title: String,
+    val contents: String,
+    val is_read: Int,
+    val create_time: Long
+)
+
+data class MessageInfoRes(val retRes: MessageInfo) : RequestResult()
+
+data class MessageInfoListRes(val retRes: ArrayList<MessageInfo>) : RequestResult()
+
+/*[id] => 文件id
+[file_url] => 文件地址
+[title] => 文件名称
+[file_size] => 文件大小
+[file_ext] => 文件后缀
+[resize_file] => 缩略图地址*/
+data class UploadFileInfo(
+    val id: Int,
+    val file_url: String,
+    val title: String,
+    val file_size: String,
+    val file_ext: String,
+    val resize_file: String
+)
+
+data class UploadFileInfoRes(var retRes: UploadFileInfo) : RequestResult()

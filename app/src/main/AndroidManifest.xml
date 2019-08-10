@@ -44,10 +44,13 @@
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
         </activity>
-        <activity android:name=".ui.LoginActivity"/>
+        <activity android:name=".ui.LoginActivity"
+                android:launchMode="singleTask"/>
         <activity android:name=".ui.RegistrationActivity"/>
         <activity android:name=".ui.WebActivity"/>
         <activity android:name=".ui.HomeActivity"/>
+        <activity android:name=".ui.ChangeUserInfoActivity"/>
+        <activity android:name=".ui.ApplyMerchantActivity"/>
     </application>
 
 </manifest>

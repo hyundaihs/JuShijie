@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/white"
+        android:padding="10dp">
+
+    <ImageView
+            android:id="@+id/merchantLogo"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:contentDescription="@null"
+            android:scaleType="fitXY"
+            app:layout_constraintDimensionRatio="1:1"
+            android:src="@mipmap/pic_demo"/>
+
+    <TextView
+            android:id="@+id/merchantName"
+            android:layout_width="wrap_content"
+            android:layout_height="20dp"
+            app:layout_constraintTop_toTopOf="@+id/merchantLogo"
+            app:layout_constraintLeft_toRightOf="@+id/merchantLogo"
+            android:text="东鹏陶瓷"
+            android:layout_marginLeft="20dp"
+            android:textSize="16sp"
+            android:textColor="@color/black"/>
+
+    <TextView
+            android:id="@+id/merchantCompany"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toBottomOf="@+id/merchantName"
+            app:layout_constraintLeft_toLeftOf="@+id/merchantName"
+            app:layout_constraintBottom_toTopOf="@+id/merchantTag1"
+            android:text="桂林市东鹏装饰有限公司"
+            android:textSize="14sp"
+            android:textColor="@color/text_4"/>
+
+    <TextView
+            android:id="@+id/merchantTag1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintLeft_toLeftOf="@+id/merchantName"
+            app:layout_constraintTop_toBottomOf="@+id/merchantCompany"
+            app:layout_constraintBottom_toTopOf="@+id/merchantTag2"
+            android:text="中国建材品牌一百强企业"
+            android:textSize="12sp"
+            android:textColor="@color/text_5"/>
+
+    <TextView
+            android:id="@+id/merchantTag2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintLeft_toLeftOf="@+id/merchantName"
+            app:layout_constraintBottom_toBottomOf="@+id/merchantLogo"
+            android:text="中国建筑协会会员单位"
+            android:textSize="12sp"
+            android:textColor="@color/text_5"/>
+
+</android.support.constraint.ConstraintLayout>

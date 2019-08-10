@@ -2,6 +2,7 @@ package com.android.jsj
 
 import android.app.Application
 import com.android.jsj.entity.SystemInfo
+import com.android.jsj.entity.UserInfo
 import kotlin.properties.Delegates
 
 /**
@@ -13,6 +14,7 @@ class JSJApplication : Application() {
     companion object {
         var instance: JSJApplication by Delegates.notNull()
         var systemInfo: SystemInfo by Delegates.notNull()
+        var userInfo:UserInfo by Delegates.notNull()
         var isUserinfoChange = false
     }
 

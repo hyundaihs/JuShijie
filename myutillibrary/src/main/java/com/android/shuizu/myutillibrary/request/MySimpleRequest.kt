@@ -214,7 +214,11 @@ public class MySimpleRequest(var callback: RequestCallBack? = null, val getProgr
             dialog = MyProgressDialog(context)
         }
         doAsync {
-            val name = "uploadedfile[]"
+            val name = if(files.size > 1){
+                "uploadedfile[]"
+            }else{
+                "uploadedfile"
+            }
             val requestBodyBuilder = MultipartBody.Builder().setType(MultipartBody.FORM)
             for (i in 0 until files.size) {
                 val file = File(files[i])

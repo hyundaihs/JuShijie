@@ -20,15 +20,9 @@
 # hide the original source file name.
 #-renamesourcefileattribute SourceFile
 
-#地区3级联动选择器
+#PictureSelector 2.0
+-keep class com.luck.picture.lib.** { *; }
 
--keep class com.lljjcoder.**{
-	*;
-}
-
--dontwarn demo.**
--keep class demo.**{*;}
--dontwarn net.sourceforge.pinyin4j.**
--keep class net.sourceforge.pinyin4j.**{*;}
--keep class net.sourceforge.pinyin4j.format.**{*;}
--keep class net.sourceforge.pinyin4j.format.exception.**{*;}
+-dontwarn com.yalantis.ucrop**
+-keep class com.yalantis.ucrop** { *; }
+-keep interface com.yalantis.ucrop** { *; }
