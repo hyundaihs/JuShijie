@@ -1,7 +1,9 @@
 package com.android.shuizu.myutillibrary.request
 
+import android.app.Activity
 import android.app.AlertDialog
 import android.app.Dialog
+import android.content.ComponentName
 import android.content.Context
 import android.content.Intent
 import android.os.Environment
@@ -53,7 +55,7 @@ class KevinRequest private constructor(val context: Context) {
     private var downloadSuccessCallback: DownloadSuccessCallback? = null
     private var requestUrl: String = ""
     private var dialog: Dialog? = null
-    private var map : Map<String,Any>? = null
+    private var map: Map<String, Any>? = null
 
     fun setRequestUrl(url: String): KevinRequest {
         requestUrl = url
@@ -80,6 +82,17 @@ class KevinRequest private constructor(val context: Context) {
         return this
     }
 
+    fun openLoginErrCallback(cls: Class<*>) {
+        setLoginErrCallback(object : KevinRequest.LoginErrCallback {
+            override fun onLoginErr(context: Context) {
+                getLoginErrDialog(context, SweetAlertDialog.OnSweetClickListener {
+                    context.startActivity(Intent(context, cls))
+                    (context as Activity).finish()
+                })
+            }
+        })
+    }
+
     fun setProgressCallback(c: ProgressCallback): KevinRequest {
         progressCallback = c
         return this
@@ -95,7 +108,7 @@ class KevinRequest private constructor(val context: Context) {
         return this
     }
 
-    fun request(){
+    fun request() {
         dialog?.show()
         context.doAsync {
             val request = Request.Builder().url(requestUrl).addHeader("cookie", sessionId).build()
@@ -208,9 +221,9 @@ class KevinRequest private constructor(val context: Context) {
     fun uploadFile(files: ArrayList<String>) {
         dialog?.show()
         doAsync {
-            val name = if(files.size > 1){
+            val name = if (files.size > 1) {
                 "uploadedfile[]"
-            }else{
+            } else {
                 "uploadedfile"
             }
             val requestBodyBuilder = MultipartBody.Builder().setType(MultipartBody.FORM)
@@ -372,7 +385,24 @@ fun Context.getLoadingDialog(): SweetAlertDialog {
     }
 }
 
-fun Any.getSuccessDialog(context: Context,meesage:String,listener: SweetAlertDialog.OnSweetClickListener? = null):SweetAlertDialog {
+fun Any.getMessageDialog(
+    context: Context,
+    meesage: String,
+    listener: SweetAlertDialog.OnSweetClickListener? = null
+): SweetAlertDialog {
+    return SweetAlertDialog(context, SweetAlertDialog.NORMAL_TYPE).apply {
+        titleText = meesage
+        confirmText = "确定"
+        setConfirmClickListener(listener)
+        show()
+    }
+}
+
+fun Any.getSuccessDialog(
+    context: Context,
+    meesage: String,
+    listener: SweetAlertDialog.OnSweetClickListener? = null
+): SweetAlertDialog {
     return SweetAlertDialog(context, SweetAlertDialog.SUCCESS_TYPE).apply {
         titleText = meesage
         confirmText = "确定"
@@ -381,7 +411,11 @@ fun Any.getSuccessDialog(context: Context,meesage:String,listener: SweetAlertDia
     }
 }
 
-fun Any.getErrorDialog(context: Context, error: String,listener: SweetAlertDialog.OnSweetClickListener? = null): SweetAlertDialog {
+fun Any.getErrorDialog(
+    context: Context,
+    error: String,
+    listener: SweetAlertDialog.OnSweetClickListener? = null
+): SweetAlertDialog {
     return SweetAlertDialog(context, SweetAlertDialog.ERROR_TYPE).apply {
         titleText = error
         confirmText = "确定"

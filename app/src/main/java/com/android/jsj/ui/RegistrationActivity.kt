@@ -1,31 +1,17 @@
 package com.android.jsj.ui
 
 import android.content.Context
-import android.content.DialogInterface
-import android.content.Intent
-import android.graphics.Color
 import android.os.Bundle
 import android.view.View
 import com.android.jsj.R
 import com.android.jsj.entity.*
 import com.android.shuizu.myutillibrary.MyBaseActivity
 import com.android.shuizu.myutillibrary.request.KevinRequest
-import com.android.shuizu.myutillibrary.request.MySimpleRequest
-import com.android.shuizu.myutillibrary.request.getLoadingDialog
 import org.jetbrains.anko.toast
-import com.android.shuizu.myutillibrary.utils.LoginErrDialog
 import com.cazaea.sweetalert.SweetAlertDialog
 import com.google.gson.Gson
 import kotlinx.android.synthetic.main.activity_registration.*
-import android.widget.Toast
-import com.android.jsj.MainActivity
-import com.android.shuizu.myutillibrary.D
-import com.android.shuizu.myutillibrary.E
 import com.android.shuizu.myutillibrary.request.getErrorDialog
-import com.bigkoo.pickerview.listener.OnOptionsSelectChangeListener
-import com.bigkoo.pickerview.view.OptionsPickerView
-import com.bigkoo.pickerview.listener.OnOptionsSelectListener
-import com.bigkoo.pickerview.builder.OptionsPickerBuilder
 import com.google.gson.JsonParser
 
 
@@ -73,7 +59,7 @@ class RegistrationActivity : MyBaseActivity() {
         }
 
         address.setOnClickListener {
-            PickerUtil.show(this
+            PickerUtil.showAddress(this
             ) { options1, options2, options3, v ->
                 //返回的分别是三个级别的选中位置
                 prov = provInfoList[options1].title
@@ -105,7 +91,7 @@ class RegistrationActivity : MyBaseActivity() {
                         val userBean = Gson().fromJson(user, ProvInfo::class.java)
                         provInfoList.add(userBean)
                     }
-                    PickerUtil.init(provInfoList)
+                    PickerUtil.initAddress(provInfoList)
                 }
             })
             setDialog()

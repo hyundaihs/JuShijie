@@ -23,5 +23,7 @@
     <color name="bg_7">#FF9C1C</color>
     <color name="bg_8">#F6B900</color>
     <color name="bg_9">#CCCCCC</color>
+    <color name="bg_10">#E73C3C</color>
+    <color name="bg_11">#44000000</color>
 
 </resources>

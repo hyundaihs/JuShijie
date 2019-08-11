@@ -20,9 +20,12 @@
 # hide the original source file name.
 #-renamesourcefileattribute SourceFile
 
-#PictureSelector 2.0
+#PictureSelector 2.0图片选择器
 -keep class com.luck.picture.lib.** { *; }
 
 -dontwarn com.yalantis.ucrop**
 -keep class com.yalantis.ucrop** { *; }
 -keep interface com.yalantis.ucrop** { *; }
+
+#直播混淆
+-keep class com.tencent.** { *; }

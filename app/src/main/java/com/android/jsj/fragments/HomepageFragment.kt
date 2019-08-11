@@ -9,8 +9,7 @@ import android.support.v7.widget.OrientationHelper
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ImageView
-import com.android.jsj.JSJApplication
+import com.android.jsj.JSJApplication.Companion.chooseType
 import com.android.jsj.R
 import com.android.jsj.entity.*
 import com.android.jsj.ui.LoginActivity
@@ -22,13 +21,11 @@ import com.android.shuizu.myutillibrary.fragment.BaseFragment
 import com.android.shuizu.myutillibrary.request.KevinRequest
 import com.android.shuizu.myutillibrary.request.getErrorDialog
 import com.android.shuizu.myutillibrary.request.getLoginErrDialog
-import com.android.shuizu.myutillibrary.utils.CalendarUtil
 import com.android.shuizu.myutillibrary.widget.GlideImageLoader
 import com.cazaea.sweetalert.SweetAlertDialog
 import com.google.gson.Gson
 import com.google.gson.JsonParser
 import com.squareup.picasso.Picasso
-import kotlinx.android.synthetic.main.activity_registration.*
 import kotlinx.android.synthetic.main.fragment_homepage.*
 import kotlinx.android.synthetic.main.layout_merchant_list_item.view.*
 
@@ -57,6 +54,7 @@ class HomepageFragment : BaseFragment() {
         super.onActivityCreated(savedInstanceState)
         getBanner()
         getOnlineNum()
+        getChooseType()
         getAreas()
         getMerchantInfo()
         initViews()
@@ -99,6 +97,7 @@ class HomepageFragment : BaseFragment() {
                     initBanner()
                 }
             })
+            openLoginErrCallback(LoginActivity::class.java)
             setDataMap(map)
             postRequest()
         }
@@ -139,6 +138,24 @@ class HomepageFragment : BaseFragment() {
         }
     }
 
+    private fun getChooseType() {
+        KevinRequest.build(activity as Context).apply {
+            setRequestUrl(STYPE.getInterface())
+            setErrorCallback(object : KevinRequest.ErrorCallback {
+                override fun onError(context: Context, error: String) {
+                    getErrorDialog(context, error)
+                }
+            })
+            setSuccessCallback(object : KevinRequest.SuccessCallback {
+                override fun onSuccess(context: Context, result: String) {
+                    val chooseTypeMapRes = Gson().fromJson(result, ChooseTypeMapRes::class.java)
+                    chooseType = chooseTypeMapRes.retRes
+                }
+            })
+            postRequest()
+        }
+    }
+
     private fun getAreas() {
         KevinRequest.build(activity as Context).apply {
             setRequestUrl(AREA)
@@ -158,9 +175,9 @@ class HomepageFragment : BaseFragment() {
                         val userBean = Gson().fromJson(user, ProvInfo::class.java)
                         provInfoList.add(userBean)
                     }
-                    PickerUtil.init(provInfoList)
+                    PickerUtil.initAddress(provInfoList)
                     addrText.setOnClickListener {
-                        PickerUtil.show(
+                        PickerUtil.showAddress(
                             activity as Context
                         ) { options1, options2, options3, v ->
                             //返回的分别是三个级别的选中位置
@@ -206,10 +223,10 @@ class HomepageFragment : BaseFragment() {
         val map = mapOf(
             Pair("page_size", "10"),
             Pair("page", "1"),
-            Pair("gz", "0")
+            Pair("tg", "1")
         )
         KevinRequest.build(activity as Context).apply {
-            setRequestUrl(SJLB.getInterface(map))
+            setRequestUrl(PPLISTS.getInterface(map))
             setErrorCallback(object : KevinRequest.ErrorCallback {
                 override fun onError(context: Context, error: String) {
                     getErrorDialog(context, error)
@@ -221,14 +238,6 @@ class HomepageFragment : BaseFragment() {
                     merchantInfo.clear()
                     merchantInfo.addAll(merchantInfoListRes.retRes)
                     merchantAdapter.notifyDataSetChanged()
-                }
-            })
-            setLoginErrCallback(object : KevinRequest.LoginErrCallback {
-                override fun onLoginErr(context: Context) {
-                    getLoginErrDialog(context, SweetAlertDialog.OnSweetClickListener {
-                        startActivity(Intent(context, LoginActivity::class.java))
-                        activity?.finish()
-                    })
                 }
             })
             setDataMap(map)

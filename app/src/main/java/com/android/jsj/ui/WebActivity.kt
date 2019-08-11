@@ -1,7 +1,6 @@
 package com.android.jsj.ui
 
 import android.os.Bundle
-import com.android.jsj.JSJApplication
 import com.android.jsj.R
 import com.android.shuizu.myutillibrary.MyBaseActivity
 import com.android.shuizu.myutillibrary.initActionBar
@@ -20,6 +19,6 @@ class WebActivity:MyBaseActivity(){
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_web)
         initActionBar(this,pageTitle)
-        contents.loadData(pageContent,"text/html; charset=UTF-8", null)
+        image.loadData(pageContent,"text/html; charset=UTF-8", null)
     }
 }

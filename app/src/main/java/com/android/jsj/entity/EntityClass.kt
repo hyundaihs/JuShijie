@@ -10,6 +10,23 @@ import java.lang.reflect.Type
  * ChaYin
  * Created by ${蔡雨峰} on 2018/8/21/021.
  */
+/*
+分类标识
+1 : 资讯来源
+2 : 资讯类型
+3 : 风格
+4 : 品牌地区
+5 : 装饰模式
+6 : 建材材料类型
+7 : 荣誉星级
+8 : 家具家电类型
+9 : 设计师入行时间
+10 : 设计师级别
+11 : 设计师费用
+12 : 商品类型
+13 : 装饰品牌房间类型
+14 : 品牌类型
+15 : 商户等级*/
 
 class App_Actions {
     companion object {
@@ -205,6 +222,7 @@ data class OnlineNumInfo(
 data class OnlineNumInfoRes(var retRes: OnlineNumInfo) : RequestResult()
 
 /*[id] => 账号id
+[account_id]=> 账号id
 [title] => 昵称/公司简称
 [pp_title] => 品牌名
 [file_url] => 头像
@@ -216,7 +234,7 @@ data class OnlineNumInfoRes(var retRes: OnlineNumInfo) : RequestResult()
 [pp_file_url] => 品牌logo
 [tags] => 标签（世界500强,优秀企业  ,隔开）*/
 data class MerchantInfo(
-    val id: Int, val title: String, val file_url: String, val gz_nums: Int, val zan_nums: Int,
+    val id: Int, val account_id: Int, val title: String, val file_url: String, val gz_nums: Int, val zan_nums: Int,
     val ft_nums: Int, val pp_id: Int, val pp_title: String, val pp_file_url: String, val tags: String
 )
 
@@ -260,3 +278,74 @@ data class UploadFileInfo(
 )
 
 data class UploadFileInfoRes(var retRes: UploadFileInfo) : RequestResult()
+
+/*[account_id] => 账号id
+[account_title] => 公司简称
+[account_file_url] => 公司头像
+[id] => 直播id
+[pp_id] => 品牌id
+[zjr_title] => 主讲人
+[file_url] => 封面图
+[video_file_url] => 播放地址
+[title] => 直播名称
+[contents] => 课程介绍（html）
+[ppfl_id] => 品牌类型id（1401:装饰品牌,1402:建材家具 对应分类标识 14）
+[zbsc] => 时长（小时）
+[start_time] => 开播时间戳
+[end_time] => 结束时间戳
+[sf_status] => 是否收费（0|1）
+[price] => 价格
+[zan_nums] => 点赞数
+[sc_nums] => 收藏数
+[pl_nums] => 评论数
+[gz_nums] => 关注数
+[view_nums] => 热度、查看人数
+[is_zan] => 是否点过赞
+[is_gz] => 是否关注
+[create_time] => 创建时间戳
+[zb_status] => 直播状态（0：未直播，1：正在直播，3：结束）
+[gm_status] => 购买状态（1：已购买，0：未购买）*/
+
+data class LiveInfo(
+    val account_id: Int,
+    val account_title: String,
+    val account_file_url: String,
+    val id: Int,
+    val pp_id: Int,
+    val zjr_title: String,
+    val file_url: String,
+    val video_file_url: String,
+    val title: String,
+    val contents: String,
+    val ppfl_id: Int,
+    val zbsc: Float,
+    val start_time: Long,
+    val end_time: Long,
+    val sf_status: Int,
+    val price: Float,
+    val zan_nums: Int,
+    val sc_nums: Int,
+    val pl_nums: Int,
+    val gz_nums: Int,
+    val view_nums: Int,
+    val is_zan: Int,
+    val is_gz: Int,
+    val create_time: Long,
+    val zb_status: Int,
+    val gm_status: Int
+)
+
+data class LiveInfoRes(val retRes: LiveInfo) : RequestResult()
+
+data class LiveInfoListRes(val retRes: ArrayList<LiveInfo>) : RequestResult()
+
+/*[id] => 分类id
+[title] => 分类名称*/
+data class ChooseType(val id: Int, val title: String) :
+    IPickerViewData {
+    override fun getPickerViewText(): String {
+        return title
+    }
+}
+
+data class ChooseTypeMapRes(val retRes: Map<String, ArrayList<ChooseType>>) : RequestResult()

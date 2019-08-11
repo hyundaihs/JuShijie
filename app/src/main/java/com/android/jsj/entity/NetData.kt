@@ -93,9 +93,13 @@ const val ONLINEINFO = "onlineinfo" //在线人数
 const val CHANGEPCA = "changepca" //修改地址
 
 const val SJLB = "sjlb" //商家列表
+const val PPLISTS = "pplists" //品牌列表
 
 const val MSGLISTS = "msglists" //系统通知列表
 const val MSGINFO = "msginfo" //系统通知详情
 const val SETINFO = "setinfo" //设置用户信息
 const val TJSJSQ = "tjsjsq" //提交商家申请
+const val ZBLB = "zblb" //直播列表
+const val ZBINFO = "zbinfo" //直播详情
+const val STYPE = "stype" //分类列表
 

@@ -19,8 +19,12 @@ public class PickerUtil {
     private static List<ProvInfo> options1Items = new ArrayList<>();
     private static ArrayList<ArrayList<String>> options2Items = new ArrayList<>();
     private static ArrayList<ArrayList<ArrayList<String>>> options3Items = new ArrayList<>();
+    private static List<ChooseType> singleData = new ArrayList<>();
 
-    public static void init(ArrayList<ProvInfo> provInfoList) {
+    public static void initAddress(ArrayList<ProvInfo> provInfoList) {
+        options1Items.clear();
+        options2Items.clear();
+        options3Items.clear();
         for (ProvInfo provInfo : provInfoList) {
             options1Items.add(provInfo);
             ArrayList cityInfoList = new ArrayList<String>();
@@ -40,9 +44,30 @@ public class PickerUtil {
         }
     }
 
-    public static void show(Context context, OnOptionsSelectListener onOptionsSelectListener) {
-        OptionsPickerView pvOptions = new OptionsPickerBuilder(context, onOptionsSelectListener).setTitleText("城市选择").setDividerColor(Color.BLACK).setTextColorCenter(Color.BLACK).setContentTextSize(20).build();
+    public static void showAddress(Context context, OnOptionsSelectListener onOptionsSelectListener) {
+        OptionsPickerView pvOptions = new OptionsPickerBuilder(context, onOptionsSelectListener)
+                .setTitleText("城市选择")
+                .setDividerColor(Color.BLACK)
+                .setTextColorCenter(Color.BLACK)
+                .setContentTextSize(20)
+                .build();
         pvOptions.setPicker(options1Items, options2Items, options3Items);//三级选择器
+        pvOptions.show();
+    }
+
+    public static void initChooseType(ArrayList<ChooseType> data) {
+        singleData.clear();
+        singleData.addAll(data);
+    }
+
+    public static void showChooseType(Context context, String title, OnOptionsSelectListener onOptionsSelectListener) {
+        OptionsPickerView pvOptions = new OptionsPickerBuilder(context, onOptionsSelectListener)
+                .setTitleText(title)
+                .setDividerColor(Color.BLACK)
+                .setTextColorCenter(Color.BLACK)
+                .setContentTextSize(20)
+                .build();
+        pvOptions.setPicker(singleData);
         pvOptions.show();
     }
 }
