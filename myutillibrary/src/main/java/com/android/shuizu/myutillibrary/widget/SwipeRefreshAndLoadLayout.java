@@ -8,11 +8,7 @@ import android.support.annotation.ColorRes;
 import android.support.annotation.Nullable;
 import android.support.annotation.VisibleForTesting;
 import android.support.v4.content.ContextCompat;
-import android.support.v4.view.NestedScrollingChild;
-import android.support.v4.view.NestedScrollingChildHelper;
-import android.support.v4.view.NestedScrollingParent;
-import android.support.v4.view.NestedScrollingParentHelper;
-import android.support.v4.view.ViewCompat;
+import android.support.v4.view.*;
 import android.util.AttributeSet;
 import android.util.DisplayMetrics;
 import android.util.Log;
@@ -231,8 +227,8 @@ public class SwipeRefreshAndLoadLayout extends ViewGroup implements NestedScroll
         return totalPages;
     }
 
-    public void setTotalPages(int totalPages) {
-        this.totalPages = totalPages;
+    public void setTotalPages(int totalItems, int pageSize) {
+        this.totalPages = totalItems % pageSize == 0 ? totalItems / pageSize : totalItems / pageSize + 1;
     }
 
     void reset() {

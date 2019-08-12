@@ -2,16 +2,14 @@ package com.android.jsj
 
 import android.content.Context
 import android.content.Intent
-import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
+import android.support.v7.app.AppCompatActivity
 import android.widget.TextView
 import com.android.jsj.entity.*
 import com.android.jsj.ui.LoginActivity
 import com.android.jsj.ui.WebActivity
 import com.android.shuizu.myutillibrary.request.KevinRequest
-import com.android.shuizu.myutillibrary.request.getErrorDialog
-import com.android.shuizu.myutillibrary.request.getLoginErrDialog
-import com.cazaea.sweetalert.SweetAlertDialog
+import com.android.shuizu.myutillibrary.utils.getErrorDialog
 import com.google.gson.Gson
 import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.activity_main.*

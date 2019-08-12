@@ -24,6 +24,7 @@
     <color name="bg_8">#F6B900</color>
     <color name="bg_9">#CCCCCC</color>
     <color name="bg_10">#E73C3C</color>
-    <color name="bg_11">#44000000</color>
+    <color name="bg_11">#40000000</color>
+    <color name="bg_12">#80625FA1</color>
 
 </resources>

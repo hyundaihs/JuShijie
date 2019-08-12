@@ -1,14 +1,13 @@
 package com.android.shuizu.myutillibrary.request
 
 import android.app.Activity
-import android.app.AlertDialog
 import android.app.Dialog
-import android.content.ComponentName
 import android.content.Context
 import android.content.Intent
 import android.os.Environment
 import com.android.shuizu.myutillibrary.D
-import com.android.shuizu.myutillibrary.utils.MyProgressDialog
+import com.android.shuizu.myutillibrary.utils.getLoadingDialog
+import com.android.shuizu.myutillibrary.utils.getLoginErrDialog
 import com.cazaea.sweetalert.SweetAlertDialog
 import com.google.gson.Gson
 import okhttp3.*
@@ -19,6 +18,12 @@ import java.io.FileOutputStream
 import java.io.IOException
 import java.io.InputStream
 import java.util.concurrent.TimeUnit
+
+open class RequestResult(val retInt: Int = 0, val retErr: String = "", val retUrl: String = "", val retCounts: Int = 0) {
+    override fun toString(): String {
+        return "RequestResult(retInt=$retInt, retErr='$retErr', retCounts=$retCounts)"
+    }
+}
 
 /**
  * ChaYin
@@ -63,7 +68,7 @@ class KevinRequest private constructor(val context: Context) {
     }
 
     fun setDialog(): KevinRequest {
-        dialog = context.getLoadingDialog()
+        dialog = getLoadingDialog(context)
         return this
     }
 
@@ -345,6 +350,22 @@ class KevinRequest private constructor(val context: Context) {
         }
     }
 
+
+    /**
+     * @param saveDir
+     * @return
+     * @throws IOException
+     * 判断下载目录是否存在
+     */
+    private fun isExistDir(saveDir: String): String {
+        // 下载位置
+        val downloadFile = File(Environment.getExternalStorageDirectory(), saveDir)
+        if (!downloadFile.mkdirs()) {
+            downloadFile.createNewFile()
+        }
+        return downloadFile.absolutePath
+    }
+
     private fun getSession(response: Response) {
         val headers = response.headers()
         val cookies = headers.values("Set-Cookie")
@@ -376,59 +397,4 @@ class KevinRequest private constructor(val context: Context) {
         fun onLoginErr(context: Context)
     }
 
-}
-
-fun Context.getLoadingDialog(): SweetAlertDialog {
-    return SweetAlertDialog(this, SweetAlertDialog.PROGRESS_TYPE).apply {
-        titleText = "Loading"
-        setCancelable(false)
-    }
-}
-
-fun Any.getMessageDialog(
-    context: Context,
-    meesage: String,
-    listener: SweetAlertDialog.OnSweetClickListener? = null
-): SweetAlertDialog {
-    return SweetAlertDialog(context, SweetAlertDialog.NORMAL_TYPE).apply {
-        titleText = meesage
-        confirmText = "确定"
-        setConfirmClickListener(listener)
-        show()
-    }
-}
-
-fun Any.getSuccessDialog(
-    context: Context,
-    meesage: String,
-    listener: SweetAlertDialog.OnSweetClickListener? = null
-): SweetAlertDialog {
-    return SweetAlertDialog(context, SweetAlertDialog.SUCCESS_TYPE).apply {
-        titleText = meesage
-        confirmText = "确定"
-        setConfirmClickListener(listener)
-        show()
-    }
-}
-
-fun Any.getErrorDialog(
-    context: Context,
-    error: String,
-    listener: SweetAlertDialog.OnSweetClickListener? = null
-): SweetAlertDialog {
-    return SweetAlertDialog(context, SweetAlertDialog.ERROR_TYPE).apply {
-        titleText = error
-        confirmText = "确定"
-        setConfirmClickListener(listener)
-        show()
-    }
-}
-
-fun Any.getLoginErrDialog(context: Context, listener: SweetAlertDialog.OnSweetClickListener? = null): SweetAlertDialog {
-    return SweetAlertDialog(context, SweetAlertDialog.WARNING_TYPE).apply {
-        titleText = "需要重新验证登陆!"
-        confirmText = "确定"
-        setConfirmClickListener(listener)
-        show()
-    }
 }

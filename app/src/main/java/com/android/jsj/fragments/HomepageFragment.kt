@@ -14,15 +14,12 @@ import com.android.jsj.R
 import com.android.jsj.entity.*
 import com.android.jsj.ui.LoginActivity
 import com.android.jsj.ui.WebActivity
-import com.android.shuizu.myutillibrary.D
 import com.android.shuizu.myutillibrary.adapter.LineDecoration
 import com.android.shuizu.myutillibrary.adapter.MyBaseAdapter
 import com.android.shuizu.myutillibrary.fragment.BaseFragment
 import com.android.shuizu.myutillibrary.request.KevinRequest
-import com.android.shuizu.myutillibrary.request.getErrorDialog
-import com.android.shuizu.myutillibrary.request.getLoginErrDialog
+import com.android.shuizu.myutillibrary.utils.getErrorDialog
 import com.android.shuizu.myutillibrary.widget.GlideImageLoader
-import com.cazaea.sweetalert.SweetAlertDialog
 import com.google.gson.Gson
 import com.google.gson.JsonParser
 import com.squareup.picasso.Picasso

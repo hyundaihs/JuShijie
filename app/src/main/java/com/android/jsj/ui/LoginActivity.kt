@@ -11,6 +11,8 @@ import com.android.shuizu.myutillibrary.D
 import com.android.shuizu.myutillibrary.MyBaseActivity
 import com.android.shuizu.myutillibrary.request.*
 import com.android.shuizu.myutillibrary.utils.PreferenceUtil
+import com.android.shuizu.myutillibrary.utils.getErrorDialog
+import com.android.shuizu.myutillibrary.utils.getLoginErrDialog
 import com.google.gson.Gson
 import kotlinx.android.synthetic.main.activity_login.*
 import com.cazaea.sweetalert.SweetAlertDialog
@@ -129,15 +131,7 @@ class LoginActivity : MyBaseActivity() {
                     autoLogin()
                 }
             })
-            setLoginErrCallback(object : KevinRequest.LoginErrCallback {
-                override fun onLoginErr(context: Context) {
-                    getLoginErrDialog(context, SweetAlertDialog.OnSweetClickListener {
-                        startActivity(Intent(context, LoginActivity::class.java))
-                        finish()
-                    })
-                }
-
-            })
+            openLoginErrCallback(LoginActivity::class.java)
             setDialog()
             postRequest()
         }

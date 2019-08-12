@@ -16,14 +16,16 @@ import com.android.shuizu.myutillibrary.adapter.LineDecoration
 import com.android.shuizu.myutillibrary.adapter.MyBaseAdapter
 import com.android.shuizu.myutillibrary.fragment.BaseFragment
 import com.android.shuizu.myutillibrary.request.KevinRequest
-import com.android.shuizu.myutillibrary.request.getErrorDialog
 import com.android.shuizu.myutillibrary.utils.CalendarUtil
 import com.android.shuizu.myutillibrary.utils.CalendarUtil.MM_DD_HH_MM
+import com.android.shuizu.myutillibrary.utils.DifferType
+import com.android.shuizu.myutillibrary.utils.getErrorDialog
 import com.android.shuizu.myutillibrary.widget.SwipeRefreshAndLoadLayout
 import com.google.gson.Gson
 import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.fragment_listview.*
-import kotlinx.android.synthetic.main.fragment_minepage.*
+import kotlinx.android.synthetic.main.fragment_livepage.*
+import kotlinx.android.synthetic.main.layout_live_list_item.view.*
 import kotlinx.android.synthetic.main.layout_merchant_ranking_list_item.view.*
 import kotlinx.android.synthetic.main.layout_message_list_item.view.*
 import java.util.*
@@ -45,12 +47,15 @@ class ListViewFragment : BaseFragment() {
         const val LOAD_DESIGNER = 7 //设计师
     }
 
+    private var pageKey = 0
     private var messageInfo = ArrayList<MessageInfo>()
     private var messageAdapter = MessageAdapter(messageInfo)
 
     private var merchantInfo = ArrayList<MerchantInfo>()
     private var merchantAdapter = MerchantAdapter(merchantInfo)
-    private var pageKey = 0
+
+    private val liveInfoList = ArrayList<LiveInfo>()
+    private val liveAdapter = LiveAdapter(liveInfoList)
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         return inflater.inflate(R.layout.fragment_listview, container, false)
@@ -80,6 +85,7 @@ class ListViewFragment : BaseFragment() {
         })
         when (pageKey) {
             LOAD_MESSAGE -> {
+                listView.setBackgroundResource(R.drawable.white_rect_round)
                 listView.adapter = messageAdapter
                 messageAdapter.myOnItemClickListener = object : MyBaseAdapter.MyOnItemClickListener {
                     override fun onItemClick(parent: MyBaseAdapter, view: View, position: Int) {
@@ -88,10 +94,29 @@ class ListViewFragment : BaseFragment() {
                 }
             }
             LOAD_RANKING -> {
+                listView.setBackgroundResource(R.drawable.white_rect_round)
                 listView.adapter = merchantAdapter
                 merchantAdapter.myOnItemClickListener = object : MyBaseAdapter.MyOnItemClickListener {
                     override fun onItemClick(parent: MyBaseAdapter, view: View, position: Int) {
-//                        getMessageInfoDetails(messageInfo[position].id)
+
+                    }
+                }
+            }
+            LOAD_ALIVE -> {
+                listView.setBackgroundResource(android.R.color.transparent)
+                listView.adapter = liveAdapter
+                liveAdapter.myOnItemClickListener = object : MyBaseAdapter.MyOnItemClickListener {
+                    override fun onItemClick(parent: MyBaseAdapter, view: View, position: Int) {
+
+                    }
+                }
+            }
+            LOAD_MERCHANT -> {
+                listView.setBackgroundResource(R.drawable.white_rect_round)
+                listView.adapter = merchantAdapter
+                merchantAdapter.myOnItemClickListener = object : MyBaseAdapter.MyOnItemClickListener {
+                    override fun onItemClick(parent: MyBaseAdapter, view: View, position: Int) {
+
                     }
                 }
             }
@@ -104,7 +129,13 @@ class ListViewFragment : BaseFragment() {
             LOAD_MESSAGE -> {
                 getMessageInfo(listViewSwipe.currPage, true)
             }
-            LOAD_RANKING->{
+            LOAD_RANKING -> {
+                getMerchantInfo(listViewSwipe.currPage, true)
+            }
+            LOAD_ALIVE -> {
+                getLiveInfo(listViewSwipe.currPage, true)
+            }
+            LOAD_MERCHANT -> {
                 getMerchantInfo(listViewSwipe.currPage, true)
             }
         }
@@ -116,37 +147,15 @@ class ListViewFragment : BaseFragment() {
             LOAD_MESSAGE -> {
                 getMessageInfo(currPage)
             }
-            LOAD_RANKING->{
+            LOAD_RANKING -> {
                 getMerchantInfo(currPage)
             }
-        }
-    }
-
-    private fun getMerchantInfo(page: Int, isRefresh: Boolean = false) {
-        val map = mapOf(
-            Pair("page_size", "15"),
-            Pair("page", page.toString())
-        )
-        KevinRequest.build(activity as Context).apply {
-            setRequestUrl(SJLB.getInterface(map))
-            setErrorCallback(object : KevinRequest.ErrorCallback {
-                override fun onError(context: Context, error: String) {
-                    getErrorDialog(context, error)
-                }
-            })
-            setSuccessCallback(object : KevinRequest.SuccessCallback {
-                override fun onSuccess(context: Context, result: String) {
-                    val merchantInfoListRes = Gson().fromJson(result, MerchantInfoListRes::class.java)
-                    if (isRefresh) {
-                        merchantInfo.clear()
-                    }
-                    merchantInfo.addAll(merchantInfoListRes.retRes)
-                    merchantAdapter.notifyDataSetChanged()
-                    listViewSwipe.isRefreshing = false
-                }
-            })
-            setDataMap(map)
-            postRequest()
+            LOAD_ALIVE -> {
+                getLiveInfo(currPage)
+            }
+            LOAD_MERCHANT -> {
+                getMerchantInfo(currPage)
+            }
         }
     }
 
@@ -165,6 +174,7 @@ class ListViewFragment : BaseFragment() {
             setSuccessCallback(object : KevinRequest.SuccessCallback {
                 override fun onSuccess(context: Context, result: String) {
                     val messageInfoListRes = Gson().fromJson(result, MessageInfoListRes::class.java)
+                    listViewSwipe.setTotalPages(messageInfoListRes.retCounts,15)
                     if (isRefresh) {
                         messageInfo.clear()
                     }
@@ -218,15 +228,45 @@ class ListViewFragment : BaseFragment() {
         override fun getItemCount(): Int = data.size
     }
 
+    private fun getMerchantInfo(page: Int, isRefresh: Boolean = false) {
+        val map = mapOf(
+            Pair("page_size", "15"),
+            Pair("page", page.toString()),
+            Pair("gz", if (pageKey == LOAD_MERCHANT) 1 else 0)
+        )
+        KevinRequest.build(activity as Context).apply {
+            setRequestUrl(SJLB.getInterface(map))
+            setErrorCallback(object : KevinRequest.ErrorCallback {
+                override fun onError(context: Context, error: String) {
+                    getErrorDialog(context, error)
+                }
+            })
+            setSuccessCallback(object : KevinRequest.SuccessCallback {
+                override fun onSuccess(context: Context, result: String) {
+                    val merchantInfoListRes = Gson().fromJson(result, MerchantInfoListRes::class.java)
+                    listViewSwipe.setTotalPages(merchantInfoListRes.retCounts,15)
+                    if (isRefresh) {
+                        merchantInfo.clear()
+                    }
+                    merchantInfo.addAll(merchantInfoListRes.retRes)
+                    merchantAdapter.notifyDataSetChanged()
+                    listViewSwipe.isRefreshing = false
+                }
+            })
+            setDataMap(map)
+            postRequest()
+        }
+    }
+
     private class MerchantAdapter(val data: ArrayList<MerchantInfo>) :
         MyBaseAdapter(R.layout.layout_merchant_ranking_list_item) {
 
         override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
             super.onBindViewHolder(holder, position)
             val merchantInfo = data[position]
-            val level = if(position < 10){
+            val level = if (position < 10) {
                 "0${position + 1}"
-            }else{
+            } else {
                 "${position + 1}"
             }
             holder.itemView.rankingNum.text = level
@@ -243,5 +283,66 @@ class ListViewFragment : BaseFragment() {
         override fun getItemCount(): Int = data.size
     }
 
+
+    private fun getLiveInfo(page: Int, isRefresh: Boolean = false) {
+        val map = mapOf(
+            Pair("page_size", "15"),
+            Pair("page", page.toString()),
+            Pair("gz", "1")
+        )
+        KevinRequest.build(activity as Context).apply {
+            setRequestUrl(ZBLB.getInterface(map))
+            setErrorCallback(object : KevinRequest.ErrorCallback {
+                override fun onError(context: Context, error: String) {
+                    getErrorDialog(context, error)
+                }
+            })
+            setSuccessCallback(object : KevinRequest.SuccessCallback {
+                override fun onSuccess(context: Context, result: String) {
+                    val liveInfoListRes = Gson().fromJson(result, LiveInfoListRes::class.java)
+                    listViewSwipe.setTotalPages(liveInfoListRes.retCounts,15)
+                    if (isRefresh) {
+                        liveInfoList.clear()
+                    }
+                    liveInfoList.addAll(liveInfoListRes.retRes)
+                    liveAdapter.notifyDataSetChanged()
+                    listViewSwipe.isRefreshing = false
+                }
+            })
+            setDataMap(map)
+            postRequest()
+        }
+    }
+
+    private class LiveAdapter(val data: ArrayList<LiveInfo>) : MyBaseAdapter(R.layout.layout_live_list_item) {
+
+        override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
+            super.onBindViewHolder(holder, position)
+            val liveInfo = data[position]
+            Picasso.with(holder.itemView.context).load(liveInfo.file_url.getImageUrl()).into(holder.itemView.livePhoto)
+            when (liveInfo.zb_status) {
+                0 -> {
+                    val cale = CalendarUtil(liveInfo.start_time, true)
+                    val hour = cale.getTimeDifferFromNow(DifferType.TYPE_HOUR)
+                    val min = cale.getTimeDifferFromNow(DifferType.TYPE_MIN)
+                    val differMin = min - hour * 60
+                    holder.itemView.liveStatus.text = "直播还有${hour}小时${differMin}分钟"
+                    holder.itemView.liveStatus.setBackgroundResource(R.drawable.bg10_rect_corner)
+                }
+                1 -> {
+                    holder.itemView.liveStatus.text = "直播中"
+                    holder.itemView.liveStatus.setBackgroundResource(R.drawable.bg_8_rect_corner)
+                }
+                else -> {
+                    holder.itemView.liveStatus.visibility = View.GONE
+                }
+            }
+            holder.itemView.liveCompany.text = liveInfo.account_title
+            holder.itemView.liveHot.text = "${liveInfo.view_nums}w"
+            holder.itemView.liveTitle.text = liveInfo.title
+        }
+
+        override fun getItemCount(): Int = data.size
+    }
 
 }

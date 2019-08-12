@@ -7,12 +7,12 @@ import com.android.jsj.R
 import com.android.jsj.entity.*
 import com.android.shuizu.myutillibrary.MyBaseActivity
 import com.android.shuizu.myutillibrary.request.KevinRequest
-import org.jetbrains.anko.toast
+import com.android.shuizu.myutillibrary.utils.getErrorDialog
 import com.cazaea.sweetalert.SweetAlertDialog
 import com.google.gson.Gson
-import kotlinx.android.synthetic.main.activity_registration.*
-import com.android.shuizu.myutillibrary.request.getErrorDialog
 import com.google.gson.JsonParser
+import kotlinx.android.synthetic.main.activity_registration.*
+import org.jetbrains.anko.toast
 
 
 /**

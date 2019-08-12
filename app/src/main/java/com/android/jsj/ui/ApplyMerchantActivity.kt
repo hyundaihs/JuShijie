@@ -3,25 +3,24 @@ package com.android.jsj.ui
 import android.app.Activity
 import android.content.Context
 import android.content.Intent
-import android.net.Uri
-import android.opengl.Visibility
 import android.os.Bundle
 import android.support.v7.widget.DefaultItemAnimator
 import android.support.v7.widget.GridLayoutManager
 import android.view.View
-import android.widget.ImageView
 import com.android.jsj.JSJApplication
 import com.android.jsj.R
-import com.android.jsj.entity.*
+import com.android.jsj.entity.TJSJSQ
+import com.android.jsj.entity.UPLOADFILE
+import com.android.jsj.entity.UploadFileInfoRes
+import com.android.jsj.entity.getInterface
 import com.android.shuizu.myutillibrary.MyBaseActivity
 import com.android.shuizu.myutillibrary.adapter.GridDivider
 import com.android.shuizu.myutillibrary.adapter.MyBaseAdapter
 import com.android.shuizu.myutillibrary.dp2px
 import com.android.shuizu.myutillibrary.initActionBar
 import com.android.shuizu.myutillibrary.request.KevinRequest
-import com.android.shuizu.myutillibrary.request.getErrorDialog
-import com.android.shuizu.myutillibrary.request.getSuccessDialog
-import com.android.shuizu.myutillibrary.utils.RoundTransform
+import com.android.shuizu.myutillibrary.utils.getErrorDialog
+import com.android.shuizu.myutillibrary.utils.getSuccessDialog
 import com.cazaea.sweetalert.SweetAlertDialog
 import com.google.gson.Gson
 import com.luck.picture.lib.PictureSelector
@@ -30,13 +29,9 @@ import com.luck.picture.lib.config.PictureConfig.CHOOSE_REQUEST
 import com.luck.picture.lib.config.PictureMimeType
 import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.activity_apply_merchant.*
-import kotlinx.android.synthetic.main.activity_change_userinfo.*
-import kotlinx.android.synthetic.main.activity_registration.*
 import kotlinx.android.synthetic.main.layout_upload_image_list_item.view.*
 import org.jetbrains.anko.toast
-import org.jetbrains.annotations.NotNull
 import java.io.File
-import kotlin.properties.Delegates
 
 /**
  * ChaYin

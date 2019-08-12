@@ -349,3 +349,10 @@ data class ChooseType(val id: Int, val title: String) :
 }
 
 data class ChooseTypeMapRes(val retRes: Map<String, ArrayList<ChooseType>>) : RequestResult()
+
+/**
+ * [type] => 操作结果（1：添加，0：取消）
+ */
+data class ZanResult(val type:Int)
+
+data class ZanResultRes(val retRes:ZanResult):RequestResult()

@@ -67,6 +67,7 @@
         <activity android:name=".ui.ApplyMerchantActivity"/>
         <activity android:name=".ui.LivePageActivity"/>
         <activity android:name=".ui.LiveDetailsActivity"/>
+        <activity android:name=".ui.CompanyShowActivity"/>
     </application>
 
 </manifest>

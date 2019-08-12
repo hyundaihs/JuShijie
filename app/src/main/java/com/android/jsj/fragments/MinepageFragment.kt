@@ -16,7 +16,7 @@ import com.android.jsj.ui.ApplyMerchantActivity
 import com.android.jsj.ui.ChangeUserInfoActivity
 import com.android.shuizu.myutillibrary.fragment.BaseFragment
 import com.android.shuizu.myutillibrary.request.KevinRequest
-import com.android.shuizu.myutillibrary.request.getErrorDialog
+import com.android.shuizu.myutillibrary.utils.getErrorDialog
 import com.google.gson.Gson
 import com.squareup.picasso.Callback
 import com.squareup.picasso.Picasso

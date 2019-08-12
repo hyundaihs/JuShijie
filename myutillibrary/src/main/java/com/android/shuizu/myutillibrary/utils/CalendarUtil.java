@@ -14,10 +14,6 @@ import java.util.Locale;
  */
 
 public class CalendarUtil {
-    /**
-     * 标准的
-     */
-    private Time time;
     public static final String STANDARD = "yyyy-MM-dd HH:mm:ss";
     public static final String STANDARD_ = "yyyy-MM-dd\nHH:mm:ss";
     public static final String YYYY_MM = "yyyy-MM";
@@ -28,7 +24,10 @@ public class CalendarUtil {
     public static final String YYYYMMDD = "yyyyMMdd";
     public static final String YY_MM_DD_HH_MM = "yy/MM/dd\nHH:mm";
     public static final String MM_DD_HH_MM = "MM/dd HH:mm";
-
+    /**
+     * 标准的
+     */
+    private Time time;
     private Calendar c;
 
     public CalendarUtil() {
@@ -89,48 +88,36 @@ public class CalendarUtil {
         c.set(year, month, day, hourOfDay, minute, second);
     }
 
-    public void setTimeInMillis(long timeInMillis) {
-        c.setTimeInMillis(timeInMillis);
+    public int getYear() {
+        return c.get(Calendar.YEAR);
     }
 
     public void setYear(int year) {
         c.set(Calendar.YEAR, year);
     }
 
-    public void setMonth(int month) {
-        c.set(Calendar.MONTH, month);
-    }
-
-    public void setDate(int date) {
-        c.set(Calendar.DATE, date);
-    }
-
-    public void setHour(int hour) {
-        c.set(Calendar.HOUR, hour);
-    }
-
-    public void setMinute(int minute) {
-        c.set(Calendar.MINUTE, minute);
-    }
-
-    public void setSecond(int second) {
-        c.set(Calendar.SECOND, second);
-    }
-
-    public int getYear() {
-        return c.get(Calendar.YEAR);
-    }
-
     public int getMonth() {
         return c.get(Calendar.MONTH) + 1;
+    }
+
+    public void setMonth(int month) {
+        c.set(Calendar.MONTH, month);
     }
 
     public int getDate() {
         return c.get(Calendar.DATE);
     }
 
+    public void setDate(int date) {
+        c.set(Calendar.DATE, date);
+    }
+
     public int getHour() {
         return c.get(Calendar.HOUR);
+    }
+
+    public void setHour(int hour) {
+        c.set(Calendar.HOUR, hour);
     }
 
     public int getHourOfDay() {
@@ -141,12 +128,24 @@ public class CalendarUtil {
         return c.get(Calendar.MINUTE);
     }
 
+    public void setMinute(int minute) {
+        c.set(Calendar.MINUTE, minute);
+    }
+
     public int getSecond() {
         return c.get(Calendar.SECOND);
     }
 
+    public void setSecond(int second) {
+        c.set(Calendar.SECOND, second);
+    }
+
     public long getTimeInMillis() {
         return c.getTimeInMillis();
+    }
+
+    public void setTimeInMillis(long timeInMillis) {
+        c.setTimeInMillis(timeInMillis);
     }
 
     public String format(String format, String yearFlag, String hourFlag) {
@@ -203,4 +202,25 @@ public class CalendarUtil {
     public void setC(Calendar c) {
         this.c = c;
     }
+
+    /**
+     * 获取与当前时间的时间差
+     */
+    public Long getTimeDifferFromNow(DifferType type) {
+        Long now = new CalendarUtil().getTimeInMillis();
+        Long tag = getTimeInMillis();
+        Long differ = Math.abs(now - tag);
+        if (type == DifferType.TYPE_DAY) {
+            return differ / (1000 * 3600 * 24);
+        } else if (type == DifferType.TYPE_HOUR) {
+            return differ / (1000 * 3600);
+        } else if (type == DifferType.TYPE_MIN) {
+            return differ / (1000 * 60);
+        } else if (type == DifferType.TYPE_SEC) {
+            return differ / (1000);
+        } else {
+            return differ;
+        }
+    }
+
 }
