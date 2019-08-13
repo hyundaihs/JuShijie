@@ -2,9 +2,6 @@ package com.android.jsj.entity
 
 import com.android.shuizu.myutillibrary.request.RequestResult
 import com.contrarywind.interfaces.IPickerViewData
-import com.google.gson.Gson
-import com.google.gson.JsonParser
-import java.lang.reflect.Type
 
 /**
  * ChaYin
@@ -223,20 +220,49 @@ data class OnlineNumInfoRes(var retRes: OnlineNumInfo) : RequestResult()
 
 /*[id] => 账号id
 [account_id]=> 账号id
-[title] => 昵称/公司简称
+[type_id] => 类型（2：普通商家，3：VIP商家）
+[title] => 公司简称
+[title2] => 公司全称
 [pp_title] => 品牌名
 [file_url] => 头像
+[tsfw] => 特色服务（,间隔）
+[address] => 地址
+[contents] => 详情（html）
 [gz_nums] => 关注数
 [zan_nums] => 点赞数
 [ft_nums] => 发帖数
 [pp_id] => 品牌id
 [pp_title] => 品牌名称
 [pp_file_url] => 品牌logo
+[ppInfo] => Array（品牌信息）
+    (
+        [id] => 品牌id
+        [pp_title] => 宜家
+        [pp_file_url] => 品牌logo
+    )
+[is_zan] => 是否点过赞
+[is_gz] => 是否关注
 [tags] => 标签（世界500强,优秀企业  ,隔开）*/
 data class MerchantInfo(
-    val id: Int, val account_id: Int, val title: String, val file_url: String, val gz_nums: Int, val zan_nums: Int,
-    val ft_nums: Int, val pp_id: Int, val pp_title: String, val pp_file_url: String, val tags: String
+    val id: Int,
+    val account_id: Int,
+    val type_id: Int,
+    val title: String,
+    val title2: String,
+    val file_url: String,
+    val address: String,
+    val contents: String,
+    val gz_nums: Int,
+    val zan_nums: Int,
+    val ft_nums: Int,
+    val pp_id: Int,
+    val pp_title: String,
+    val pp_file_url: String,
+    val ppInfo: ArrayList<PPInfo>,
+    val tags: String
 )
+
+data class MerchantInfoRes(val retRes: MerchantInfo) : RequestResult()
 
 data class MerchantInfoListRes(val retRes: ArrayList<MerchantInfo>) : RequestResult()
 
@@ -353,6 +379,6 @@ data class ChooseTypeMapRes(val retRes: Map<String, ArrayList<ChooseType>>) : Re
 /**
  * [type] => 操作结果（1：添加，0：取消）
  */
-data class ZanResult(val type:Int)
+data class ZanResult(val type: Int)
 
-data class ZanResultRes(val retRes:ZanResult):RequestResult()
+data class ZanResultRes(val retRes: ZanResult) : RequestResult()

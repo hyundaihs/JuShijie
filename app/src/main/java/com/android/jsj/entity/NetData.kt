@@ -104,4 +104,5 @@ const val ZBINFO = "zbinfo" //直播详情
 const val STYPE = "stype" //分类列表
 const val TJZBZFPZ = "tjzbzfpz" //提交直播支付凭证
 const val NRCZ = "nrcz" //点赞收藏关注
+const val SJXQ = "sjxq" //商家秀商家详情
 
