@@ -2,11 +2,10 @@ package com.android.jsj.ui
 
 import android.content.Context
 import android.os.Bundle
+import android.widget.RadioButton
 import com.android.jsj.R
-import com.android.jsj.entity.MerchantInfo
-import com.android.jsj.entity.SJXQ
-import com.android.jsj.entity.getImageUrl
-import com.android.jsj.entity.getInterface
+import com.android.jsj.entity.*
+import com.android.jsj.fragments.CompanyInfoFragment
 import com.android.shuizu.myutillibrary.MyBaseActivity
 import com.android.shuizu.myutillibrary.request.KevinRequest
 import com.android.shuizu.myutillibrary.utils.getErrorDialog
@@ -39,16 +38,13 @@ class CompanyShowActivity : MyBaseActivity() {
             setRequestUrl(SJXQ.getInterface(map))
             setErrorCallback(object : KevinRequest.ErrorCallback {
                 override fun onError(context: Context, error: String) {
-                    getErrorDialog(context, error, object : SweetAlertDialog.OnSweetClickListener {
-                        override fun onClick(sweetAlertDialog: SweetAlertDialog?) {
-                            finish()
-                        }
-                    })
+                    getErrorDialog(context, error,
+                        SweetAlertDialog.OnSweetClickListener { finish() })
                 }
             })
             setSuccessCallback(object : KevinRequest.SuccessCallback {
                 override fun onSuccess(context: Context, result: String) {
-                    merchantInfo = Gson().fromJson(result, MerchantInfo::class.java)
+                    merchantInfo = Gson().fromJson(result, MerchantInfoRes::class.java).retRes
                     initViews()
                 }
             })
@@ -60,12 +56,55 @@ class CompanyShowActivity : MyBaseActivity() {
     }
 
     private fun initViews() {
-        companyTitle.text = merchantInfo.title
-        Picasso.with(this).load(merchantInfo.file_url.getImageUrl()).resize(300, 300).into(companyPhoto)
-        companyPPName.text = merchantInfo.pp_title
+        companyTitle.text = merchantInfo.title2
+        Picasso.with(this).load(merchantInfo.file_url.getImageUrl()).resize(200, 200).into(companyPhoto)
+        companyPPName.text = merchantInfo.title
         gz_nums.text = merchantInfo.gz_nums.toString()
         hz_nums.text = merchantInfo.zan_nums.toString()
         ft_nums.text = merchantInfo.ft_nums.toString()
+        for (i in 0 until merchantInfo.zdyfl_lists.size) {
+            val rbtn = layoutInflater.inflate(R.layout.company_show_menus_item, buttons) as RadioButton
+            rbtn.text = merchantInfo.zdyfl_lists[i].title
+            buttons.addView(rbtn)
+        }
+        buttons.setOnCheckedChangeListener { group, checkedId ->
+            when(checkedId){
+                R.id.companyFirst->{
+                    loadCompanyInfoFragment()
+                }
+                1->{
+
+                }
+                2->{
+
+                }
+                3->{
+
+                }
+                4->{
+
+                }
+                5->{
+
+                }
+                6->{
+
+                }
+                else->{
+
+                }
+            }
+        }
+
+        loadCompanyInfoFragment()
+    }
+
+    private fun loadCompanyInfoFragment() {
+        val ft = supportFragmentManager.beginTransaction()
+        val fragment = CompanyInfoFragment()
+        CompanyInfoFragment.merchantInfo = merchantInfo
+        ft.add(R.id.layoutFragment, fragment)
+        ft.commit()
     }
 
 }

@@ -12,7 +12,7 @@ import java.security.MessageDigest
  */
 const val TEST_DEVICE_ID = "TR-005D16660016402020E42DE4"
 
-const val ROOT_URL = "http://zxzb.hyk001.com"
+const val ROOT_URL = "https://xcx.hyk001.com"
 const val INTERFACE_INDEX = "/api.php/Index/"
 const val FROM = "/from/android"
 const val KEY_STR = "/keystr/"

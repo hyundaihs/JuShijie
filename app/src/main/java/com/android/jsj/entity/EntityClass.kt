@@ -242,7 +242,16 @@ data class OnlineNumInfoRes(var retRes: OnlineNumInfo) : RequestResult()
     )
 [is_zan] => 是否点过赞
 [is_gz] => 是否关注
-[tags] => 标签（世界500强,优秀企业  ,隔开）*/
+[tags] => 标签（世界500强,优秀企业  ,隔开）
+[zdyfl_lists] => Array（商家自定义分类）
+               (
+                   [0] => Array
+                       (
+                           [id] => 分类id
+                           [title] => 分类名称
+                       )
+               )
+*/
 data class MerchantInfo(
     val id: Int,
     val account_id: Int,
@@ -250,6 +259,7 @@ data class MerchantInfo(
     val title: String,
     val title2: String,
     val file_url: String,
+    val tsfw : String,
     val address: String,
     val contents: String,
     val gz_nums: Int,
@@ -258,8 +268,9 @@ data class MerchantInfo(
     val pp_id: Int,
     val pp_title: String,
     val pp_file_url: String,
-    val ppInfo: ArrayList<PPInfo>,
-    val tags: String
+    val tags: String,
+    val ppInfo: PPInfo,
+    val zdyfl_lists: ArrayList<ChooseType>
 )
 
 data class MerchantInfoRes(val retRes: MerchantInfo) : RequestResult()

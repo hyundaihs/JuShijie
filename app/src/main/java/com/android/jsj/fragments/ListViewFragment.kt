@@ -45,6 +45,10 @@ class ListViewFragment : BaseFragment() {
         const val LOAD_MERCHANT = 5 //商家
         const val LOAD_CASE = 6 //案例
         const val LOAD_DESIGNER = 7 //设计师
+        const val LOAD_RONG_YU = 8 //荣誉
+        const val LOAD_VIDEO = 9 //视频
+        const val LOAD_NEWS = 10 //资讯
+        const val LOAD_SALE = 11 //特卖
     }
 
     private var pageKey = 0

@@ -64,7 +64,6 @@ class LoginActivity : MyBaseActivity() {
                     }
                 })
                 setDataMap(map)
-                setDialog()
                 postRequest()
             }
         }
@@ -132,7 +131,6 @@ class LoginActivity : MyBaseActivity() {
                 }
             })
             openLoginErrCallback(LoginActivity::class.java)
-            setDialog()
             postRequest()
         }
     }

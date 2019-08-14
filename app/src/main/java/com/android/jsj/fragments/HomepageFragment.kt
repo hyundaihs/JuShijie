@@ -12,6 +12,7 @@ import android.view.ViewGroup
 import com.android.jsj.JSJApplication.Companion.chooseType
 import com.android.jsj.R
 import com.android.jsj.entity.*
+import com.android.jsj.ui.CompanyShowActivity
 import com.android.jsj.ui.LoginActivity
 import com.android.jsj.ui.WebActivity
 import com.android.shuizu.myutillibrary.adapter.LineDecoration
@@ -73,6 +74,13 @@ class HomepageFragment : BaseFragment() {
         homepageList.itemAnimator = DefaultItemAnimator()
         homepageList.isNestedScrollingEnabled = false
         homepageList.adapter = merchantAdapter
+        merchantAdapter.myOnItemClickListener = object : MyBaseAdapter.MyOnItemClickListener {
+            override fun onItemClick(parent: MyBaseAdapter, view: View, position: Int) {
+                val intent = Intent(view.context, CompanyShowActivity::class.java)
+                intent.putExtra("id", merchantInfo[position].account_id)
+                startActivity(intent)
+            }
+        }
     }
 
     private fun getBanner() {
@@ -249,7 +257,7 @@ class HomepageFragment : BaseFragment() {
         override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
             super.onBindViewHolder(holder, position)
             val merchantInfo = data[position]
-            Picasso.with(holder.itemView.context).load(merchantInfo.file_url.getImageUrl())
+            Picasso.with(holder.itemView.context).load(merchantInfo.pp_file_url.getImageUrl())
                 .resize(200, 200)
                 .into(holder.itemView.merchantLogo)
             holder.itemView.merchantName.text = merchantInfo.title
