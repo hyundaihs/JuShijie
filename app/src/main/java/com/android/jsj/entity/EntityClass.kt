@@ -259,7 +259,7 @@ data class MerchantInfo(
     val title: String,
     val title2: String,
     val file_url: String,
-    val tsfw : String,
+    val tsfw: String,
     val address: String,
     val contents: String,
     val gz_nums: Int,
@@ -393,3 +393,120 @@ data class ChooseTypeMapRes(val retRes: Map<String, ArrayList<ChooseType>>) : Re
 data class ZanResult(val type: Int)
 
 data class ZanResultRes(val retRes: ZanResult) : RequestResult()
+
+/*
+[https_m3u8] => https://play.zb.idianjiao.com/live/jsj0000001.m3u8
+[https_flv] => https://play.zb.idianjiao.com/live/jsj0000001.flv
+[rtmp] => rtmp://play.zb.idianjiao.com/live/jsj0000001*/
+
+data class PlayUrl(val https_m3u8: String, val https_flv: String, val rtmp: String)
+
+data class PlayUrlRes(val retRes: PlayUrl) : RequestResult()
+
+/*[account_id] => 账号id
+[account_title] => 公司名称
+[account_file_url] => 公司头像
+[dj_id] => 公司等级id
+[id] => 内容id
+[mk_id] => 模块id（1：资讯，2：品牌荣誉，3：视频：4：设计团队，5：案例，6：特卖）
+[create_time] => 发布时间戳
+[is_zan] => 是否点过赞（0|1）
+[is_sc] => 是否收藏过（0|1）
+[is_gz] => 是否关注过（0|1）
+[zan_nums] => 点赞数量
+[view_nums] => 访问数量
+[gz_nums] => 关注数
+
+
+[img_lists] => Array(图片列表)
+(
+[0] => Array
+(
+[id] => 文件id
+[file_url] => 原图
+[resize_file_url] => 缩略图
+[file_size] => 文件大小
+)
+
+)
+ 品牌荣誉字段
+                    [file_url] => 图片
+                    [title] => 标题
+
+                    案例字段
+                    [file_url] => 图片
+                    [title] => 标题
+                    [sjs_id] => 设计师id
+                    [sjs_title] => 设计师标题
+                    [sjsdj_id] => 设计师等级id
+
+                    视频字段
+                    [file_url] => 图片
+                    [video_file_url] => 视频地址
+                    [title] => 标题
+                    [sub_info] => 简介
+
+                    资讯字段
+                    [type_id] => 信息源id（1：新闻，2：活动，3：推广，4：饰界 ）(对应系统分类标识 1)
+                    [file_url] => 图片
+                    [title] => 标题
+                    [zan_nums] => 点赞数量
+                    [view_nums] => 访问数量
+
+                    设计团队字段
+                    [file_url] => 图片
+                    [title] => 标题
+                    [sjsdj_id] => 设计师等级id
+                    [jy] => 经验id
+                    [al_num] => 作品案例数
+
+                    特卖字段
+                    [file_url] => 图片
+                    [title] => 标题
+                    [price] => 现价
+                    [price2] => 原价
+
+                    商家自定义内容
+                    [title] => 标题
+                    [file_url] => 图片
+                    [sub_info] => 简介
+*/
+
+data class FileInfo(val id: Int, val file_url: String, val resize_file_url: String, val file_size: String)
+
+data class CompanyInfo(
+    var account_id: Int,
+    var account_title: String,
+    var account_file_url: String,
+    val title: String,
+    val file_url: String,
+
+    val sjs_id: Int,
+    val sjs_title: String,
+    val sjsdj_id: Int,
+
+    val video_file_url: String,
+    val sub_info: String,
+
+    val type_id: Int,
+
+    val jy: Int,
+    val al_num: Int,
+
+    val price: Float,
+    val price2: Float,
+
+    var dj_id: Int,
+    var id: Int,
+    var mk_id: Int,
+    var create_time: Long,
+    var is_zan: Int,
+    var is_sc: Int,
+    var is_gz: Int,
+    var zan_nums: Int,
+    var view_nums: Int,
+    var gz_nums: Int,
+    var img_lists: ArrayList<FileInfo>
+)
+
+data class CompanyInfoListRes(val retRes: ArrayList<CompanyInfo>) : RequestResult()

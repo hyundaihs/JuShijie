@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="10dp">
+
+    <ImageView
+            android:id="@+id/logo"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:contentDescription="@null"
+            android:scaleType="fitXY"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintDimensionRatio="1:1"
+            android:src="@mipmap/pic_demo"/>
+
+    <TextView
+            android:id="@+id/name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintVertical_chainStyle="spread_inside"
+            app:layout_constraintTop_toTopOf="@+id/logo"
+            app:layout_constraintLeft_toRightOf="@+id/logo"
+            app:layout_constraintBottom_toTopOf="@+id/content"
+            android:text="东鹏陶瓷"
+            android:maxLines="1"
+            android:layout_marginStart="10dp"
+            android:textSize="16sp"
+            android:textColor="@color/black"/>
+
+    <TextView
+            android:id="@+id/content"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintLeft_toLeftOf="@+id/name"
+            app:layout_constraintTop_toBottomOf="@+id/name"
+            app:layout_constraintBottom_toTopOf="@+id/layout_3"
+            android:text="中国建材品牌一百强企业"
+            android:maxLines="1"
+            android:textSize="12sp"
+            android:textColor="@color/text_5"/>
+
+    <LinearLayout
+            android:id="@+id/layout_3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="start"
+            app:layout_constraintLeft_toLeftOf="@+id/name"
+            app:layout_constraintTop_toBottomOf="@+id/content"
+            app:layout_constraintBottom_toBottomOf="@+id/logo"
+            android:textSize="12sp"
+            android:textColor="@color/text_5">
+
+        <TextView
+                android:id="@+id/zan"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/bg_9"
+                android:drawableStart="@mipmap/icon_z_gray"
+                android:textSize="12sp"
+                android:text="12w"/>
+
+        <TextView
+                android:id="@+id/hot"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/bg_9"
+                android:layout_marginStart="5dp"
+                android:drawableStart="@mipmap/icon_heart"
+                android:textSize="12sp"
+                android:text="12w"/>
+
+        <TextView
+                android:id="@+id/time"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/bg_9"
+                android:drawableStart="@mipmap/icon_pulish_time"
+                android:textSize="12sp"
+                android:layout_marginStart="5dp"
+                android:text="2019-02-15"/>
+    </LinearLayout>
+
+</android.support.constraint.ConstraintLayout>

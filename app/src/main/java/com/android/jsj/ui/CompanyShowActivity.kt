@@ -2,10 +2,11 @@ package com.android.jsj.ui
 
 import android.content.Context
 import android.os.Bundle
+import android.support.v4.app.Fragment
 import android.widget.RadioButton
 import com.android.jsj.R
 import com.android.jsj.entity.*
-import com.android.jsj.fragments.CompanyInfoFragment
+import com.android.jsj.fragments.*
 import com.android.shuizu.myutillibrary.MyBaseActivity
 import com.android.shuizu.myutillibrary.request.KevinRequest
 import com.android.shuizu.myutillibrary.utils.getErrorDialog
@@ -22,6 +23,9 @@ class CompanyShowActivity : MyBaseActivity() {
 
     private var companyId = 0
     private lateinit var merchantInfo: MerchantInfo
+    private val MENUS: MutableList<String> = listOf("公司简介", "品牌荣誉", "案例", "视频", "资讯", "设计团队", "特卖").toMutableList()
+    private lateinit var fragments: Array<Fragment?>
+    private var last = -1
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -62,49 +66,98 @@ class CompanyShowActivity : MyBaseActivity() {
         gz_nums.text = merchantInfo.gz_nums.toString()
         hz_nums.text = merchantInfo.zan_nums.toString()
         ft_nums.text = merchantInfo.ft_nums.toString()
+        fragments = Array<Fragment?>(7 + merchantInfo.zdyfl_lists.size) { null }
         for (i in 0 until merchantInfo.zdyfl_lists.size) {
-            val rbtn = layoutInflater.inflate(R.layout.company_show_menus_item, buttons) as RadioButton
-            rbtn.text = merchantInfo.zdyfl_lists[i].title
-            buttons.addView(rbtn)
+            MENUS.add(merchantInfo.zdyfl_lists[i].title)
         }
+        for (i in 0 until MENUS.size) {
+            layoutInflater.inflate(R.layout.layout_company_show_menus_item, buttons, true)
+            (buttons.getChildAt(i) as RadioButton).text = MENUS[i]
+            if (i == 0) {
+                (buttons.getChildAt(i) as RadioButton).isChecked = true
+            }
+        }
+        CompanyInfoFragment.merchantInfo = merchantInfo
         buttons.setOnCheckedChangeListener { group, checkedId ->
-            when(checkedId){
-                R.id.companyFirst->{
-                    loadCompanyInfoFragment()
+            when (checkedId) {
+                1 -> {
+                    loadFragment(0, 0, 0)
                 }
-                1->{
-
+                2 -> {
+                    loadFragment(checkedId - 1, merchantInfo.id, 2)
                 }
-                2->{
-
+                3 -> {
+                    loadFragment(checkedId - 1, merchantInfo.id, 5)
                 }
-                3->{
-
+                4 -> {
+                    loadFragment(checkedId - 1, merchantInfo.id, 3)
                 }
-                4->{
-
+                5 -> {
+                    loadFragment(checkedId - 1, merchantInfo.id, 1)
                 }
-                5->{
-
+                6 -> {
+                    loadFragment(checkedId - 1, merchantInfo.id, 4)
                 }
-                6->{
-
+                7 -> {
+                    loadFragment(checkedId - 1, merchantInfo.id, 6)
                 }
-                else->{
+                in 8..fragments.size -> {
+                    loadFragment(
+                        checkedId - 1,
 
+                        merchantInfo.id,
+                        merchantInfo.zdyfl_lists[checkedId - 8].id
+                    )
                 }
             }
         }
-
-        loadCompanyInfoFragment()
+        loadFragment(0, 0, 0)
     }
 
-    private fun loadCompanyInfoFragment() {
+    private fun loadFragment(position: Int, id: Int, mk_id: Int) {
         val ft = supportFragmentManager.beginTransaction()
-        val fragment = CompanyInfoFragment()
-        CompanyInfoFragment.merchantInfo = merchantInfo
-        ft.add(R.id.layoutFragment, fragment)
+        val fragment = when (position) {
+            0 -> {
+                CompanyInfoFragment()
+            }
+            1 -> {
+                HonorFragment.aId = id
+                HonorFragment.mkId = mk_id
+                HonorFragment()
+            }
+            2 -> {
+                CaseFragment.aId = id
+                CaseFragment.mkId = mk_id
+                CaseFragment()
+            }
+            3 -> {
+                VideoFragment.aId = id
+                VideoFragment.mkId = mk_id
+                VideoFragment()
+            }
+            4 -> {
+                NewsFragment.aId = id
+                NewsFragment.mkId = mk_id
+                NewsFragment()
+            }
+            5 -> {
+                DesignerFragment.aId = id
+                DesignerFragment.mkId = mk_id
+                DesignerFragment()
+            }
+            6 -> {
+                SaleFragment.aId = id
+                SaleFragment.mkId = mk_id
+                SaleFragment()
+            }
+            else -> {
+                CustomFragment.aId = id
+                CustomFragment.mkId = 7
+                CustomFragment.zdyId = mk_id
+                CustomFragment()
+            }
+        }
+        ft.replace(R.id.layoutFragment, fragment)
         ft.commit()
     }
-
 }

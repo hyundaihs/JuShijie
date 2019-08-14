@@ -26,5 +26,9 @@
     <color name="bg_10">#E73C3C</color>
     <color name="bg_11">#40000000</color>
     <color name="bg_12">#80625FA1</color>
+    <color name="bg_13">#AAA8EB</color>
+    <color name="bg_14">#68C1FF</color>
+    <color name="bg_15">#FF6F4D</color>
+    <color name="bg_16">#A8A6D8</color>
 
 </resources>

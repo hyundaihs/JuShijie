@@ -13,6 +13,7 @@ import com.android.jsj.R
 import com.android.jsj.entity.*
 import com.android.jsj.ui.LiveDetailsActivity
 import com.android.jsj.ui.LivePageActivity
+import com.android.jsj.util.getPlayUrl
 import com.android.shuizu.myutillibrary.D
 import com.android.shuizu.myutillibrary.adapter.GridDivider
 import com.android.shuizu.myutillibrary.adapter.MyBaseAdapter
@@ -74,18 +75,23 @@ class LivepageFragment : BaseFragment() {
         liveAdapter.myOnItemClickListener = object : MyBaseAdapter.MyOnItemClickListener {
             override fun onItemClick(parent: MyBaseAdapter, view: View, position: Int) {
                 val liveInfo = liveInfoList[position]
-                if(liveInfo.gm_status == 1){
-                    if(liveInfo.zb_status == 1){//已付费并且正在直播
-                        val intent = Intent(context, LivePageActivity::class.java)
-                        intent.putExtra("url", liveInfoList[position].video_file_url)
-                        startActivity(intent)
-                    }else{
-                        getMessageDialog(view.context,"主播还没开播呢！")
+                if (liveInfo.gm_status == 1) {
+                    if (liveInfo.zb_status == 1) {//已付费并且正在直播
+                        view.context.getPlayUrl(liveInfo.id, object : KevinRequest.SuccessCallback {
+                            override fun onSuccess(context: Context, result: String) {
+                                val playUrl = Gson().fromJson(result, PlayUrlRes::class.java).retRes
+                                val intent = Intent(context, LivePageActivity::class.java)
+                                intent.putExtra("url", playUrl.https_flv)
+                                startActivity(intent)
+                            }
+                        })
+                    } else {
+                        getMessageDialog(view.context, "主播还没开播呢！")
                     }
-                }else{
-                    if(liveInfo.zb_status == 1){//未付费已经开播
-                        getMessageDialog(view.context,"您没有购买，无法观看！")
-                    }else{
+                } else {
+                    if (liveInfo.zb_status == 1) {//未付费已经开播
+                        getMessageDialog(view.context, "您没有购买，无法观看！")
+                    } else {
                         val intent = Intent(context, LiveDetailsActivity::class.java)
                         intent.putExtra("id", liveInfoList[position].id)
                         startActivity(intent)
@@ -137,7 +143,7 @@ class LivepageFragment : BaseFragment() {
             setSuccessCallback(object : KevinRequest.SuccessCallback {
                 override fun onSuccess(context: Context, result: String) {
                     val liveInfoListRes = Gson().fromJson(result, LiveInfoListRes::class.java)
-                    livePageSwipe.setTotalPages(liveInfoListRes.retCounts,10)
+                    livePageSwipe.setTotalPages(liveInfoListRes.retCounts, 10)
                     if (isRefresh) {
                         liveInfoList.clear()
                     }

@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="10dp">
+
+    <ImageView
+            android:id="@+id/logo"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:contentDescription="@null"
+            android:scaleType="fitXY"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintDimensionRatio="1:1"
+            android:src="@mipmap/pic_demo"/>
+
+    <TextView
+            android:id="@+id/name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintVertical_chainStyle="spread_inside"
+            app:layout_constraintTop_toTopOf="@+id/logo"
+            app:layout_constraintLeft_toRightOf="@+id/logo"
+            app:layout_constraintBottom_toTopOf="@+id/price"
+            android:text="东鹏陶瓷"
+            android:maxLines="1"
+            android:layout_marginStart="10dp"
+            android:textSize="16sp"
+            android:textColor="@color/black"/>
+
+    <TextView
+            android:id="@+id/price"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintLeft_toLeftOf="@+id/name"
+            app:layout_constraintTop_toBottomOf="@+id/name"
+            app:layout_constraintBottom_toTopOf="@+id/price2"
+            android:text="中国建材品牌一百强企业"
+            android:maxLines="1"
+            android:textSize="12sp"
+            android:textColor="@color/text_5"/>
+
+    <TextView
+            android:id="@+id/price2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintLeft_toLeftOf="@+id/name"
+            app:layout_constraintTop_toBottomOf="@+id/price"
+            app:layout_constraintBottom_toBottomOf="@+id/logo"
+            android:text="中国建材品牌一百强企业"
+            android:maxLines="1"
+            android:textSize="12sp"
+            android:textColor="@color/bg_8"/>
+
+</android.support.constraint.ConstraintLayout>

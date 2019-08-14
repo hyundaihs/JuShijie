@@ -56,7 +56,7 @@
                     android:paddingEnd="10dp"
                     android:paddingTop="3dp"
                     android:paddingBottom="3dp"
-                    android:background="@drawable/rect_round_bg_7"/>
+                    android:background="@drawable/rect_radius_bg_7"/>
         </RelativeLayout>
 
         <android.support.constraint.ConstraintLayout
@@ -248,7 +248,7 @@
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_weight="1"
-            android:background="@color/bg_9"
+            android:background="@color/bg_3"
             android:orientation="horizontal">
 
         <RadioGroup
@@ -256,93 +256,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:background="@color/white"
-                android:checkedButton="@id/companyFirst"
                 android:orientation="vertical">
 
-            <RadioButton
-                    android:id="@+id/companyFirst"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="公司简介"
-                    android:button="@drawable/rect_v_checked"
-                    android:paddingStart="5dp"
-                    android:paddingEnd="5dp"
-                    android:paddingTop="10dp"
-                    android:paddingBottom="10dp"
-                    android:background="@drawable/bg_checked"
-                    android:textColor="@color/color_checked"/>
-
-            <RadioButton
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="品牌荣誉"
-                    android:button="@drawable/rect_v_checked"
-                    android:paddingStart="5dp"
-                    android:paddingEnd="5dp"
-                    android:paddingTop="10dp"
-                    android:paddingBottom="10dp"
-                    android:background="@drawable/bg_checked"
-                    android:textColor="@color/color_checked"/>
-
-            <RadioButton
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="案例"
-                    android:button="@drawable/rect_v_checked"
-                    android:paddingStart="5dp"
-                    android:paddingEnd="5dp"
-                    android:paddingTop="10dp"
-                    android:paddingBottom="10dp"
-                    android:background="@drawable/bg_checked"
-                    android:textColor="@color/color_checked"/>
-
-            <RadioButton
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="视频"
-                    android:button="@drawable/rect_v_checked"
-                    android:paddingStart="5dp"
-                    android:paddingEnd="5dp"
-                    android:paddingTop="10dp"
-                    android:paddingBottom="10dp"
-                    android:background="@drawable/bg_checked"
-                    android:textColor="@color/color_checked"/>
-
-            <RadioButton
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="资讯"
-                    android:button="@drawable/rect_v_checked"
-                    android:paddingStart="5dp"
-                    android:paddingEnd="5dp"
-                    android:paddingTop="10dp"
-                    android:paddingBottom="10dp"
-                    android:background="@drawable/bg_checked"
-                    android:textColor="@color/color_checked"/>
-
-            <RadioButton
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="设计团队"
-                    android:button="@drawable/rect_v_checked"
-                    android:paddingStart="5dp"
-                    android:paddingEnd="5dp"
-                    android:paddingTop="10dp"
-                    android:paddingBottom="10dp"
-                    android:background="@drawable/bg_checked"
-                    android:textColor="@color/color_checked"/>
-
-            <RadioButton
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="特卖"
-                    android:button="@drawable/rect_v_checked"
-                    android:paddingStart="5dp"
-                    android:paddingEnd="5dp"
-                    android:paddingTop="10dp"
-                    android:paddingBottom="10dp"
-                    android:background="@drawable/bg_checked"
-                    android:textColor="@color/color_checked"/>
         </RadioGroup>
 
         <FrameLayout

@@ -1,6 +1,7 @@
 package com.android.jsj.util
 
 import android.content.Context
+import com.android.jsj.entity.GETPLAYURL
 import com.android.jsj.entity.NRCZ
 import com.android.jsj.entity.TJZBZFPZ
 import com.android.jsj.entity.getInterface
@@ -27,6 +28,23 @@ fun Context.dianZan(id: Int, table_name: String, type_str: String,c: KevinReques
     )
     KevinRequest.build(this).apply {
         setRequestUrl(NRCZ.getInterface(map))
+        setErrorCallback(object : KevinRequest.ErrorCallback {
+            override fun onError(context: Context, error: String) {
+                getErrorDialog(context, error)
+            }
+        })
+        setSuccessCallback(c)
+        setDataMap(map)
+        postRequest()
+    }
+}
+
+fun Context.getPlayUrl(id:Int,c: KevinRequest.SuccessCallback){
+    val map = mapOf(
+        Pair("id", id)
+    )
+    KevinRequest.build(this).apply {
+        setRequestUrl(GETPLAYURL.getInterface(map))
         setErrorCallback(object : KevinRequest.ErrorCallback {
             override fun onError(context: Context, error: String) {
                 getErrorDialog(context, error)
