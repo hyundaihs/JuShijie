@@ -483,10 +483,17 @@ data class CompanyInfo(
 
     val sjs_id: Int,
     val sjs_title: String,
+    val bj_file_url: String,
     val sjsdj_id: Int,
+    val fengge_ids: String,
+    val fengge_title: String,
 
     val video_file_url: String,
     val sub_info: String,
+    val pp_title: String,
+    val xinghao: String,
+    val yanse: String,
+    val chicun: String,
 
     val type_id: Int,
 
@@ -506,7 +513,62 @@ data class CompanyInfo(
     var zan_nums: Int,
     var view_nums: Int,
     var gz_nums: Int,
+    val contents: String,
+    val tags: String,
+    val price_str: String,
+    val address: String,
     var img_lists: ArrayList<FileInfo>
 )
 
+data class CompanyInfoRes(val retRes: CompanyInfo) : RequestResult()
+
 data class CompanyInfoListRes(val retRes: ArrayList<CompanyInfo>) : RequestResult()
+
+/*
+[id] => 评论id
+[title] => 评论详情
+[create_time] => 时间戳
+[account_id] => 发布人账号id
+[account_title] => 发布人昵称
+[account_file_url] => 发布人头像
+[hf_account_title] => 回复对象昵称
+[hf_account_file_url] => 回复对象头像
+[zan_nums] => 点赞数
+[pl_nums] => 回复数
+[my] => 是否是自己发布的（0|1）
+[hf_lists] => Array（回复列表）
+(
+[0] => Array
+(
+[id] => 评论id
+[title] => 评论详情
+[create_time] => 时间戳
+[account_id] => 发布人账号id
+[account_title] => 发布人昵称
+[account_file_url] => 发布人头像
+[hf_account_title] => 回复对象昵称
+[hf_account_file_url] => 回复对象头像
+[zan_nums] => 点赞数
+[pl_nums] => 回复数
+[my] => 是否是自己发布的（0|1）
+)
+
+)
+*/
+open class Reviews(
+    val id: Int = 0,
+    val title: String = "",
+    val create_time: Long = 0,
+    val account_id: Int = 0,
+    val account_title: String = "",
+    val account_file_url: String = "",
+    val hf_account_title: String = "",
+    val hf_account_file_url: String = "",
+    val zan_nums: Int = 0,
+    val pl_nums: Int = 0,
+    val my: Int = 0
+)
+
+data class ReviewsInfo(val hf_lists: ArrayList<Reviews>) : Reviews()
+
+data class ReviewsInfoListRes(var retRes: ArrayList<ReviewsInfo>) : RequestResult()

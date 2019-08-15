@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+    <include layout="@layout/layout_toolbar"/>
+
+    <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1">
+
+        <android.support.constraint.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+            <TextView
+                    android:id="@+id/companyTitle"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="10dp"
+                    android:textSize="16sp"
+                    android:textColor="@color/black"/>
+
+            <WebView
+                    android:id="@+id/content"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintTop_toBottomOf="@+id/companyTitle"
+                    android:layout_margin="10dp"/>
+
+            <TextView
+                    android:id="@+id/pingLunTitle"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintTop_toBottomOf="@+id/content"
+                    android:drawableStart="@drawable/rect_v"
+                    android:layout_marginTop="10dp"
+                    android:drawablePadding="5dp"
+                    android:padding="10dp"
+                    android:background="@color/bg_3"
+                    android:text="热门评论"
+                    android:textSize="15sp"
+                    android:textColor="@color/black"/>
+
+            <android.support.v7.widget.RecyclerView
+                    android:id="@+id/pingLun"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:minHeight="200dp"
+                    app:layout_constraintTop_toBottomOf="@+id/pingLunTitle"/>
+
+
+        </android.support.constraint.ConstraintLayout>
+    </ScrollView>
+
+    <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="5dp"
+            android:focusable="true"
+            android:focusableInTouchMode="true"
+            android:orientation="horizontal">
+
+        <EditText
+                android:id="@+id/pingLunInfo"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="wrap_content"
+                android:inputType="text"
+                android:textSize="14sp"
+                android:textColor="@color/black"
+                android:hint="请输入评论信息.."/>
+
+        <TextView
+                android:id="@+id/send"
+                android:layout_width="wrap_content"
+                android:background="@drawable/rect_radius_primary"
+                android:paddingStart="10dp"
+                android:paddingEnd="10dp"
+                android:paddingTop="5dp"
+                android:paddingBottom="5dp"
+                android:textColor="@color/white"
+                android:textSize="14sp"
+                android:layout_height="wrap_content"
+                android:text="发送"/>
+    </LinearLayout>
+</LinearLayout>

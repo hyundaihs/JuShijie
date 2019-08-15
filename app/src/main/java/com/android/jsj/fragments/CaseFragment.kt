@@ -1,6 +1,7 @@
 package com.android.jsj.fragments
 
 import android.content.Context
+import android.content.Intent
 import android.os.Bundle
 import android.support.v7.widget.DefaultItemAnimator
 import android.support.v7.widget.LinearLayoutManager
@@ -10,11 +11,11 @@ import android.view.View
 import android.view.ViewGroup
 import com.android.jsj.R
 import com.android.jsj.adapters.CaseAdapter
-import com.android.jsj.adapters.CustomAdapter
 import com.android.jsj.entity.CompanyInfo
 import com.android.jsj.entity.CompanyInfoListRes
 import com.android.jsj.entity.NEWSLISTS
 import com.android.jsj.entity.getInterface
+import com.android.jsj.ui.CaseDetailsActivity
 import com.android.shuizu.myutillibrary.adapter.LineDecoration
 import com.android.shuizu.myutillibrary.adapter.MyBaseAdapter
 import com.android.shuizu.myutillibrary.fragment.BaseFragment
@@ -23,13 +24,13 @@ import com.android.shuizu.myutillibrary.utils.getErrorDialog
 import com.android.shuizu.myutillibrary.widget.SwipeRefreshAndLoadLayout
 import com.google.gson.Gson
 import kotlinx.android.synthetic.main.fragment_listview.*
-import java.util.ArrayList
+import java.util.*
 
 /**
  * ChaYin
  * Created by ${蔡雨峰} on 2019/8/14/014.
  */
-class CaseFragment: BaseFragment() {
+class CaseFragment : BaseFragment() {
 
     companion object {
         var aId = 0
@@ -69,7 +70,8 @@ class CaseFragment: BaseFragment() {
         listView.adapter = companyInfoAdapter
         companyInfoAdapter.myOnItemClickListener = object : MyBaseAdapter.MyOnItemClickListener {
             override fun onItemClick(parent: MyBaseAdapter, view: View, position: Int) {
-
+                CaseDetailsActivity.aId = companyInfoList[position].id
+                startActivity(Intent(view.context, CaseDetailsActivity::class.java))
             }
         }
         refresh()

@@ -67,10 +67,6 @@ class LiveDetailsActivity : MyBaseActivity() {
         }
     }
 
-    fun ImageView.setCheckedZan(isCheck:Boolean){
-        this.setBackgroundResource(if(isCheck) R.drawable.circle_bg_12 else R.drawable.circle_bg_11)
-    }
-
     private fun initViews(liveInfo: LiveInfo) {
         zan.setCheckedZan(liveInfo.is_zan == 1)
         guanzhu.setCheckedZan(liveInfo.is_gz == 1)
@@ -198,4 +194,8 @@ class LiveDetailsActivity : MyBaseActivity() {
             postRequest()
         }
     }
+}
+
+fun ImageView.setCheckedZan(isCheck:Boolean){
+    this.setBackgroundResource(if(isCheck) R.drawable.circle_bg_12 else R.drawable.circle_bg_11)
 }

@@ -1,6 +1,7 @@
 package com.android.jsj.fragments
 
 import android.content.Context
+import android.content.Intent
 import android.os.Bundle
 import android.support.v7.widget.DefaultItemAnimator
 import android.support.v7.widget.LinearLayoutManager
@@ -9,12 +10,12 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.android.jsj.R
-import com.android.jsj.adapters.CustomAdapter
 import com.android.jsj.adapters.VideoAdapter
 import com.android.jsj.entity.CompanyInfo
 import com.android.jsj.entity.CompanyInfoListRes
 import com.android.jsj.entity.NEWSLISTS
 import com.android.jsj.entity.getInterface
+import com.android.jsj.ui.VideoDetailsActivity
 import com.android.shuizu.myutillibrary.adapter.LineDecoration
 import com.android.shuizu.myutillibrary.adapter.MyBaseAdapter
 import com.android.shuizu.myutillibrary.fragment.BaseFragment
@@ -23,13 +24,13 @@ import com.android.shuizu.myutillibrary.utils.getErrorDialog
 import com.android.shuizu.myutillibrary.widget.SwipeRefreshAndLoadLayout
 import com.google.gson.Gson
 import kotlinx.android.synthetic.main.fragment_listview_menus.*
-import java.util.ArrayList
+import java.util.*
 
 /**
  * ChaYin
  * Created by ${蔡雨峰} on 2019/8/14/014.
  */
-class VideoFragment: BaseFragment() {
+class VideoFragment : BaseFragment() {
 
     companion object {
         var aId = 0
@@ -69,7 +70,8 @@ class VideoFragment: BaseFragment() {
         listView.adapter = companyInfoAdapter
         companyInfoAdapter.myOnItemClickListener = object : MyBaseAdapter.MyOnItemClickListener {
             override fun onItemClick(parent: MyBaseAdapter, view: View, position: Int) {
-
+                VideoDetailsActivity.aId = companyInfoList[position].id
+                startActivity(Intent(view.context, VideoDetailsActivity::class.java))
             }
         }
         refresh()
@@ -100,7 +102,7 @@ class VideoFragment: BaseFragment() {
             })
             setSuccessCallback(object : KevinRequest.SuccessCallback {
                 override fun onSuccess(context: Context, result: String) {
-                    val companyInfoListRes = Gson().fromJson(result, CompanyInfoListRes::class.java)
+                    val companyInfoListRes = Gson().fromJson(result, CompanyInfoListRes::class.java) ?: return
                     listViewSwipe.setTotalPages(companyInfoListRes.retCounts, 15)
                     if (isRefresh) {
                         companyInfoList.clear()

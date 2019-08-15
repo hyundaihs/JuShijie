@@ -25,7 +25,6 @@ class CompanyShowActivity : MyBaseActivity() {
     private lateinit var merchantInfo: MerchantInfo
     private val MENUS: MutableList<String> = listOf("公司简介", "品牌荣誉", "案例", "视频", "资讯", "设计团队", "特卖").toMutableList()
     private lateinit var fragments: Array<Fragment?>
-    private var last = -1
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

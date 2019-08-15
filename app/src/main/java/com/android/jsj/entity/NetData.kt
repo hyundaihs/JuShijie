@@ -107,4 +107,7 @@ const val NRCZ = "nrcz" //点赞收藏关注
 const val SJXQ = "sjxq" //商家秀商家详情
 const val GETPLAYURL = "getplayurl" //获取直播播放地址
 const val NEWSLISTS = "newslists" //荣誉案例设计师特卖等
+const val NEWSINFO = "newsinfo" //荣誉案例设计师特卖等详情
+const val NRPLLISTS = "nrpllists" //荣誉案例设计师特卖等评论列表
+const val NRPLADD = "nrpladd" //荣誉案例设计师特卖等创建评论
 
