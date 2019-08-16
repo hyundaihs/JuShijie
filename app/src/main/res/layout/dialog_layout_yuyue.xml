@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:padding="40dp"
+        android:gravity="center"
+        android:background="@color/bg_11"
+        android:orientation="vertical">
+
+    <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="10dp"
+            android:background="@color/white"
+            android:orientation="vertical">
+
+        <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="16sp"
+                android:textColor="@color/black"
+                android:text="预约提醒："/>
+
+        <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="14sp"
+                android:textColor="@color/text_1"
+                android:layout_marginTop="10dp"
+                android:background="@drawable/rect_radius_bg_19"
+                android:padding="5dp"
+                android:text="您的预约信息平台将及时发送给对应商家，请耐心等候客服联系您，本平台将竭诚为您服务！"/>
+
+        <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="16sp"
+                android:textColor="@color/black"
+                android:layout_marginTop="10dp"
+                android:text="请选择预约时间："/>
+
+        <TextView
+                android:id="@+id/time"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/rect_radius_bg_19"
+                android:layout_marginTop="10dp"
+                android:padding="5dp"
+                android:text="年-月-日"/>
+
+        <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="end|center_vertical"
+                android:orientation="horizontal">
+
+            <Button
+                    android:id="@+id/cancel"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/colorAccent"
+                    style="@android:style/Holo.Light.ButtonBar.AlertDialog"
+                    android:text="取消"/>
+
+            <Button
+                    android:id="@+id/ok"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/colorAccent"
+                    style="@android:style/Holo.Light.ButtonBar.AlertDialog"
+                    android:text="确定"/>
+        </LinearLayout>
+
+    </LinearLayout>
+</LinearLayout>

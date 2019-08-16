@@ -110,4 +110,6 @@ const val NEWSLISTS = "newslists" //荣誉案例设计师特卖等
 const val NEWSINFO = "newsinfo" //荣誉案例设计师特卖等详情
 const val NRPLLISTS = "nrpllists" //荣誉案例设计师特卖等评论列表
 const val NRPLADD = "nrpladd" //荣誉案例设计师特卖等创建评论
+const val TJYY = "tjyy" //提交预约
+const val FSSX = "fssx" //发送私信
 

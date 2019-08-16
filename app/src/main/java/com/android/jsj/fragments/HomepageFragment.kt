@@ -121,7 +121,7 @@ class HomepageFragment : BaseFragment() {
         banner.start()
     }
 
-    private fun getBannerInfo(id:Int) {
+    private fun getBannerInfo(id: Int) {
         val map = mapOf(
             Pair("id", id)
         )
@@ -160,8 +160,8 @@ class HomepageFragment : BaseFragment() {
                     val onlineNumInfoRes = Gson().fromJson(result, OnlineNumInfoRes::class.java)
                     onlineNumInfo = onlineNumInfoRes.retRes
                     addrText.text = onlineNumInfo?.city
-                    onlineNum.text = onlineNumInfo?.online_num.toString()
-                    areaText.text = onlineNumInfo?.area
+                    sumNum.text = onlineNumInfo?.all_num.toString()
+                    localNum.text = onlineNumInfo?.online_num.toString()
                 }
             })
             postRequest()

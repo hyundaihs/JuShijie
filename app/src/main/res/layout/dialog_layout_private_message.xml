@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="10dp"
+        android:orientation="vertical">
+
+    <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="16sp"
+            android:textColor="@color/black"
+            android:text="预约提醒："/>
+
+    <EditText
+            android:id="@+id/message"
+            android:layout_width="match_parent"
+            android:layout_height="80dp"
+            android:textSize="14sp"
+            android:textColor="@color/black"
+            android:layout_marginTop="10dp"
+            android:gravity="start|top"
+            android:background="@drawable/rect_radius_bg_19"
+            android:minLines="5"
+            android:padding="5dp"
+            android:hint="请输入私信内容"
+            android:inputType="text"/>
+
+</LinearLayout>

@@ -1,10 +1,12 @@
 package com.android.jsj.ui
 
+import android.app.AlertDialog
 import android.content.Context
+import android.content.DialogInterface
 import android.content.Intent
 import android.os.Bundle
 import android.support.v4.app.Fragment
-import android.view.View
+import android.view.*
 import android.widget.RadioButton
 import com.android.jsj.R
 import com.android.jsj.entity.*
@@ -18,6 +20,21 @@ import com.cazaea.sweetalert.SweetAlertDialog
 import com.google.gson.Gson
 import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.activity_company_show.*
+import android.widget.LinearLayout
+import com.luck.picture.lib.tools.ScreenUtils
+import kotlinx.android.synthetic.main.dialog_layout_yuyue.view.*
+import android.widget.Toast
+import com.android.shuizu.myutillibrary.utils.CalendarUtil
+import com.bigkoo.pickerview.listener.OnTimeSelectListener
+import com.bigkoo.pickerview.builder.TimePickerBuilder
+import kotlinx.android.synthetic.main.dialog_layout_private_message.view.*
+import kotlinx.android.synthetic.main.dialog_layout_yuyue.*
+import org.jetbrains.anko.toast
+import java.util.*
+import android.view.KeyEvent.KEYCODE_BACK
+
+
+
 
 /**
  * JuShijie
@@ -121,10 +138,10 @@ class CompanyShowActivity : MyBaseActivity() {
         }
         loadFragment(0, 0, 0)
         yuYue.setOnClickListener {
-
+            showYuYue()
         }
         companyMsg.setOnClickListener {
-
+            showPrivateMessage()
         }
         companyShare.setOnClickListener {
 
@@ -151,6 +168,111 @@ class CompanyShowActivity : MyBaseActivity() {
                     startActivity(intent)
                 }
             })
+        }
+    }
+
+    private var isYuYueShow = false
+
+    private fun showYuYue() {
+        isYuYueShow = true
+        val pvTime = TimePickerBuilder(this,
+            OnTimeSelectListener { date, v ->
+                time.text = CalendarUtil(date.time).format(CalendarUtil.YYYY_MM_DD)
+            }).build()
+        layoutYuYue.visibility = View.VISIBLE
+        time.setOnClickListener {
+            pvTime.show()
+        }
+        ok.setOnClickListener {
+            if (pvTime.isShowing) {
+                pvTime.dismiss()
+            }
+            layoutYuYue.visibility = View.GONE
+            isYuYueShow = false
+            if (time.text.isEmpty() || time.text.toString() == "年-月-日") {
+                getErrorDialog(this@CompanyShowActivity, "预约时间为空")
+            } else {
+                yuYue(time.text.toString())
+            }
+        }
+        cancel.setOnClickListener {
+            if (pvTime.isShowing) {
+                pvTime.dismiss()
+            }
+            layoutYuYue.visibility = View.GONE
+            isYuYueShow = false
+        }
+    }
+
+    override fun onBackPressed() {
+        if(isYuYueShow){
+            layoutYuYue.visibility = View.GONE
+            isYuYueShow = false
+        }else{
+            super.onBackPressed()
+        }
+    }
+
+    private fun yuYue(time: String) {
+        val map = mapOf(
+            Pair("account_id", merchantInfo.id),
+//            Pair("sjs_id", merchantInfo.id),
+            Pair("yy_time", time)
+        )
+        KevinRequest.build(this).apply {
+            setRequestUrl(TJYY.getInterface(map))
+            setErrorCallback(object : KevinRequest.ErrorCallback {
+                override fun onError(context: Context, error: String) {
+                    getErrorDialog(context, error)
+                }
+            })
+            setSuccessCallback(object : KevinRequest.SuccessCallback {
+                override fun onSuccess(context: Context, result: String) {
+                    toast("预约成功")
+                }
+            })
+            setDataMap(map)
+            setDialog()
+            postRequest()
+        }
+    }
+
+    private fun showPrivateMessage() {
+        val view = LayoutInflater.from(this).inflate(R.layout.dialog_layout_private_message, null, false)
+        val builder = AlertDialog.Builder(this).setView(view)
+        builder.setPositiveButton("确定", object : DialogInterface.OnClickListener {
+            override fun onClick(dialog: DialogInterface?, which: Int) {
+                if (view.message.text.trim().isEmpty()) {
+                    getErrorDialog(this@CompanyShowActivity, "私信内容为空")
+                } else {
+                    sendMessage(view.message.text.toString())
+                }
+            }
+        })
+        builder.setNegativeButton("取消", null)
+        builder.create().show()
+    }
+
+    private fun sendMessage(text: String) {
+        val map = mapOf(
+            Pair("account_id", merchantInfo.id),
+            Pair("contents", text)
+        )
+        KevinRequest.build(this).apply {
+            setRequestUrl(FSSX.getInterface(map))
+            setErrorCallback(object : KevinRequest.ErrorCallback {
+                override fun onError(context: Context, error: String) {
+                    getErrorDialog(context, error)
+                }
+            })
+            setSuccessCallback(object : KevinRequest.SuccessCallback {
+                override fun onSuccess(context: Context, result: String) {
+                    toast("私信发送成功")
+                }
+            })
+            setDataMap(map)
+            setDialog()
+            postRequest()
         }
     }
 
