@@ -19,7 +19,7 @@ class VideoAdapter(val data: ArrayList<CompanyInfo>) : MyBaseAdapter(R.layout.la
         val companyInfo = data[position]
         Picasso.with(holder.itemView.context).load(companyInfo.file_url.getImageUrl()).resize(500, 400)
             .into(holder.itemView.image)
-        holder.itemView.title.text = companyInfo.title
+        holder.itemView.accountTitle.text = companyInfo.title
         holder.itemView.content.text = companyInfo.sub_info
     }
 

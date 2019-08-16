@@ -22,7 +22,7 @@ class SaleAdapter(val data: ArrayList<CompanyInfo>) : MyBaseAdapter(R.layout.lay
             .into(holder.itemView.logo)
         holder.itemView.name.text = companyInfo.title
         holder.itemView.price.text = "原价：￥${companyInfo.price}"
-        holder.itemView.price.paint.flags = Paint. STRIKE_THRU_TEXT_FLAG;
+        holder.itemView.price.paint.flags = Paint. STRIKE_THRU_TEXT_FLAG
         holder.itemView.price2.text = "现价：￥${companyInfo.price2}"
     }
 

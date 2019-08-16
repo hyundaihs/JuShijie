@@ -116,9 +116,34 @@ class HomepageFragment : BaseFragment() {
         banner.setImages(images).setImageLoader(GlideImageLoader()).start()
         banner.setOnBannerListener {
             val banner = bannerInfos[it]
-            WebActivity.pageTitle = "详情"
-            WebActivity.pageContent = banner.contents
-            startActivity(Intent(context, WebActivity::class.java))
+            getBannerInfo(banner.id)
+        }
+        banner.start()
+    }
+
+    private fun getBannerInfo(id:Int) {
+        val map = mapOf(
+            Pair("id", id)
+        )
+        KevinRequest.build(activity as Context).apply {
+            setRequestUrl(BANNERINFO.getInterface(map))
+            setErrorCallback(object : KevinRequest.ErrorCallback {
+                override fun onError(context: Context, error: String) {
+                    getErrorDialog(context, error)
+                }
+            })
+            setSuccessCallback(object : KevinRequest.SuccessCallback {
+                override fun onSuccess(context: Context, result: String) {
+                    val bannerInfoRes = Gson().fromJson(result, BannerInfoRes::class.java)
+                    WebActivity.pageTitle = "详情"
+                    WebActivity.pageContent = bannerInfoRes.retRes.contents
+                    startActivity(Intent(context, WebActivity::class.java))
+                }
+            })
+            openLoginErrCallback(LoginActivity::class.java)
+            setDialog()
+            setDataMap(map)
+            postRequest()
         }
     }
 

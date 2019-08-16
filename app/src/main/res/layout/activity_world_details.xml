@@ -1,0 +1,173 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+    <include layout="@layout/layout_toolbar"/>
+
+    <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1">
+
+        <android.support.constraint.ConstraintLayout
+                xmlns:android="http://schemas.android.com/apk/res/android"
+                xmlns:app="http://schemas.android.com/apk/res-auto"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="10dp">
+
+            <de.hdodenhof.circleimageview.CircleImageView
+                    android:id="@+id/photo"
+                    android:layout_width="30dp"
+                    android:layout_height="0dp"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    android:src="@mipmap/ic_launcher"
+                    app:layout_constraintDimensionRatio="1:1"/>
+
+            <TextView
+                    android:id="@+id/accountTitle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="16sp"
+                    android:textColor="@color/bg_6"
+                    app:layout_constraintLeft_toRightOf="@id/photo"
+                    app:layout_constraintTop_toTopOf="@id/photo"
+                    android:layout_marginStart="5dp"
+                    android:text="侯玉凯"/>
+
+            <TextView
+                    android:id="@+id/time"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="12sp"
+                    android:textColor="@color/text_5"
+                    app:layout_constraintRight_toRightOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    android:layout_marginStart="5dp"
+                    android:text="08/12 14:11"/>
+
+            <TextView
+                    android:id="@+id/content"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:textSize="14sp"
+                    android:textColor="@color/text_2"
+                    app:layout_constraintLeft_toLeftOf="@id/accountTitle"
+                    app:layout_constraintRight_toRightOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/accountTitle"
+                    android:text="侯玉凯放大师傅第三方水电费但是多斯拉克机房到时空裂缝水电费但是生的范德萨发生的发生的"/>
+
+            <android.support.v7.widget.RecyclerView
+                    android:id="@+id/images"
+                    android:layout_width="327dp"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintLeft_toLeftOf="@id/accountTitle"
+                    app:layout_constraintRight_toRightOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/content"/>
+
+            <LinearLayout
+                    android:id="@+id/buttons"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:gravity="end|center_vertical"
+                    app:layout_constraintLeft_toLeftOf="@id/accountTitle"
+                    app:layout_constraintRight_toRightOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/images">
+
+                <TextView
+                        android:id="@+id/zan"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textColor="@color/bg_9"
+                        android:drawableStart="@mipmap/icon_z_gray"
+                        android:drawablePadding="2dp"
+                        android:textSize="12sp"
+                        android:text="12"/>
+
+                <TextView
+                        android:id="@+id/gz"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textColor="@color/bg_9"
+                        android:layout_marginStart="10dp"
+                        android:drawableStart="@mipmap/icon_heart"
+                        android:drawablePadding="2dp"
+                        android:textSize="12sp"
+                        android:text="12"/>
+
+                <TextView
+                        android:id="@+id/pl"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textColor="@color/bg_9"
+                        android:drawableStart="@mipmap/icon_pl"
+                        android:drawablePadding="2dp"
+                        android:textSize="12sp"
+                        android:layout_marginStart="10dp"
+                        android:text="5"/>
+
+            </LinearLayout>
+
+            <TextView
+                    android:id="@+id/pingLunTitle"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintTop_toBottomOf="@+id/buttons"
+                    android:drawableStart="@drawable/rect_v"
+                    android:layout_marginTop="10dp"
+                    android:drawablePadding="5dp"
+                    android:padding="10dp"
+                    android:background="@color/bg_3"
+                    android:text="热门评论"
+                    android:textSize="15sp"
+                    android:textColor="@color/black"/>
+
+            <android.support.v7.widget.RecyclerView
+                    android:id="@+id/pingLun"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:minHeight="200dp"
+                    app:layout_constraintTop_toBottomOf="@+id/pingLunTitle"/>
+
+
+        </android.support.constraint.ConstraintLayout>
+    </ScrollView>
+
+    <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="5dp"
+            android:focusable="true"
+            android:focusableInTouchMode="true"
+            android:orientation="horizontal">
+
+        <EditText
+                android:id="@+id/pingLunInfo"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="wrap_content"
+                android:inputType="text"
+                android:textSize="14sp"
+                android:textColor="@color/black"
+                android:hint="请输入评论信息.."/>
+
+        <TextView
+                android:id="@+id/send"
+                android:layout_width="wrap_content"
+                android:background="@drawable/rect_radius_primary"
+                android:paddingStart="10dp"
+                android:paddingEnd="10dp"
+                android:paddingTop="5dp"
+                android:paddingBottom="5dp"
+                android:textColor="@color/white"
+                android:textSize="14sp"
+                android:layout_height="wrap_content"
+                android:text="发送"/>
+    </LinearLayout>
+</LinearLayout>

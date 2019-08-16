@@ -1,6 +1,7 @@
 package com.android.jsj.fragments
 
 import android.content.Context
+import android.content.Intent
 import android.os.Bundle
 import android.support.v7.widget.DefaultItemAnimator
 import android.support.v7.widget.LinearLayoutManager
@@ -15,6 +16,7 @@ import com.android.jsj.entity.CompanyInfo
 import com.android.jsj.entity.CompanyInfoListRes
 import com.android.jsj.entity.NEWSLISTS
 import com.android.jsj.entity.getInterface
+import com.android.jsj.ui.CustomDetailsActivity
 import com.android.shuizu.myutillibrary.adapter.LineDecoration
 import com.android.shuizu.myutillibrary.adapter.MyBaseAdapter
 import com.android.shuizu.myutillibrary.fragment.BaseFragment
@@ -69,7 +71,8 @@ class CustomFragment : BaseFragment() {
         listView.adapter = companyInfoAdapter
         companyInfoAdapter.myOnItemClickListener = object : MyBaseAdapter.MyOnItemClickListener {
             override fun onItemClick(parent: MyBaseAdapter, view: View, position: Int) {
-
+                CustomDetailsActivity.aId = companyInfoList[position].id
+                startActivity(Intent(view.context, CustomDetailsActivity::class.java))
             }
         }
         refresh()

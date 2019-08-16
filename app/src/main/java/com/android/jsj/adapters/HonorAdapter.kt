@@ -18,7 +18,7 @@ class HonorAdapter(val data: ArrayList<CompanyInfo>) : MyBaseAdapter(R.layout.la
         super.onBindViewHolder(holder, position)
         val companyInfo = data[position]
         Picasso.with(holder.itemView.context).load(companyInfo.file_url.getImageUrl()).into(holder.itemView.image)
-        holder.itemView.title.text = companyInfo.title
+        holder.itemView.accountTitle.text = companyInfo.title
     }
 
     override fun getItemCount(): Int = data.size

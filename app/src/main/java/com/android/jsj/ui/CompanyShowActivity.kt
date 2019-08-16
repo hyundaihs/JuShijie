@@ -1,12 +1,16 @@
 package com.android.jsj.ui
 
 import android.content.Context
+import android.content.Intent
 import android.os.Bundle
 import android.support.v4.app.Fragment
+import android.view.View
 import android.widget.RadioButton
 import com.android.jsj.R
 import com.android.jsj.entity.*
 import com.android.jsj.fragments.*
+import com.android.jsj.util.dianZan
+import com.android.jsj.util.getPlayUrl
 import com.android.shuizu.myutillibrary.MyBaseActivity
 import com.android.shuizu.myutillibrary.request.KevinRequest
 import com.android.shuizu.myutillibrary.utils.getErrorDialog
@@ -59,6 +63,11 @@ class CompanyShowActivity : MyBaseActivity() {
     }
 
     private fun initViews() {
+        companyGz.text = if (merchantInfo.is_gz == 1) "已关注" else "关注"
+        companyGz.setBackgroundResource(
+            if (merchantInfo.is_gz == 1) R.drawable.rect_bg17_round_bg18_bold
+            else R.drawable.rect_bg6_round_white_bold
+        )
         companyTitle.text = merchantInfo.title2
         Picasso.with(this).load(merchantInfo.file_url.getImageUrl()).resize(200, 200).into(companyPhoto)
         companyPPName.text = merchantInfo.title
@@ -111,6 +120,38 @@ class CompanyShowActivity : MyBaseActivity() {
             }
         }
         loadFragment(0, 0, 0)
+        yuYue.setOnClickListener {
+
+        }
+        companyMsg.setOnClickListener {
+
+        }
+        companyShare.setOnClickListener {
+
+        }
+        companyGz.setOnClickListener {
+            dianZan(CaseDetailsActivity.aId, "account", "gz", object : KevinRequest.SuccessCallback {
+                override fun onSuccess(context: Context, result: String) {
+                    val zanResultRes = Gson().fromJson(result, ZanResultRes::class.java)
+                    companyGz.text = if (zanResultRes.retRes.type == 1) "已关注" else "关注"
+                    companyGz.setBackgroundResource(
+                        if (zanResultRes.retRes.type == 1) R.drawable.rect_bg17_round_bg18_bold
+                        else R.drawable.rect_bg6_round_white_bold
+                    )
+                }
+            })
+        }
+        companyWatchShow.visibility = if (merchantInfo.zbj_zb_status == 1) View.VISIBLE else View.GONE
+        companyWatchShow.setOnClickListener {
+            it.context.getPlayUrl(merchantInfo.zbj_id, object : KevinRequest.SuccessCallback {
+                override fun onSuccess(context: Context, result: String) {
+                    val playUrl = Gson().fromJson(result, PlayUrlRes::class.java).retRes
+                    val intent = Intent(context, LivePageActivity::class.java)
+                    intent.putExtra("url", playUrl.https_flv)
+                    startActivity(intent)
+                }
+            })
+        }
     }
 
     private fun loadFragment(position: Int, id: Int, mk_id: Int) {

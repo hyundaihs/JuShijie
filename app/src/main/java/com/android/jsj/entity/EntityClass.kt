@@ -243,6 +243,10 @@ data class OnlineNumInfoRes(var retRes: OnlineNumInfo) : RequestResult()
 [is_zan] => 是否点过赞
 [is_gz] => 是否关注
 [tags] => 标签（世界500强,优秀企业  ,隔开）
+[zbj_id] => 直播间id 未申请为0
+            [zbj_title] => 直播名称
+            [zbj_zb_status] => 直播状态（0：未直播，1：正在直播，3：结束）
+            [zbj_status] => 直播申请状态（0：未申请，1：申请中，2：已通过，3：未通过）
 [zdyfl_lists] => Array（商家自定义分类）
                (
                    [0] => Array
@@ -270,6 +274,12 @@ data class MerchantInfo(
     val pp_file_url: String,
     val tags: String,
     val ppInfo: PPInfo,
+    val is_zan: Int,
+    val is_gz: Int,
+    val zbj_id: Int,
+    val zbj_title:String,
+    val zbj_zb_status:Int,
+    val zbj_status:Int,
     val zdyfl_lists: ArrayList<ChooseType>
 )
 
@@ -500,8 +510,8 @@ data class CompanyInfo(
     val jy: Int,
     val al_num: Int,
 
-    val price: Float,
-    val price2: Float,
+    val price: String,
+    val price2: String,
 
     var dj_id: Int,
     var id: Int,
@@ -517,6 +527,7 @@ data class CompanyInfo(
     val tags: String,
     val price_str: String,
     val address: String,
+    val pl_nums: Int,
     var img_lists: ArrayList<FileInfo>
 )
 

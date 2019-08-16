@@ -74,6 +74,9 @@
                   android:theme="@style/AppTheme"/>
         <activity android:name=".ui.NewsDetailsActivity"/>
         <activity android:name=".ui.DesignerDetailsActivity"/>
+        <activity android:name=".ui.SaleDetailsActivity"/>
+        <activity android:name=".ui.CustomDetailsActivity"/>
+        <activity android:name=".ui.WorldDetailsActivity"/>
     </application>
 
 </manifest>
