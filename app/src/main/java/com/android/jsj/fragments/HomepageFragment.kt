@@ -12,9 +12,14 @@ import android.view.ViewGroup
 import com.android.jsj.JSJApplication.Companion.chooseType
 import com.android.jsj.R
 import com.android.jsj.entity.*
-import com.android.jsj.ui.CompanyShowActivity
-import com.android.jsj.ui.LoginActivity
-import com.android.jsj.ui.WebActivity
+import com.android.jsj.ui.*
+import com.android.jsj.ui.HomeMenusActivity.Companion.LOAD_MENUS1
+import com.android.jsj.ui.HomeMenusActivity.Companion.LOAD_MENUS2
+import com.android.jsj.ui.HomeMenusActivity.Companion.LOAD_MENUS3
+import com.android.jsj.ui.HomeMenusActivity.Companion.LOAD_MENUS5
+import com.android.jsj.ui.HomeMenusActivity.Companion.LOAD_MENUS6
+import com.android.jsj.ui.HomeMenusActivity.Companion.LOAD_MENUS7
+import com.android.jsj.ui.HomeMenusActivity.Companion.LOAD_MENUS8
 import com.android.shuizu.myutillibrary.adapter.LineDecoration
 import com.android.shuizu.myutillibrary.adapter.MyBaseAdapter
 import com.android.shuizu.myutillibrary.fragment.BaseFragment
@@ -59,14 +64,37 @@ class HomepageFragment : BaseFragment() {
     }
 
     private fun initViews() {
-        menuBtn1.setOnClickListener { }
-        menuBtn2.setOnClickListener { }
-        menuBtn3.setOnClickListener { }
-        menuBtn4.setOnClickListener { }
-        menuBtn5.setOnClickListener { }
-        menuBtn6.setOnClickListener { }
-        menuBtn7.setOnClickListener { }
-        menuBtn8.setOnClickListener { }
+        menuBtn1.setOnClickListener {
+            HomeMenusActivity.pageKey = LOAD_MENUS1
+            startActivity(Intent(it.context, HomeMenusActivity::class.java))
+        }
+        menuBtn2.setOnClickListener {
+            HomeMenusActivity.pageKey = LOAD_MENUS2
+            startActivity(Intent(it.context, HomeMenusActivity::class.java))
+        }
+        menuBtn3.setOnClickListener {
+            HomeMenusActivity.pageKey = LOAD_MENUS3
+            startActivity(Intent(it.context, HomeMenusActivity::class.java))
+        }
+        menuBtn4.setOnClickListener {
+            (activity as HomeActivity).loadPage(1)
+        }
+        menuBtn5.setOnClickListener {
+            HomeMenusActivity.pageKey = LOAD_MENUS5
+            startActivity(Intent(it.context, HomeMenusActivity::class.java))
+        }
+        menuBtn6.setOnClickListener {
+            HomeMenusActivity.pageKey = LOAD_MENUS6
+            startActivity(Intent(it.context, HomeMenusActivity::class.java))
+        }
+        menuBtn7.setOnClickListener {
+            HomeMenusActivity.pageKey = LOAD_MENUS7
+            startActivity(Intent(it.context, HomeMenusActivity::class.java))
+        }
+        menuBtn8.setOnClickListener {
+            HomeMenusActivity.pageKey = LOAD_MENUS8
+            startActivity(Intent(it.context, HomeMenusActivity::class.java))
+        }
         val layoutManager = LinearLayoutManager(context)
         homepageList.layoutManager = layoutManager
         layoutManager.orientation = OrientationHelper.VERTICAL
