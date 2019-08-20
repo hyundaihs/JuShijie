@@ -24,6 +24,7 @@ import com.android.shuizu.myutillibrary.utils.getErrorDialog
 import com.android.shuizu.myutillibrary.widget.SwipeRefreshAndLoadLayout
 import com.google.gson.Gson
 import kotlinx.android.synthetic.main.fragment_listview.*
+import kotlinx.android.synthetic.main.layout_list_empty.*
 import java.util.*
 
 /**
@@ -74,8 +75,8 @@ class ListViewFragment : BaseFragment() {
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-        pageKey = arguments!!.getInt(PAGE_KEY)
-        aId = arguments!!.getInt("id")
+        pageKey = arguments!!.getInt(PAGE_KEY,LOAD_MESSAGE)
+        aId = arguments!!.getInt("id",0)
         mkId = arguments!!.getInt("mk_id", 0)
         initListView()
     }
@@ -89,6 +90,7 @@ class ListViewFragment : BaseFragment() {
                 listView.addItemDecoration(GridDivider(context, context?.dp2px(10f)!!.toInt(), 2))
                 listView.itemAnimator = DefaultItemAnimator()
                 listView.isNestedScrollingEnabled = false
+                listView.setEmptyView(emptyView)
                 listView.setBackgroundResource(android.R.color.transparent)
             }
             else -> {
@@ -98,6 +100,7 @@ class ListViewFragment : BaseFragment() {
                 listView.addItemDecoration(LineDecoration(context, LineDecoration.VERTICAL))
                 listView.itemAnimator = DefaultItemAnimator()
                 listView.isNestedScrollingEnabled = false
+                listView.setEmptyView(emptyView)
                 listView.setBackgroundResource(R.drawable.white_rect_round)
             }
         }
@@ -174,6 +177,14 @@ class ListViewFragment : BaseFragment() {
                     }
                 }
             }
+            else ->{
+                listView.adapter = messageAdapter
+                messageAdapter.myOnItemClickListener = object : MyBaseAdapter.MyOnItemClickListener {
+                    override fun onItemClick(parent: MyBaseAdapter, view: View, position: Int) {
+                        getMessageInfoDetails(messageInfo[position].id)
+                    }
+                }
+            }
         }
         refresh()
     }
@@ -201,6 +212,9 @@ class ListViewFragment : BaseFragment() {
             LOAD_DESIGNER -> {
                 getDesignerInfo(listViewSwipe.currPage, true)
             }
+            else ->{
+                getMessageInfo(listViewSwipe.currPage, true)
+            }
         }
 
     }
@@ -227,6 +241,9 @@ class ListViewFragment : BaseFragment() {
             }
             LOAD_DESIGNER -> {
                 getDesignerInfo(currPage)
+            }
+            else ->{
+                getMessageInfo(currPage)
             }
         }
     }

@@ -15,7 +15,6 @@ import kotlinx.android.synthetic.main.activity_live_page.*
  */
 class LivePageActivity : MyBaseActivity() {
 
-    private var flvUrl = ""
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_live_page)

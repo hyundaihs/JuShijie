@@ -58,10 +58,29 @@ class MainActivity : AppCompatActivity() {
 //        }
 //        startCount()
 //        getPics()
-
-        startActivity(Intent(this, LoginActivity::class.java))
-        finish()
+        getChooseType()
     }
+
+    private fun getChooseType() {
+        KevinRequest.build(this).apply {
+            setRequestUrl(STYPE.getInterface())
+            setErrorCallback(object : KevinRequest.ErrorCallback {
+                override fun onError(context: Context, error: String) {
+                    getErrorDialog(context, error)
+                }
+            })
+            setSuccessCallback(object : KevinRequest.SuccessCallback {
+                override fun onSuccess(context: Context, result: String) {
+                    val chooseTypeMapRes = Gson().fromJson(result, ChooseTypeMapRes::class.java)
+                    JSJApplication.chooseType = chooseTypeMapRes.retRes
+                    startActivity(Intent(context, LoginActivity::class.java))
+                    finish()
+                }
+            })
+            postRequest()
+        }
+    }
+
 
     private fun startCount() {
         if (countTimer == null) {

@@ -23,6 +23,7 @@ import com.android.shuizu.myutillibrary.utils.getErrorDialog
 import com.android.shuizu.myutillibrary.widget.SwipeRefreshAndLoadLayout
 import com.google.gson.Gson
 import kotlinx.android.synthetic.main.fragment_listview_menus.*
+import kotlinx.android.synthetic.main.layout_list_empty.*
 import java.util.ArrayList
 
 /**
@@ -56,6 +57,7 @@ class HonorFragment : BaseFragment() {
         listView.addItemDecoration(LineDecoration(context, LineDecoration.VERTICAL))
         listView.itemAnimator = DefaultItemAnimator()
         listView.isNestedScrollingEnabled = false
+        listView.setEmptyView(emptyView)
         listViewSwipe.setOnRefreshListener(object : SwipeRefreshAndLoadLayout.OnRefreshListener {
             override fun onRefresh() {
                 refresh()

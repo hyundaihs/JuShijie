@@ -46,21 +46,34 @@
         </LinearLayout>
     </LinearLayout>
 
-    <com.android.shuizu.myutillibrary.widget.SwipeRefreshAndLoadLayout
-            android:id="@+id/livePageSwipe"
+    <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:background="@color/bg_3">
+            android:layout_height="match_parent">
 
-        <android.support.v4.widget.NestedScrollView
+        <include
+                layout="@layout/layout_list_empty"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"/>
+
+        <com.android.shuizu.myutillibrary.widget.SwipeRefreshAndLoadLayout
+                android:id="@+id/livePageSwipe"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:layout_height="match_parent"
+                android:background="@color/bg_3">
 
-            <android.support.v7.widget.RecyclerView
-                    android:id="@+id/livePageListView"
+            <android.support.v4.widget.NestedScrollView
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"/>
-        </android.support.v4.widget.NestedScrollView>
-    </com.android.shuizu.myutillibrary.widget.SwipeRefreshAndLoadLayout>
+                    android:layout_height="wrap_content">
+
+                <com.android.shuizu.myutillibrary.widget.EmptyRecyclerView
+                        android:id="@+id/livePageListView"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"/>
+
+            </android.support.v4.widget.NestedScrollView>
+        </com.android.shuizu.myutillibrary.widget.SwipeRefreshAndLoadLayout>
+
+    </RelativeLayout>
 
 </LinearLayout>

@@ -4,12 +4,16 @@ import android.content.Context
 import android.os.Bundle
 import android.support.v7.widget.DefaultItemAnimator
 import android.support.v7.widget.GridLayoutManager
+import android.support.v7.widget.LinearLayoutManager
+import android.support.v7.widget.OrientationHelper
 import android.view.View
 import com.android.jsj.R
+import com.android.jsj.adapters.ReplyAdapter
 import com.android.jsj.adapters.ReviewsAdapter
 import com.android.jsj.entity.*
 import com.android.shuizu.myutillibrary.MyBaseActivity
 import com.android.shuizu.myutillibrary.adapter.GridDivider
+import com.android.shuizu.myutillibrary.adapter.LineDecoration
 import com.android.shuizu.myutillibrary.adapter.MyBaseAdapter
 import com.android.shuizu.myutillibrary.dp2px
 import com.android.shuizu.myutillibrary.initActionBar
@@ -20,6 +24,7 @@ import com.cazaea.sweetalert.SweetAlertDialog
 import com.google.gson.Gson
 import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.activity_world_details.*
+import kotlinx.android.synthetic.main.layout_list_empty.*
 import kotlinx.android.synthetic.main.layout_upload_image_list_item.view.*
 import org.jetbrains.anko.toast
 import java.util.ArrayList
@@ -92,6 +97,16 @@ class WorldDetailsActivity : MyBaseActivity(){
 
             }
         }
+
+        val layoutManager = LinearLayoutManager(this)
+        layoutManager.orientation = OrientationHelper.VERTICAL
+        pingLun.layoutManager = layoutManager
+        pingLun.addItemDecoration(LineDecoration(this, LineDecoration.VERTICAL))
+        pingLun.itemAnimator = DefaultItemAnimator()
+        pingLun.isNestedScrollingEnabled = false
+        pingLun.setEmptyView(emptyView)
+        pingLun.adapter = adapter
+
         getPingLun()
         send.setOnClickListener {
             send()

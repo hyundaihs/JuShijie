@@ -1,8 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
+<RelativeLayout
         xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
+
+    <include
+            layout="@layout/layout_list_empty"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"/>
 
     <com.android.shuizu.myutillibrary.widget.SwipeRefreshAndLoadLayout
             android:id="@+id/listViewSwipe"
@@ -13,12 +19,14 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
 
-            <android.support.v7.widget.RecyclerView
+            <com.android.shuizu.myutillibrary.widget.EmptyRecyclerView
                     android:id="@+id/listView"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:background="@drawable/white_rect_round"/>
+                    android:layout_height="wrap_content"/>
+
         </android.support.v4.widget.NestedScrollView>
+
+
     </com.android.shuizu.myutillibrary.widget.SwipeRefreshAndLoadLayout>
 
-</LinearLayout>
+</RelativeLayout>

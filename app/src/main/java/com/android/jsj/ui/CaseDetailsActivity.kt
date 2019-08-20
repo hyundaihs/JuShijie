@@ -9,6 +9,7 @@ import com.android.shuizu.myutillibrary.MyBaseActivity
 import com.android.shuizu.myutillibrary.initActionBar
 import com.android.shuizu.myutillibrary.request.KevinRequest
 import com.android.shuizu.myutillibrary.utils.getErrorDialog
+import com.android.shuizu.myutillibrary.utils.initImageAuto
 import com.cazaea.sweetalert.SweetAlertDialog
 import com.google.gson.Gson
 import com.squareup.picasso.Picasso
@@ -69,6 +70,7 @@ class CaseDetailsActivity : MyBaseActivity() {
         name.text = companyInfo.account_title
         designer.text = companyInfo.sjs_title
         caseInfo.text = companyInfo.sub_info
+        caseDetails.initImageAuto()
         caseDetails.loadData(companyInfo.contents, "text/html; charset=UTF-8", null)
         share.setOnClickListener {
             //分享

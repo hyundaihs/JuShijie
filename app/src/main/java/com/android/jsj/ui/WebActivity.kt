@@ -5,6 +5,9 @@ import com.android.jsj.R
 import com.android.shuizu.myutillibrary.MyBaseActivity
 import com.android.shuizu.myutillibrary.initActionBar
 import kotlinx.android.synthetic.main.activity_web.*
+import android.webkit.WebSettings
+import com.android.shuizu.myutillibrary.utils.initImageAuto
+
 
 /**
  * ChaYin
@@ -19,6 +22,7 @@ class WebActivity:MyBaseActivity(){
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_web)
         initActionBar(this,pageTitle)
+        image.initImageAuto()
         image.loadData(pageContent,"text/html; charset=UTF-8", null)
     }
 }

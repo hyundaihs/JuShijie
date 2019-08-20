@@ -10,6 +10,7 @@ import com.android.shuizu.myutillibrary.adapter.LineDecoration
 import com.android.shuizu.myutillibrary.adapter.MyBaseAdapter
 import com.android.shuizu.myutillibrary.utils.CalendarUtil
 import com.squareup.picasso.Picasso
+import kotlinx.android.synthetic.main.layout_list_empty.*
 import kotlinx.android.synthetic.main.layout_reviews_list_item.view.*
 import java.util.*
 

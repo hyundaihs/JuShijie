@@ -13,9 +13,11 @@ import com.android.shuizu.myutillibrary.adapter.LineDecoration
 import com.android.shuizu.myutillibrary.initActionBar
 import com.android.shuizu.myutillibrary.request.KevinRequest
 import com.android.shuizu.myutillibrary.utils.getErrorDialog
+import com.android.shuizu.myutillibrary.utils.initImageAuto
 import com.cazaea.sweetalert.SweetAlertDialog
 import com.google.gson.Gson
 import kotlinx.android.synthetic.main.activity_news_details.*
+import kotlinx.android.synthetic.main.layout_list_empty.*
 import org.jetbrains.anko.toast
 
 /**
@@ -67,6 +69,7 @@ class NewsDetailsActivity : MyBaseActivity() {
     private fun initViews() {
         initActionBar(this, companyInfo.title)
         companyTitle.text = companyInfo.title
+        content.initImageAuto()
         content.loadData(companyInfo.contents,"text/html; charset=UTF-8", null)
         val layoutManager = LinearLayoutManager(this)
         pingLun.layoutManager = layoutManager
@@ -74,6 +77,7 @@ class NewsDetailsActivity : MyBaseActivity() {
         pingLun.addItemDecoration(LineDecoration(this, LineDecoration.VERTICAL))
         pingLun.itemAnimator = DefaultItemAnimator()
         pingLun.isNestedScrollingEnabled = false
+        pingLun.setEmptyView(emptyView)
         pingLun.adapter = adapter
         getPingLun()
         send.setOnClickListener {

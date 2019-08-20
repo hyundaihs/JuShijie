@@ -7,8 +7,8 @@ import android.view.ViewGroup
 import android.widget.TextView
 import com.android.jsj.R
 import com.android.jsj.entity.MerchantInfo
-import com.android.jsj.ui.WebActivity
 import com.android.shuizu.myutillibrary.fragment.BaseFragment
+import com.android.shuizu.myutillibrary.utils.initImageAuto
 import kotlinx.android.synthetic.main.fragment_company_info.*
 
 /**
@@ -32,6 +32,7 @@ class CompanyInfoFragment : BaseFragment() {
 
     private fun initViews() {
         companyAddress.text = merchantInfo.address
+        companySubInfo.initImageAuto()
         companySubInfo.loadData(merchantInfo.contents, "text/html; charset=UTF-8", null)
         val tags = merchantInfo.tsfw.split(",")
         for (i in 0 until tags.size) {
@@ -39,4 +40,5 @@ class CompanyInfoFragment : BaseFragment() {
             (teSeLayout.getChildAt(i) as TextView).text = tags[i]
         }
     }
+
 }

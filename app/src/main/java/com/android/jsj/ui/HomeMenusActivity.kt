@@ -1,6 +1,7 @@
 package com.android.jsj.ui
 
 import android.content.Context
+import android.content.Intent
 import android.os.Bundle
 import android.support.v7.widget.DefaultItemAnimator
 import android.support.v7.widget.GridLayoutManager
@@ -25,6 +26,7 @@ import com.android.shuizu.myutillibrary.utils.getErrorDialog
 import com.android.shuizu.myutillibrary.widget.SwipeRefreshAndLoadLayout
 import com.google.gson.Gson
 import kotlinx.android.synthetic.main.activity_home_menus.*
+import kotlinx.android.synthetic.main.layout_list_empty.*
 import java.util.*
 
 /**
@@ -133,6 +135,7 @@ class HomeMenusActivity : MyBaseActivity() {
                 menusPageListView.addItemDecoration(GridDivider(this, dp2px(10f).toInt(), 2))
                 menusPageListView.itemAnimator = DefaultItemAnimator()
                 menusPageListView.isNestedScrollingEnabled = false
+                menusPageListView.setEmptyView(emptyView)
                 menusPageListView.setBackgroundResource(android.R.color.transparent)
             }
             else -> {
@@ -142,6 +145,7 @@ class HomeMenusActivity : MyBaseActivity() {
                 menusPageListView.addItemDecoration(LineDecoration(this, LineDecoration.VERTICAL))
                 menusPageListView.itemAnimator = DefaultItemAnimator()
                 menusPageListView.isNestedScrollingEnabled = false
+                menusPageListView.setEmptyView(emptyView)
                 menusPageListView.setBackgroundResource(R.drawable.white_rect_round)
             }
         }
@@ -151,42 +155,86 @@ class HomeMenusActivity : MyBaseActivity() {
                 baseAdapter = MerchantAdapter(merchantInfoList)
                 menusPageListView.adapter = baseAdapter
                 menusPageSwipe.setPadding(0, 0, 0, 0)
+                baseAdapter.myOnItemClickListener = object : MyBaseAdapter.MyOnItemClickListener {
+                    override fun onItemClick(parent: MyBaseAdapter, view: View, position: Int) {
+                        val intent = Intent(view.context, CompanyShowActivity::class.java)
+                        intent.putExtra("id", merchantInfoList[position].account_id)
+                        startActivity(intent)
+                    }
+                }
             }
             LOAD_MENUS2 -> {
                 initActionBar(this, "建材家具")
                 baseAdapter = MerchantAdapter(merchantInfoList)
                 menusPageListView.adapter = baseAdapter
                 menusPageSwipe.setPadding(0, 0, 0, 0)
+                baseAdapter.myOnItemClickListener = object : MyBaseAdapter.MyOnItemClickListener {
+                    override fun onItemClick(parent: MyBaseAdapter, view: View, position: Int) {
+                        val intent = Intent(view.context, CompanyShowActivity::class.java)
+                        intent.putExtra("id", merchantInfoList[position].account_id)
+                        startActivity(intent)
+                    }
+                }
             }
             LOAD_MENUS3 -> {
                 initActionBar(this, "视频")
                 baseAdapter = VideoAdapter(companyInfoList)
                 menusPageListView.adapter = baseAdapter
                 menusPageSwipe.setPadding(m, m, m, m)
+                baseAdapter.myOnItemClickListener = object : MyBaseAdapter.MyOnItemClickListener {
+                    override fun onItemClick(parent: MyBaseAdapter, view: View, position: Int) {
+                        VideoDetailsActivity.aId = companyInfoList[position].id
+                        startActivity(Intent(view.context, VideoDetailsActivity::class.java))
+                    }
+                }
             }
             LOAD_MENUS5 -> {
                 initActionBar(this, "资讯")
                 baseAdapter = NewsAdapter(companyInfoList)
                 menusPageListView.adapter = baseAdapter
                 menusPageSwipe.setPadding(m, m, m, m)
+                baseAdapter.myOnItemClickListener = object : MyBaseAdapter.MyOnItemClickListener {
+                    override fun onItemClick(parent: MyBaseAdapter, view: View, position: Int) {
+                        NewsDetailsActivity.aId = companyInfoList[position].id
+                        startActivity(Intent(view.context, NewsDetailsActivity::class.java))
+                    }
+                }
             }
             LOAD_MENUS6 -> {
                 initActionBar(this, "案例")
                 baseAdapter = CaseAdapter(companyInfoList)
                 menusPageListView.adapter = baseAdapter
                 menusPageSwipe.setPadding(m, m, m, m)
+                baseAdapter.myOnItemClickListener = object : MyBaseAdapter.MyOnItemClickListener {
+                    override fun onItemClick(parent: MyBaseAdapter, view: View, position: Int) {
+                        CaseDetailsActivity.aId = companyInfoList[position].id
+                        startActivity(Intent(view.context, CaseDetailsActivity::class.java))
+                    }
+                }
             }
             LOAD_MENUS7 -> {
                 initActionBar(this, "设计师")
                 baseAdapter = DesignerAdapter(companyInfoList)
                 menusPageListView.adapter = baseAdapter
                 menusPageSwipe.setPadding(m, m, m, m)
+                baseAdapter.myOnItemClickListener = object : MyBaseAdapter.MyOnItemClickListener {
+                    override fun onItemClick(parent: MyBaseAdapter, view: View, position: Int) {
+                        DesignerDetailsActivity.aId = companyInfoList[position].id
+                        startActivity(Intent(view.context, DesignerDetailsActivity::class.java))
+                    }
+                }
             }
             LOAD_MENUS8 -> {
                 initActionBar(this, "特卖")
                 baseAdapter = SaleAdapter(companyInfoList)
                 menusPageListView.adapter = baseAdapter
                 menusPageSwipe.setPadding(m, m, m, m)
+                baseAdapter.myOnItemClickListener = object : MyBaseAdapter.MyOnItemClickListener {
+                    override fun onItemClick(parent: MyBaseAdapter, view: View, position: Int) {
+                        SaleDetailsActivity.aId = companyInfoList[position].id
+                        startActivity(Intent(view.context, SaleDetailsActivity::class.java))
+                    }
+                }
             }
         }
         menusPageSwipe.setOnRefreshListener(object : SwipeRefreshAndLoadLayout.OnRefreshListener {
@@ -198,12 +246,7 @@ class HomeMenusActivity : MyBaseActivity() {
                 loadMore(currPage)
             }
         })
-        baseAdapter.myOnItemClickListener = object : MyBaseAdapter.MyOnItemClickListener {
-            override fun onItemClick(parent: MyBaseAdapter, view: View, position: Int) {
-                val companyInfo = companyInfoList[position]
 
-            }
-        }
         refresh()
     }
 

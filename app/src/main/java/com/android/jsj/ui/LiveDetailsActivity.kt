@@ -16,6 +16,7 @@ import com.android.shuizu.myutillibrary.request.KevinRequest
 import com.android.shuizu.myutillibrary.utils.CalendarUtil
 import com.android.shuizu.myutillibrary.utils.getErrorDialog
 import com.android.shuizu.myutillibrary.utils.getSuccessDialog
+import com.android.shuizu.myutillibrary.utils.initImageAuto
 import com.cazaea.sweetalert.SweetAlertDialog
 import com.google.gson.Gson
 import com.luck.picture.lib.PictureSelector
@@ -76,6 +77,7 @@ class LiveDetailsActivity : MyBaseActivity() {
         price.text = liveInfo.price.toString()
         time.text = "时间：${CalendarUtil(liveInfo.start_time, true).format(CalendarUtil.MM_DD_HH_MM)} " +
                 "~ ${CalendarUtil(liveInfo.end_time, true).format(CalendarUtil.MM_DD_HH_MM)}"
+        contents.initImageAuto()
         contents.loadData(liveInfo.contents, "text/html; charset=UTF-8", null)
         bank.text = "开户银行：${systemInfo.bank_zh}"
         bankAccountNum.text = systemInfo.bank_yhkh

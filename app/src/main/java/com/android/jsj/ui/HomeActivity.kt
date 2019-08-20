@@ -1,7 +1,10 @@
 package com.android.jsj.ui
 
 import android.os.Bundle
+import android.os.Handler
+import android.os.Message
 import android.support.v4.app.Fragment
+import android.widget.Toast
 import com.android.jsj.R
 import com.android.jsj.fragments.ConcernpageFragment
 import com.android.jsj.fragments.HomepageFragment
@@ -11,6 +14,7 @@ import com.android.shuizu.myutillibrary.MyBaseActivity
 import com.ashokvarma.bottomnavigation.BottomNavigationBar
 import com.ashokvarma.bottomnavigation.BottomNavigationItem
 import kotlinx.android.synthetic.main.activity_home.*
+import org.jetbrains.anko.toast
 
 
 /**
@@ -68,8 +72,29 @@ class HomeActivity : MyBaseActivity(), BottomNavigationBar.OnTabSelectedListener
         loadFragment(0)
     }
 
+
+    private var isExit = false  // 标识是否退出
+
+    private val mHandler = object : Handler() {
+
+        override fun handleMessage(msg: Message) {
+            super.handleMessage(msg)
+            isExit = false
+        }
+    }
+
     fun loadPage(index: Int) {
         navigation.selectTab(index)
+    }
+
+    override fun onBackPressed() {
+        if (!isExit) {
+            isExit = true
+            toast("再按一次后退键退出程序")
+            mHandler.sendEmptyMessageDelayed(0, 2000)  // 利用handler延迟发送更改状态信息
+        } else {
+            super.onBackPressed()
+        }
     }
 
     private fun loadFragment(position: Int) {

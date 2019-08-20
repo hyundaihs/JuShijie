@@ -23,6 +23,7 @@ import com.cazaea.sweetalert.SweetAlertDialog
 import com.google.gson.Gson
 import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.activity_designer_details.*
+import kotlinx.android.synthetic.main.layout_list_empty.*
 import java.util.*
 
 /**
@@ -114,6 +115,7 @@ class DesignerDetailsActivity : MyBaseActivity() {
         caseList.addItemDecoration(LineDecoration(this, LineDecoration.VERTICAL))
         caseList.itemAnimator = DefaultItemAnimator()
         caseList.isNestedScrollingEnabled = false
+        caseList.setEmptyView(emptyView)
         caseList.adapter = companyInfoAdapter
         companyInfoAdapter.myOnItemClickListener = object : MyBaseAdapter.MyOnItemClickListener {
             override fun onItemClick(parent: MyBaseAdapter, view: View, position: Int) {

@@ -30,6 +30,7 @@ import com.google.gson.Gson
 import com.google.gson.JsonParser
 import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.fragment_homepage.*
+import kotlinx.android.synthetic.main.layout_list_empty.*
 import kotlinx.android.synthetic.main.layout_merchant_list_item.view.*
 
 
@@ -57,7 +58,6 @@ class HomepageFragment : BaseFragment() {
         super.onActivityCreated(savedInstanceState)
         getBanner()
         getOnlineNum()
-        getChooseType()
         getAreas()
         getMerchantInfo()
         initViews()
@@ -101,6 +101,7 @@ class HomepageFragment : BaseFragment() {
         homepageList.addItemDecoration(LineDecoration(context, LineDecoration.VERTICAL))
         homepageList.itemAnimator = DefaultItemAnimator()
         homepageList.isNestedScrollingEnabled = false
+        homepageList.setEmptyView(emptyView)
         homepageList.adapter = merchantAdapter
         merchantAdapter.myOnItemClickListener = object : MyBaseAdapter.MyOnItemClickListener {
             override fun onItemClick(parent: MyBaseAdapter, view: View, position: Int) {
@@ -109,6 +110,7 @@ class HomepageFragment : BaseFragment() {
                 startActivity(intent)
             }
         }
+
     }
 
     private fun getBanner() {
@@ -190,24 +192,6 @@ class HomepageFragment : BaseFragment() {
                     addrText.text = onlineNumInfo?.city
                     sumNum.text = onlineNumInfo?.all_num.toString()
                     localNum.text = onlineNumInfo?.online_num.toString()
-                }
-            })
-            postRequest()
-        }
-    }
-
-    private fun getChooseType() {
-        KevinRequest.build(activity as Context).apply {
-            setRequestUrl(STYPE.getInterface())
-            setErrorCallback(object : KevinRequest.ErrorCallback {
-                override fun onError(context: Context, error: String) {
-                    getErrorDialog(context, error)
-                }
-            })
-            setSuccessCallback(object : KevinRequest.SuccessCallback {
-                override fun onSuccess(context: Context, result: String) {
-                    val chooseTypeMapRes = Gson().fromJson(result, ChooseTypeMapRes::class.java)
-                    chooseType = chooseTypeMapRes.retRes
                 }
             })
             postRequest()

@@ -24,6 +24,7 @@ import com.android.shuizu.myutillibrary.utils.getErrorDialog
 import com.android.shuizu.myutillibrary.widget.SwipeRefreshAndLoadLayout
 import com.google.gson.Gson
 import kotlinx.android.synthetic.main.fragment_listview_designer.*
+import kotlinx.android.synthetic.main.layout_list_empty.*
 import java.util.*
 
 /**
@@ -58,6 +59,7 @@ class DesignerFragment: BaseFragment() {
         livePageListView.itemAnimator = DefaultItemAnimator()
         livePageListView.adapter = companyInfoAdapter
         livePageListView.isNestedScrollingEnabled = false
+        livePageListView.setEmptyView(emptyView)
 
         livePageSwipe.setOnRefreshListener(object : SwipeRefreshAndLoadLayout.OnRefreshListener {
             override fun onRefresh() {

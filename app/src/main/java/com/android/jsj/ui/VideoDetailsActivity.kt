@@ -21,6 +21,7 @@ import com.google.gson.Gson
 import com.squareup.picasso.Picasso
 import fm.jiecao.jcvideoplayer_lib.JCVideoPlayer
 import kotlinx.android.synthetic.main.activity_video_details.*
+import kotlinx.android.synthetic.main.layout_list_empty.*
 import org.jetbrains.anko.toast
 
 /**
@@ -124,6 +125,7 @@ class VideoDetailsActivity : MyBaseActivity() {
         pingLun.addItemDecoration(LineDecoration(this, LineDecoration.VERTICAL))
         pingLun.itemAnimator = DefaultItemAnimator()
         pingLun.isNestedScrollingEnabled = false
+        pingLun.setEmptyView(emptyView)
         pingLun.adapter = adapter
         getPingLun()
         send.setOnClickListener {

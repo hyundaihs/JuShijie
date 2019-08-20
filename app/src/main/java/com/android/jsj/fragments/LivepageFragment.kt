@@ -28,6 +28,7 @@ import com.android.shuizu.myutillibrary.widget.SwipeRefreshAndLoadLayout
 import com.google.gson.Gson
 import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.fragment_livepage.*
+import kotlinx.android.synthetic.main.layout_list_empty.*
 import kotlinx.android.synthetic.main.layout_live_list_item.view.*
 
 /**
@@ -63,6 +64,7 @@ class LivepageFragment : BaseFragment() {
         livePageListView.itemAnimator = DefaultItemAnimator()
         livePageListView.adapter = liveAdapter
         livePageListView.isNestedScrollingEnabled = false
+        livePageListView.setEmptyView(emptyView)
         livePageSwipe.setOnRefreshListener(object : SwipeRefreshAndLoadLayout.OnRefreshListener {
             override fun onRefresh() {
                 refresh()

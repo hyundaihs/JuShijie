@@ -6,7 +6,8 @@ import android.content.DialogInterface
 import android.content.Intent
 import android.os.Bundle
 import android.support.v4.app.Fragment
-import android.view.*
+import android.view.LayoutInflater
+import android.view.View
 import android.widget.RadioButton
 import com.android.jsj.R
 import com.android.jsj.entity.*
@@ -15,25 +16,17 @@ import com.android.jsj.util.dianZan
 import com.android.jsj.util.getPlayUrl
 import com.android.shuizu.myutillibrary.MyBaseActivity
 import com.android.shuizu.myutillibrary.request.KevinRequest
+import com.android.shuizu.myutillibrary.utils.CalendarUtil
 import com.android.shuizu.myutillibrary.utils.getErrorDialog
+import com.bigkoo.pickerview.builder.TimePickerBuilder
+import com.bigkoo.pickerview.listener.OnTimeSelectListener
 import com.cazaea.sweetalert.SweetAlertDialog
 import com.google.gson.Gson
 import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.activity_company_show.*
-import android.widget.LinearLayout
-import com.luck.picture.lib.tools.ScreenUtils
-import kotlinx.android.synthetic.main.dialog_layout_yuyue.view.*
-import android.widget.Toast
-import com.android.shuizu.myutillibrary.utils.CalendarUtil
-import com.bigkoo.pickerview.listener.OnTimeSelectListener
-import com.bigkoo.pickerview.builder.TimePickerBuilder
 import kotlinx.android.synthetic.main.dialog_layout_private_message.view.*
 import kotlinx.android.synthetic.main.dialog_layout_yuyue.*
 import org.jetbrains.anko.toast
-import java.util.*
-import android.view.KeyEvent.KEYCODE_BACK
-
-
 
 
 /**
@@ -77,6 +70,9 @@ class CompanyShowActivity : MyBaseActivity() {
             setDialog()
             postRequest()
         }
+        companyShowBg.setOnClickListener {
+            finish()
+        }
     }
 
     private fun initViews() {
@@ -104,34 +100,37 @@ class CompanyShowActivity : MyBaseActivity() {
         }
         CompanyInfoFragment.merchantInfo = merchantInfo
         buttons.setOnCheckedChangeListener { group, checkedId ->
-            when (checkedId) {
+            var tempId = checkedId % fragments.size
+            if(tempId == 0){
+                tempId = fragments.size
+            }
+            when (tempId) {
                 1 -> {
                     loadFragment(0, 0, 0)
                 }
                 2 -> {
-                    loadFragment(checkedId - 1, merchantInfo.id, 2)
+                    loadFragment(tempId - 1, merchantInfo.id, 2)
                 }
                 3 -> {
-                    loadFragment(checkedId - 1, merchantInfo.id, 5)
+                    loadFragment(tempId - 1, merchantInfo.id, 5)
                 }
                 4 -> {
-                    loadFragment(checkedId - 1, merchantInfo.id, 3)
+                    loadFragment(tempId - 1, merchantInfo.id, 3)
                 }
                 5 -> {
-                    loadFragment(checkedId - 1, merchantInfo.id, 1)
+                    loadFragment(tempId - 1, merchantInfo.id, 1)
                 }
                 6 -> {
-                    loadFragment(checkedId - 1, merchantInfo.id, 4)
+                    loadFragment(tempId - 1, merchantInfo.id, 4)
                 }
                 7 -> {
-                    loadFragment(checkedId - 1, merchantInfo.id, 6)
+                    loadFragment(tempId - 1, merchantInfo.id, 6)
                 }
-                in 8..fragments.size -> {
+                else -> {
                     loadFragment(
-                        checkedId - 1,
-
+                        tempId - 1,
                         merchantInfo.id,
-                        merchantInfo.zdyfl_lists[checkedId - 8].id
+                        merchantInfo.zdyfl_lists[tempId - 8].id
                     )
                 }
             }
@@ -205,10 +204,10 @@ class CompanyShowActivity : MyBaseActivity() {
     }
 
     override fun onBackPressed() {
-        if(isYuYueShow){
+        if (isYuYueShow) {
             layoutYuYue.visibility = View.GONE
             isYuYueShow = false
-        }else{
+        } else {
             super.onBackPressed()
         }
     }
