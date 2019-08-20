@@ -13,6 +13,7 @@ import com.android.jsj.JSJApplication.Companion.userInfo
 import com.android.jsj.R
 import com.android.jsj.entity.*
 import com.android.jsj.ui.ApplyMerchantActivity
+import com.android.jsj.ui.ApplyVIPMerchantActivity
 import com.android.jsj.ui.ChangeUserInfoActivity
 import com.android.shuizu.myutillibrary.fragment.BaseFragment
 import com.android.shuizu.myutillibrary.request.KevinRequest
@@ -87,9 +88,15 @@ class MinepageFragment : BaseFragment() {
         setting.setOnClickListener {
             startActivity(Intent(context, ChangeUserInfoActivity::class.java))
         }
-        applyToMerchant.setOnClickListener {
-            startActivity(Intent(context, ApplyMerchantActivity::class.java))
+        if(userInfo.sjsq_status == 0){
+            applyToMerchant.text = "申请成为商家"
+            applyToMerchant.setOnClickListener {
+                startActivity(Intent(context, ApplyMerchantActivity::class.java))
+            }
+        }else if(userInfo.sjsq_status == 1){
+            applyToMerchant.text = "申请认证信息审核中..."
         }
+
         val fragments = ArrayList<Fragment>()
         for (i in 0 until keys.size) {
             val ordersFragment = ListViewFragment()
@@ -101,6 +108,9 @@ class MinepageFragment : BaseFragment() {
 
         viewpager.adapter = MyPagerAdapter(childFragmentManager, fragments, titles)
         tabLayout.setupWithViewPager(viewpager)//此方法就是让tablayout和ViewPager联动
+        applyVIPMerchant.setOnClickListener {
+            startActivity(Intent(context, ApplyVIPMerchantActivity::class.java))
+        }
     }
 
     private fun getUserInfo() {

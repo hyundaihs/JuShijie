@@ -1,9 +1,11 @@
 package com.android.jsj
 
+import android.app.Activity
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
+import android.view.View
 import android.widget.TextView
 import com.android.jsj.entity.*
 import com.android.jsj.ui.LoginActivity
@@ -32,16 +34,15 @@ class MainActivity : AppCompatActivity() {
             doAsync {
                 uiThread {
                     if (time == 0L) {
-                        text.text = "跳过"
-                        text.isClickable = true
                         countTimer?.cancel()
                         countTimer = null
                         countTask?.cancel()
                         countTask = null
                         time = 6L
+                        text.context.startActivity(Intent(text.context, LoginActivity::class.java))
+                        (text.context as Activity).finish()
                     } else {
                         text.text = "${time--}s 跳过"
-                        text.isClickable = false
                     }
                 }
             }
@@ -51,13 +52,18 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-//        counter.setOnClickListener {
-//            counter.isClickable = false
-//            startActivity(Intent(this, LoginActivity::class.java))
-//            finish()
-//        }
-//        startCount()
-//        getPics()
+        counter.visibility = View.GONE
+        counter.setOnClickListener {
+            counter.isClickable = false
+            countTimer?.cancel()
+            countTimer = null
+            countTask?.cancel()
+            countTask = null
+            time = 6L
+            startActivity(Intent(this, LoginActivity::class.java))
+            finish()
+        }
+        getPics()
         getChooseType()
     }
 
@@ -73,8 +79,7 @@ class MainActivity : AppCompatActivity() {
                 override fun onSuccess(context: Context, result: String) {
                     val chooseTypeMapRes = Gson().fromJson(result, ChooseTypeMapRes::class.java)
                     JSJApplication.chooseType = chooseTypeMapRes.retRes
-                    startActivity(Intent(context, LoginActivity::class.java))
-                    finish()
+                    startCount()
                 }
             })
             postRequest()
@@ -83,6 +88,7 @@ class MainActivity : AppCompatActivity() {
 
 
     private fun startCount() {
+        counter.visibility = View.VISIBLE
         if (countTimer == null) {
             countTimer = Timer()
         }
@@ -131,10 +137,17 @@ class MainActivity : AppCompatActivity() {
             })
             setSuccessCallback(object : KevinRequest.SuccessCallback {
                 override fun onSuccess(context: Context, result: String) {
+                    countTimer?.cancel()
+                    countTimer = null
+                    countTask?.cancel()
+                    countTask = null
+                    time = 6L
                     val bannerInfoRes = Gson().fromJson(result, BannerInfoRes::class.java)
                     WebActivity.pageTitle = "详情"
                     WebActivity.pageContent = bannerInfoRes.retRes.contents
-                    startActivity(Intent(context,WebActivity::class.java))
+                    startActivity(Intent(context, LoginActivity::class.java))
+                    startActivity(Intent(context, WebActivity::class.java))
+                    finish()
                 }
             })
             setDataMap(map)

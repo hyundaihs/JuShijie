@@ -1,16 +1,22 @@
 package com.android.jsj.adapters
 
+import android.content.Context
 import android.support.v7.widget.DefaultItemAnimator
 import android.support.v7.widget.GridLayoutManager
 import android.view.View
+import android.widget.TextView
 import com.android.jsj.R
 import com.android.jsj.entity.CompanyInfo
 import com.android.jsj.entity.FileInfo
+import com.android.jsj.entity.ZanResultRes
 import com.android.jsj.entity.getImageUrl
+import com.android.jsj.util.dianZan
 import com.android.shuizu.myutillibrary.adapter.GridDivider
 import com.android.shuizu.myutillibrary.adapter.MyBaseAdapter
 import com.android.shuizu.myutillibrary.dp2px
+import com.android.shuizu.myutillibrary.request.KevinRequest
 import com.android.shuizu.myutillibrary.utils.CalendarUtil
+import com.google.gson.Gson
 import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.layout_upload_image_list_item.view.*
 import kotlinx.android.synthetic.main.layout_world_list_item.view.*
@@ -37,11 +43,31 @@ class WorldAdapter(val data: ArrayList<CompanyInfo>) : MyBaseAdapter(R.layout.la
         holder.itemView.zan.text = companyInfo.zan_nums.toString()
         holder.itemView.gz.text = companyInfo.gz_nums.toString()
         holder.itemView.pl.text = companyInfo.pl_nums.toString()
+        holder.itemView.zan.setOnClickListener {
+            it.context.dianZan(companyInfo.id, "account", "zan", object : KevinRequest.SuccessCallback {
+                override fun onSuccess(context: Context, result: String) {
+                    val zanResultRes = Gson().fromJson(result, ZanResultRes::class.java)
+                    val text = it as TextView
+                    val o = text.text.toString().toInt()
+                    if (zanResultRes.retRes.type == 1) {
+                        text.text = (o + 1).toString()
+                    } else {
+                        text.text = (o - 1).toString()
+                    }
+                }
+            })
+        }
 
         val gridLayoutManager1 = GridLayoutManager(holder.itemView.context, 5)
         holder.itemView.images.layoutManager = gridLayoutManager1
         //水平分割线
-        holder.itemView.images.addItemDecoration(GridDivider(holder.itemView.context, holder.itemView.context.dp2px(10f).toInt(), 5))
+        holder.itemView.images.addItemDecoration(
+            GridDivider(
+                holder.itemView.context,
+                holder.itemView.context.dp2px(10f).toInt(),
+                5
+            )
+        )
         holder.itemView.images.itemAnimator = DefaultItemAnimator()
         holder.itemView.images.adapter = imageAdapter
         holder.itemView.images.isNestedScrollingEnabled = false

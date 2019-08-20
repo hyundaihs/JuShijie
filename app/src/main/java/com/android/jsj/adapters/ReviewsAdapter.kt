@@ -3,6 +3,7 @@ package com.android.jsj.adapters
 import android.support.v7.widget.DefaultItemAnimator
 import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.OrientationHelper
+import android.view.View
 import com.android.jsj.R
 import com.android.jsj.entity.ReviewsInfo
 import com.android.jsj.entity.getImageUrl
@@ -18,7 +19,8 @@ import java.util.*
  * JuShijie
  * Created by 蔡雨峰 on 2019/8/15.
  */
-class ReviewsAdapter(val data: ArrayList<ReviewsInfo>) : MyBaseAdapter(R.layout.layout_reviews_list_item) {
+class ReviewsAdapter(val data: ArrayList<ReviewsInfo>, val onZanPinClickListener: OnZanPinClickListener) :
+    MyBaseAdapter(R.layout.layout_reviews_list_item) {
 
     override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
         super.onBindViewHolder(holder, position)
@@ -29,7 +31,13 @@ class ReviewsAdapter(val data: ArrayList<ReviewsInfo>) : MyBaseAdapter(R.layout.
         holder.itemView.sendContent.text = reviewsInfo.title
         holder.itemView.publishTime.text = CalendarUtil(reviewsInfo.create_time, true).format(CalendarUtil.YYYY_MM_DD)
         holder.itemView.zan.text = reviewsInfo.zan_nums.toString()
+        holder.itemView.zan.setOnClickListener {
+            onZanPinClickListener.onZanClickListener(it, position)
+        }
         holder.itemView.pingLun.text = reviewsInfo.pl_nums.toString()
+        holder.itemView.pingLun.setOnClickListener {
+            onZanPinClickListener.onPinClickListener(it, position)
+        }
 
         val layoutManager = LinearLayoutManager(holder.itemView.context)
         holder.itemView.replyList.layoutManager = layoutManager
@@ -41,4 +49,9 @@ class ReviewsAdapter(val data: ArrayList<ReviewsInfo>) : MyBaseAdapter(R.layout.
     }
 
     override fun getItemCount(): Int = data.size
+}
+
+interface OnZanPinClickListener {
+    fun onZanClickListener(view: View, position: Int)
+    fun onPinClickListener(view: View, position: Int)
 }

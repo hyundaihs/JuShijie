@@ -7,10 +7,13 @@ import android.support.v7.widget.GridLayoutManager
 import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.OrientationHelper
 import android.view.View
+import android.widget.TextView
 import com.android.jsj.R
+import com.android.jsj.adapters.OnZanPinClickListener
 import com.android.jsj.adapters.ReplyAdapter
 import com.android.jsj.adapters.ReviewsAdapter
 import com.android.jsj.entity.*
+import com.android.jsj.util.dianZan
 import com.android.shuizu.myutillibrary.MyBaseActivity
 import com.android.shuizu.myutillibrary.adapter.GridDivider
 import com.android.shuizu.myutillibrary.adapter.LineDecoration
@@ -33,15 +36,41 @@ import java.util.ArrayList
  * JuShijie
  * Created by 蔡雨峰 on 2019/8/16.
  */
-class WorldDetailsActivity : MyBaseActivity(){
+class WorldDetailsActivity : MyBaseActivity(), OnZanPinClickListener {
+    override fun onZanClickListener(view: View, position: Int) {
+        val re = reviewsInfo[position]
+        dianZan(re.id, "pllog", "zan", object : KevinRequest.SuccessCallback {
+            override fun onSuccess(context: Context, result: String) {
+                val zanResultRes = Gson().fromJson(result, ZanResultRes::class.java)
+                val text = view as TextView
+                val o = text.text.toString().toInt()
+                if (zanResultRes.retRes.type == 1) {
+                    view.text = (o + 1).toString()
+                } else {
+                    view.text = (o - 1).toString()
+                }
+            }
+        })
+    }
+
+    override fun onPinClickListener(view: View, position: Int) {
+        val re = reviewsInfo[position]
+        pinLunId = re.id
+        pingLunInfo.hint = "回复${re.title}:"
+        isReply = true
+    }
+
     companion object {
         var aId = 0
     }
+
     private lateinit var companyInfo: CompanyInfo
     private val imageData = ArrayList<FileInfo>()
     private val imageAdapter = ImageAdapter(imageData)
     private var reviewsInfo = ArrayList<ReviewsInfo>()
-    private var adapter = ReviewsAdapter(reviewsInfo)
+    private var adapter = ReviewsAdapter(reviewsInfo, this)
+    private var pinLunId = 0
+    private var isReply = false //回复还是评论
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -111,6 +140,26 @@ class WorldDetailsActivity : MyBaseActivity(){
         send.setOnClickListener {
             send()
         }
+
+        pl.setOnClickListener {
+            isReply = false
+            pingLunInfo.hint = "请输入评论信息"
+        }
+
+        zan.setOnClickListener {
+            dianZan(aId, "account", "zan", object : KevinRequest.SuccessCallback {
+                override fun onSuccess(context: Context, result: String) {
+                    val zanResultRes = Gson().fromJson(result, ZanResultRes::class.java)
+                    val o = zan.text.toString().toInt()
+                    if (zanResultRes.retRes.type == 1) {
+                        zan.text = (o + 1).toString()
+                    } else {
+                        zan.text = (o - 1).toString()
+                    }
+                }
+            })
+        }
+
     }
 
     private class ImageAdapter(val data: ArrayList<FileInfo>) : MyBaseAdapter(R.layout.layout_upload_image_list_item) {
@@ -139,6 +188,7 @@ class WorldDetailsActivity : MyBaseActivity(){
             })
             setSuccessCallback(object : KevinRequest.SuccessCallback {
                 override fun onSuccess(context: Context, result: String) {
+                    reviewsInfo.clear()
                     reviewsInfo.addAll(Gson().fromJson(result, ReviewsInfoListRes::class.java).retRes)
                     adapter.notifyDataSetChanged()
                 }
@@ -156,7 +206,10 @@ class WorldDetailsActivity : MyBaseActivity(){
         val map = mapOf(
             Pair("id", aId),
             Pair("title", pingLunInfo.text.toString())
-        )
+        ).toMutableMap()
+        if (isReply) {
+            map.put("pl_id", pinLunId)
+        }
         KevinRequest.build(this).apply {
             setRequestUrl(NRPLADD.getInterface(map))
             setErrorCallback(object : KevinRequest.ErrorCallback {

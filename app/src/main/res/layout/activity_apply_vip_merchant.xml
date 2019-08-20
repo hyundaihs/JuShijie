@@ -1,0 +1,154 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:orientation="vertical">
+
+    <include layout="@layout/layout_toolbar"/>
+
+    <android.support.constraint.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1">
+
+        <LinearLayout
+                android:id="@+id/hint"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toBottomOf="@+id/payTitle"
+                android:orientation="horizontal"
+                android:layout_margin="10dp"
+                android:padding="10dp"
+                android:background="@color/bg_3">
+
+            <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="温馨提示:对公付款包含技术服务费"
+                    android:textSize="10sp"
+                    android:textColor="@color/black"/>
+
+            <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="20元"
+                    android:textSize="10sp"
+                    android:textColor="@color/color_orange"/>
+
+            <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text=",平台将开具技术服务类型发票"
+                    android:textSize="10sp"
+                    android:textColor="@color/black"/>
+        </LinearLayout>
+
+
+        <TextView
+                android:id="@+id/bank"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toBottomOf="@+id/hint"
+                android:layout_margin="10dp"
+                android:textSize="14sp"
+                android:textColor="@color/black"/>
+
+        <LinearLayout
+                android:id="@+id/bankAccount"
+                app:layout_constraintTop_toBottomOf="@+id/bank"
+                android:layout_margin="10dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+            <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="对公账号："
+                    android:textSize="14sp"
+                    android:textColor="@color/black"/>
+
+            <TextView
+                    android:id="@+id/bankAccountNum"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="14sp"
+                    android:textColor="@color/color_orange"/>
+        </LinearLayout>
+
+        <TextView
+                android:id="@+id/imageTitle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toBottomOf="@+id/bankAccount"
+                android:layout_margin="10dp"
+                android:text="上传支付单据截图："
+                android:textSize="14sp"
+                android:textColor="@color/black"/>
+
+        <ImageView
+                android:id="@+id/payImage"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:contentDescription="@null"
+                android:src="@mipmap/btn_add_photo"
+                android:layout_margin="10dp"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/imageTitle"/>
+
+        <ImageView
+                android:id="@+id/payImageDelete"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/ic_delete_photo"
+                android:contentDescription="@null"
+                android:visibility="gone"
+                app:layout_constraintTop_toTopOf="@+id/payImage"
+                app:layout_constraintEnd_toEndOf="@+id/payImage"
+                android:layout_marginTop="5dp"
+                android:layout_marginEnd="5dp"/>
+
+        <LinearLayout
+                android:id="@+id/xieyiTitle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toBottomOf="@+id/payImage"
+                android:layout_marginTop="20dp"
+                android:gravity="center"
+                android:orientation="horizontal">
+
+            <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="14sp"
+                    android:textColor="@color/text_1"
+                    android:text="提交即同意"/>
+
+            <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="14sp"
+                    android:textColor="@color/colorPrimary"
+                    android:text="《居饰界用户平台使用协议》"/>
+        </LinearLayout>
+
+        <TextView
+                android:id="@+id/submit"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/rect_round_purple"
+                android:gravity="center"
+                app:layout_constraintTop_toBottomOf="@+id/xieyiTitle"
+                app:layout_constraintBottom_toBottomOf="parent"
+                android:layout_marginBottom="20dp"
+                android:textColor="@android:color/white"
+                android:text="提  交"
+                android:layout_margin="20dp"
+                android:padding="10dp"
+                android:textSize="16sp"/>
+
+    </android.support.constraint.ConstraintLayout>
+
+</LinearLayout>

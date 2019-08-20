@@ -10,6 +10,7 @@ import com.android.shuizu.myutillibrary.request.KevinRequest
 import com.android.shuizu.myutillibrary.utils.getErrorDialog
 import com.android.shuizu.myutillibrary.utils.getSuccessDialog
 import com.cazaea.sweetalert.SweetAlertDialog
+import org.jetbrains.anko.toast
 
 /**
  * JuShijie
@@ -20,7 +21,15 @@ import com.cazaea.sweetalert.SweetAlertDialog
  * table_name:内容类型【account：公司，news：荣誉，案例，视频，资讯，设计团队，特卖，pllog：评论，accountzbj：直播】
  * type_str:操作类型（zan：点赞，sc：收藏，gz：关注）
  */
-fun Context.dianZan(id: Int, table_name: String, type_str: String,c: KevinRequest.SuccessCallback) {
+
+var startTime = 0L
+
+fun Context.dianZan(id: Int, table_name: String, type_str: String, c: KevinRequest.SuccessCallback) {
+    if (System.currentTimeMillis() - startTime < 2000) {
+        toast("点的太快了")
+        return
+    }
+    startTime = System.currentTimeMillis()
     val map = mapOf(
         Pair("id", id),
         Pair("table_name", table_name),
@@ -39,7 +48,7 @@ fun Context.dianZan(id: Int, table_name: String, type_str: String,c: KevinReques
     }
 }
 
-fun Context.getPlayUrl(id:Int,c: KevinRequest.SuccessCallback){
+fun Context.getPlayUrl(id: Int, c: KevinRequest.SuccessCallback) {
     val map = mapOf(
         Pair("id", id)
     )
