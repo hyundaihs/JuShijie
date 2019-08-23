@@ -9,11 +9,12 @@
     <ImageView
             android:id="@+id/logo"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_height="0dp"
             android:contentDescription="@null"
             android:scaleType="fitXY"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintDimensionRatio="1:1"
             android:src="@mipmap/pic_demo"/>
 
@@ -37,10 +38,22 @@
             android:layout_height="wrap_content"
             app:layout_constraintLeft_toLeftOf="@+id/name"
             app:layout_constraintTop_toBottomOf="@+id/name"
+            app:layout_constraintBottom_toTopOf="@+id/designer"
+            android:text="中国建材品牌一百强企业"
+            android:maxLines="1"
+            android:textSize="14sp"
+            android:textColor="@color/text_5"/>
+
+    <TextView
+            android:id="@+id/designer"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintLeft_toLeftOf="@+id/name"
+            app:layout_constraintTop_toBottomOf="@+id/content"
             app:layout_constraintBottom_toTopOf="@+id/layout_3"
             android:text="中国建材品牌一百强企业"
             android:maxLines="1"
-            android:textSize="12sp"
+            android:textSize="14sp"
             android:textColor="@color/text_5"/>
 
     <LinearLayout
@@ -50,9 +63,8 @@
             android:orientation="horizontal"
             android:gravity="start"
             app:layout_constraintLeft_toLeftOf="@+id/name"
-            app:layout_constraintTop_toBottomOf="@+id/content"
+            app:layout_constraintTop_toBottomOf="@+id/designer"
             app:layout_constraintBottom_toBottomOf="@+id/logo"
-            android:textSize="12sp"
             android:textColor="@color/text_5">
 
         <TextView
@@ -61,7 +73,7 @@
                 android:layout_height="wrap_content"
                 android:textColor="@color/bg_9"
                 android:drawableStart="@mipmap/icon_z_gray"
-                android:textSize="12sp"
+                android:textSize="14sp"
                 android:text="12w"/>
 
         <TextView
@@ -71,7 +83,7 @@
                 android:textColor="@color/bg_9"
                 android:layout_marginStart="5dp"
                 android:drawableStart="@mipmap/icon_heart"
-                android:textSize="12sp"
+                android:textSize="14sp"
                 android:text="12w"/>
 
         <TextView
@@ -80,7 +92,7 @@
                 android:layout_height="wrap_content"
                 android:textColor="@color/bg_9"
                 android:drawableStart="@mipmap/icon_pulish_time"
-                android:textSize="12sp"
+                android:textSize="14sp"
                 android:layout_marginStart="5dp"
                 android:text="2019-02-15"/>
     </LinearLayout>

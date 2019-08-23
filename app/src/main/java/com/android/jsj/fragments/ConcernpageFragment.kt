@@ -4,11 +4,13 @@ import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.support.v4.app.FragmentManager
 import android.support.v4.app.FragmentPagerAdapter
+import android.support.v7.app.AppCompatActivity
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.android.jsj.R
 import com.android.shuizu.myutillibrary.fragment.BaseFragment
+import com.android.shuizu.myutillibrary.initActionBar
 import kotlinx.android.synthetic.main.fragment_concernpage.*
 
 /**
@@ -23,6 +25,7 @@ class ConcernpageFragment : BaseFragment() {
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
+        (activity as AppCompatActivity).initActionBar(activity as AppCompatActivity,"关注",false)
         initViews()
     }
 

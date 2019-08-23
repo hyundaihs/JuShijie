@@ -6,6 +6,8 @@
         android:layout_height="match_parent"
         android:orientation="vertical">
 
+    <include layout="@layout/layout_toolbar"/>
+
     <android.support.design.widget.TabLayout
             android:id="@+id/tabLayoutConcern"
             android:layout_width="match_parent"

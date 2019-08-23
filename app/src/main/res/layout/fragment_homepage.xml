@@ -3,104 +3,125 @@
         xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
         android:background="@color/bg_3"
         android:orientation="vertical">
 
-    <LinearLayout
+    <RelativeLayout
             android:layout_width="match_parent"
-            android:orientation="vertical"
             android:layout_height="0dp"
-            android:background="@mipmap/topbg"
             android:layout_weight="1">
+
+        <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:scaleType="fitXY"
+                android:src="@mipmap/topbg"
+                android:layout_marginBottom="10dp"
+                android:contentDescription="@null"/>
 
         <LinearLayout
                 android:layout_width="match_parent"
-                android:gravity="center_vertical"
-                android:orientation="horizontal"
-                android:layout_height="wrap_content">
-
-            <TextView
-                    android:id="@+id/addrText"
-                    android:layout_width="0dp"
-                    android:layout_weight="1"
-                    android:layout_height="wrap_content"
-                    android:text="武汉市"
-                    android:drawablePadding="5dp"
-                    android:paddingTop="5dp"
-                    android:gravity="center_vertical"
-                    android:paddingBottom="5dp"
-                    android:paddingStart="10dp"
-                    android:paddingEnd="10dp"
-                    android:textSize="12sp"
-                    android:textColor="@android:color/white"
-                    android:drawableStart="@mipmap/location"/>
-
+                android:layout_height="match_parent"
+                android:orientation="vertical">
             <LinearLayout
-                    android:layout_width="0dp"
-                    android:layout_weight="2"
-                    android:gravity="end|center_vertical"
-                    android:paddingTop="5dp"
-                    android:paddingBottom="5dp"
+                    android:layout_width="match_parent"
+                    android:gravity="center_vertical"
                     android:orientation="horizontal"
-                    android:paddingStart="10dp"
-                    android:layout_marginEnd="10dp"
-                    android:paddingEnd="10dp"
-                    android:background="@drawable/rect_round_bg5"
                     android:layout_height="wrap_content">
 
                 <TextView
-                        android:layout_width="wrap_content"
-                        android:text="总在线人数"
+                        android:id="@+id/addrText"
+                        android:layout_width="0dp"
+                        android:layout_weight="1"
+                        android:layout_height="wrap_content"
+                        android:text="武汉市"
+                        android:drawablePadding="5dp"
+                        android:paddingTop="5dp"
+                        android:gravity="center_vertical"
+                        android:paddingBottom="5dp"
+                        android:paddingStart="10dp"
+                        android:paddingEnd="10dp"
                         android:textSize="12sp"
-                        android:maxLines="1"
                         android:textColor="@android:color/white"
-                        android:layout_height="wrap_content"/>
+                        android:drawableStart="@mipmap/location"/>
 
-                <TextView
-                        android:id="@+id/sumNum"
-                        android:layout_width="wrap_content"
-                        android:text="65536"
-                        android:textSize="12sp"
-                        android:maxLines="1"
-                        android:textColor="@color/text_3"
-                        android:layout_height="wrap_content"/>
+                <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_weight="2"
+                        android:gravity="end|center_vertical"
+                        android:paddingTop="5dp"
+                        android:paddingBottom="5dp"
+                        android:orientation="horizontal"
+                        android:paddingStart="10dp"
+                        android:layout_marginEnd="10dp"
+                        android:paddingEnd="10dp"
+                        android:background="@drawable/rect_round_bg5"
+                        android:layout_height="wrap_content">
 
-                <TextView
-                        android:id="@+id/areaText"
-                        android:layout_width="wrap_content"
-                        android:text="/本地区在线人数"
-                        android:textSize="12sp"
-                        android:maxLines="1"
-                        android:textColor="@android:color/white"
-                        android:layout_height="wrap_content"/>
+                    <TextView
+                            android:layout_width="wrap_content"
+                            android:text="总在线人数"
+                            android:textSize="12sp"
+                            android:maxLines="1"
+                            android:textColor="@android:color/white"
+                            android:layout_height="wrap_content"/>
 
-                <TextView
-                        android:id="@+id/localNum"
-                        android:layout_width="wrap_content"
-                        android:text="65536"
-                        android:textSize="12sp"
-                        android:maxLines="1"
-                        android:textColor="@color/text_3"
-                        android:layout_height="wrap_content"/>
+                    <TextView
+                            android:id="@+id/sumNum"
+                            android:layout_width="wrap_content"
+                            android:text="65536"
+                            android:textSize="12sp"
+                            android:maxLines="1"
+                            android:textColor="@color/text_3"
+                            android:layout_height="wrap_content"/>
+
+                    <TextView
+                            android:id="@+id/areaText"
+                            android:layout_width="wrap_content"
+                            android:text="/本地区在线人数"
+                            android:textSize="12sp"
+                            android:maxLines="1"
+                            android:textColor="@android:color/white"
+                            android:layout_height="wrap_content"/>
+
+                    <TextView
+                            android:id="@+id/localNum"
+                            android:layout_width="wrap_content"
+                            android:text="65536"
+                            android:textSize="12sp"
+                            android:maxLines="1"
+                            android:textColor="@color/text_3"
+                            android:layout_height="wrap_content"/>
+                </LinearLayout>
             </LinearLayout>
-        </LinearLayout>
 
-        <com.youth.banner.Banner
-                android:id="@+id/banner"
-                android:layout_width="match_parent"
-                android:layout_height="0dp"
-                android:layout_weight="1"/>
-    </LinearLayout>
+            <android.support.v7.widget.CardView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginEnd="10dp"
+                    app:cardCornerRadius="5dp"
+                    app:cardElevation="2dp">
+                <com.youth.banner.Banner
+                        android:id="@+id/banner"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"/>
+            </android.support.v7.widget.CardView>
+        </LinearLayout>
+    </RelativeLayout>
 
     <LinearLayout
             android:layout_width="match_parent"
+            android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:layout_height="0dp"
-            android:layout_marginTop="5dp"
-            android:layout_marginStart="5dp"
-            android:layout_marginEnd="5dp"
-            android:background="@drawable/rect_corners_white"
-            android:layout_weight="1">
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="10dp"
+            android:paddingBottom="5dp"
+            android:paddingTop="5dp"
+            android:layout_marginStart="10dp"
+            android:layout_marginEnd="10dp"
+            android:background="@drawable/rect_corners_white">
 
         <LinearLayout
                 android:layout_width="match_parent"
@@ -291,10 +312,9 @@
             android:layout_width="match_parent"
             android:orientation="vertical"
             android:layout_height="0dp"
-            android:layout_marginTop="5dp"
-            android:layout_marginStart="5dp"
-            android:layout_marginEnd="5dp"
-            android:layout_weight="1">
+            android:layout_marginStart="10dp"
+            android:layout_marginEnd="10dp"
+            android:layout_weight="2">
 
         <com.android.shuizu.myutillibrary.widget.EmptyRecyclerView
                 android:id="@+id/homepageList"

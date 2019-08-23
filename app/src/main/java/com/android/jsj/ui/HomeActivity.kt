@@ -1,10 +1,10 @@
 package com.android.jsj.ui
 
+import android.os.Build
 import android.os.Bundle
 import android.os.Handler
 import android.os.Message
 import android.support.v4.app.Fragment
-import android.widget.Toast
 import com.android.jsj.R
 import com.android.jsj.fragments.ConcernpageFragment
 import com.android.jsj.fragments.HomepageFragment

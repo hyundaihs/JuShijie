@@ -18,10 +18,11 @@ class CaseAdapter(val data: ArrayList<CompanyInfo>) : MyBaseAdapter(R.layout.lay
     override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
         super.onBindViewHolder(holder, position)
         val companyInfo = data[position]
-        Picasso.with(holder.itemView.context).load(companyInfo.file_url.getImageUrl()).resize(200, 180)
+        Picasso.with(holder.itemView.context).load(companyInfo.file_url.getImageUrl()).resize(300, 300)
             .into(holder.itemView.logo)
         holder.itemView.name.text = companyInfo.title
-        holder.itemView.content.text = companyInfo.sub_info
+        holder.itemView.content.text = companyInfo.account_title
+        holder.itemView.designer.text = "设计师：${companyInfo.sjs_title}"
         holder.itemView.zan.text = companyInfo.zan_nums.toString()
         holder.itemView.hot.text = companyInfo.view_nums.toString()
         holder.itemView.time.text = CalendarUtil(companyInfo.create_time, true).format(CalendarUtil.YYYY_MM_DD)
