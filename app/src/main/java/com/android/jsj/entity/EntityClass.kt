@@ -56,21 +56,21 @@ class App_Keyword {
 [bank_yhkh] => 银行卡号
 [bank_khmc] => 开户名称*/
 data class SystemInfo(
-    var title: String,
-    var link_man: String,
-    var telphone: String,
-    var qq: String,
-    var email: String,
-    var address: String,
-    var company_right: String,
-    var beian_info: String,
-    var gzh_file_url: String,
-    var zcxy: String,
-    var bank_khh: String,
-    var bank_zh: String,
-    var bank_zhhh: String,
-    var bank_yhkh: String,
-    var bank_khmc: String
+    var title: String = "",
+    var link_man: String = "",
+    var telphone: String = "",
+    var qq: String = "",
+    var email: String = "",
+    var address: String = "",
+    var company_right: String = "",
+    var beian_info: String = "",
+    var gzh_file_url: String = "",
+    var zcxy: String = "",
+    var bank_khh: String = "",
+    var bank_zh: String = "",
+    var bank_zhhh: String = "",
+    var bank_yhkh: String = "",
+    var bank_khmc: String = ""
 )
 
 data class SystemInfoRes(var retRes: SystemInfo) : RequestResult()
@@ -138,22 +138,22 @@ class ApplyStatus {
 data class PPInfo(val id: Int, var pp_title: String, var pp_file_url: String)
 
 data class UserInfo(
-    val id: Int,
-    var account: String,
-    var type_id: Int,
-    var title: String,
-    var file_url: String,
-    var area: String,
-    var city: String,
-    var province: String,
-    var login_time: Long,
-    var create_time: Long,
-    var fs_nums: Int,
-    var gz_nums: Int,
-    var zan_nums: Int,
-    var ft_nums: Int,
-    var sjsq_status: Int,
-    var ppInfo: PPInfo
+    var id: Int = 0,
+    var account: String = "",
+    var type_id: Int = 0,
+    var title: String = "",
+    var file_url: String = "",
+    var area: String = "",
+    var city: String = "",
+    var province: String = "",
+    var login_time: Long = 0,
+    var create_time: Long = 0,
+    var fs_nums: Int = 0,
+    var gz_nums: Int = 0,
+    var zan_nums: Int = 0,
+    var ft_nums: Int = 0,
+    var sjsq_status: Int = 0,
+    var ppInfo: PPInfo = PPInfo(0,"","")
 )
 
 data class UserInfoRes(var retRes: UserInfo) : RequestResult()

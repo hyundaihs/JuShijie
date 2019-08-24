@@ -15,17 +15,17 @@ class JSJApplication : Application() {
 
     companion object {
         var instance: JSJApplication by Delegates.notNull()
-        var systemInfo: SystemInfo by Delegates.notNull()
-        var userInfo:UserInfo by Delegates.notNull()
-        var chooseType:Map<String, ArrayList<ChooseType>> by Delegates.notNull()
+        var systemInfo = SystemInfo()
+        var userInfo = UserInfo()
+        var chooseType : Map<String, ArrayList<ChooseType>> = mapOf()
         var isUserinfoChange = false
     }
 
     override fun onCreate() {
         super.onCreate()
         instance = this
-        val licenceURL = "http://license.vod2.myqcloud.com/license/v1/01de8f682ffae40cd8cf0a43ff6a4659/TXLiveSDK.licence" // 获取到的 licence url
-        val licenceKey = "a5a008b95c078460c037f483f783dc0d" // 获取到的 licence key
+        val licenceURL = "http://license.vod2.myqcloud.com/license/v1/e13dad417f55b25480df2570667e663b/TXLiveSDK.licence" // 获取到的 licence url
+        val licenceKey = "eee4d6dbe223769235373061b142318a" // 获取到的 licence key
         TXLiveBase.getInstance().setLicence(this, licenceURL, licenceKey)
     }
 }

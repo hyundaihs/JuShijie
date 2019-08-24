@@ -12,6 +12,7 @@ import com.android.jsj.entity.*
 import com.android.jsj.ui.LoginActivity
 import com.android.jsj.ui.WebActivity
 import com.android.shuizu.myutillibrary.request.KevinRequest
+import com.android.shuizu.myutillibrary.requestPermission
 import com.android.shuizu.myutillibrary.utils.getErrorDialog
 import com.google.gson.Gson
 import com.squareup.picasso.Picasso
@@ -66,6 +67,7 @@ class MainActivity : AppCompatActivity() {
         }
         getPics()
         getChooseType()
+        requestPermission {  }
     }
 
     private fun getChooseType() {

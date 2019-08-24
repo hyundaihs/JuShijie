@@ -53,6 +53,8 @@ val mPermissions = arrayOf(Permission.READ_EXTERNAL_STORAGE,
         Permission.WRITE_EXTERNAL_STORAGE,
         Permission.ACCESS_COARSE_LOCATION,
         Permission.ACCESS_FINE_LOCATION,
+        Permission.RECORD_AUDIO,
+        Permission.READ_PHONE_STATE,
         Permission.CAMERA
 )
 

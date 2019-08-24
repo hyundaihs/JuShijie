@@ -81,7 +81,7 @@ class LivepageFragment : BaseFragment() {
             override fun onItemClick(parent: MyBaseAdapter, view: View, position: Int) {
                 val liveInfo = liveInfoList[position]
                 if (liveInfo.gm_status == 1) {
-                    if (liveInfo.zb_status == 1) {//已付费并且正在直播
+//                    if (liveInfo.zb_status == 1) {//已付费并且正在直播
                         view.context.getPlayUrl(liveInfo.id, object : KevinRequest.SuccessCallback {
                             override fun onSuccess(context: Context, result: String) {
                                 val playUrl = Gson().fromJson(result, PlayUrlRes::class.java).retRes
@@ -90,9 +90,9 @@ class LivepageFragment : BaseFragment() {
                                 startActivity(intent)
                             }
                         })
-                    } else {
-                        getMessageDialog(view.context, "主播还没开播呢！")
-                    }
+//                    } else {
+//                        getMessageDialog(view.context, "主播还没开播呢！")
+//                    }
                 } else {
                     if (liveInfo.zb_status == 1) {//未付费已经开播
                         getMessageDialog(view.context, "您没有购买，无法观看！")
@@ -102,6 +102,9 @@ class LivepageFragment : BaseFragment() {
                         startActivity(intent)
                     }
                 }
+//                val intent = Intent(context, LivePageActivity::class.java)
+//                intent.putExtra("url", "")
+//                startActivity(intent)
             }
         }
         refresh()
