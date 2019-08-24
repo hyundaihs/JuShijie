@@ -86,7 +86,7 @@ class LivepageFragment : BaseFragment() {
                             override fun onSuccess(context: Context, result: String) {
                                 val playUrl = Gson().fromJson(result, PlayUrlRes::class.java).retRes
                                 val intent = Intent(context, LivePageActivity::class.java)
-                                intent.putExtra("url", playUrl.https_flv)
+                                intent.putExtra("url", playUrl.rtmp)
                                 startActivity(intent)
                             }
                         })
