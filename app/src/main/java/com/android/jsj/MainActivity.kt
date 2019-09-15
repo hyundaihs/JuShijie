@@ -67,7 +67,7 @@ class MainActivity : AppCompatActivity() {
         }
         getPics()
         getChooseType()
-        requestPermission {  }
+        requestPermission { }
     }
 
     private fun getChooseType() {
@@ -115,10 +115,14 @@ class MainActivity : AppCompatActivity() {
             setSuccessCallback(object : KevinRequest.SuccessCallback {
                 override fun onSuccess(context: Context, result: String) {
                     val bannerInfoListRes = Gson().fromJson(result, BannerInfoListRes::class.java)
-                    id = bannerInfoListRes.retRes[0].id
-                    Picasso.with(context).load(bannerInfoListRes.retRes[0].file_url.getImageUrl()).into(loadingImage)
-                    loadingImage.setOnClickListener {
-                        getBannerInfo()
+                    if (bannerInfoListRes.retRes.size > 0) {
+                        id = bannerInfoListRes.retRes[0].id
+                        Picasso.with(context)
+                            .load(bannerInfoListRes.retRes[0].file_url.getImageUrl())
+                            .into(loadingImage)
+                        loadingImage.setOnClickListener {
+                            getBannerInfo()
+                        }
                     }
                 }
             })
