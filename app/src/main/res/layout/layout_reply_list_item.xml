@@ -9,7 +9,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textSize="14sp"
-            android:textColor="@color/bg_8"/>
+            android:textColor="@color/color_F6B900"/>
 
     <TextView
             android:layout_width="wrap_content"
@@ -23,13 +23,13 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textSize="14sp"
-            android:textColor="@color/bg_13"/>
+            android:textColor="@color/color_AAA8EB"/>
 
     <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textSize="14sp"
-            android:textColor="@color/text_1"
+            android:textColor="@color/color_333333"
             android:text="："/>
 
     <TextView
@@ -37,6 +37,6 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textSize="14sp"
-            android:textColor="@color/text_1"/>
+            android:textColor="@color/color_333333"/>
 
 </LinearLayout>

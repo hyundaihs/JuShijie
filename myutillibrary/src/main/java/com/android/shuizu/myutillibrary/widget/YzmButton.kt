@@ -38,6 +38,7 @@ class YzmButton @JvmOverloads constructor(context: Context, attrs: AttributeSet?
                         time = 60
                         isRun = false
                         text.text = "获取验证码"
+                        text.isEnabled = true
                     }else{
                         text.text = "重新获取(${time--}秒)"
                     }

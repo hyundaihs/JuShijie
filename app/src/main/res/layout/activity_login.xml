@@ -6,25 +6,11 @@
               android:background="@android:color/white"
               android:orientation="vertical">
 
-    <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="1"
-            android:gravity="center"
-            android:orientation="vertical">
-
-        <ImageView
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:contentDescription="@null"
-                android:scaleType="fitXY"
-                android:src="@mipmap/login_topbg"/>
-    </LinearLayout>
+    <include layout="@layout/layout_app_title_flag"/>
 
     <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="1"
+            android:layout_height="wrap_content"
             android:gravity="center"
             android:paddingStart="40dp"
             android:paddingEnd="40dp"
@@ -44,6 +30,8 @@
                 android:textSize="14sp"
                 android:maxLines="1"
                 android:singleLine="true"
+                android:textColorHint="@color/color_8E90AA"
+                android:textColor="@color/color_333333"
                 app:layout_constraintLeft_toLeftOf="@id/loginBtn"
                 app:layout_constraintRight_toRightOf="@id/loginBtn"/>
 
@@ -51,8 +39,8 @@
                 android:id="@+id/line1"
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
-                android:layout_marginTop="10dp"
-                android:background="@color/gray_1"
+                android:layout_marginTop="35dp"
+                android:background="@color/color_EEEEEE"
                 app:layout_constraintLeft_toLeftOf="@id/loginBtn"
                 app:layout_constraintRight_toRightOf="@id/loginBtn"
                 app:layout_constraintTop_toBottomOf="@id/account"/>
@@ -72,6 +60,8 @@
                 android:inputType="textPassword"
                 android:maxLines="1"
                 android:singleLine="true"
+                android:textColorHint="@color/color_8E90AA"
+                android:textColor="@color/color_333333"
                 app:layout_constraintLeft_toLeftOf="@id/loginBtn"
                 app:layout_constraintRight_toRightOf="@id/loginBtn"
                 app:layout_constraintTop_toBottomOf="@id/line1"/>
@@ -80,43 +70,34 @@
                 android:id="@+id/line2"
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
-                android:layout_marginTop="10dp"
-                android:background="@color/gray_1"
+                android:layout_marginTop="35dp"
+                android:background="@color/color_EEEEEE"
                 app:layout_constraintLeft_toLeftOf="@id/loginBtn"
                 app:layout_constraintRight_toRightOf="@id/loginBtn"
                 app:layout_constraintTop_toBottomOf="@id/password"/>
+
         <TextView
                 android:id="@+id/forgetPassword"
                 android:layout_width="match_parent"
                 android:gravity="right"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="5dp"
-                android:text="忘记密码？找回密码"
+                android:layout_marginTop="11dp"
+                android:text="忘记密码"
                 android:textSize="14sp"
-                android:textColor="@color/text_1"
+                android:textColor="@color/color_8E90AA"
                 app:layout_constraintRight_toRightOf="@id/password"
                 app:layout_constraintTop_toBottomOf="@id/line2"/>
-    </LinearLayout>
-
-    <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="1"
-            android:gravity="center_horizontal"
-            android:paddingStart="50dp"
-            android:paddingEnd="50dp"
-            android:orientation="vertical">
         <TextView
                 android:id="@+id/loginBtn"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@drawable/rect_round_purple"
                 android:gravity="center"
-                android:paddingBottom="2dp"
                 android:textColor="@android:color/white"
-                android:text="登  录"
-                android:padding="10dp"
-                android:textSize="16sp"
+                android:text="登录"
+                android:padding="13dp"
+                android:layout_marginTop="35dp"
+                android:textSize="15sp"
                 app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintRight_toRightOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/line2"/>
@@ -128,10 +109,10 @@
                 android:layout_marginTop="20dp"
                 android:gravity="center"
                 android:background="@drawable/rect_round_white"
-                android:textColor="@color/colorPrimary"
-                android:text="注  册"
-                android:padding="10dp"
-                android:textSize="16sp"
+                android:textColor="@color/color_5660F5"
+                android:text="注册"
+                android:padding="13dp"
+                android:textSize="15sp"
                 app:layout_constraintLeft_toLeftOf="@id/loginBtn"
                 app:layout_constraintTop_toBottomOf="@id/loginBtn"/>
 

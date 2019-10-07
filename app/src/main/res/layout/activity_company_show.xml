@@ -83,7 +83,7 @@
                         android:layout_marginTop="20dp"
                         android:layout_marginBottom="20dp"
                         app:civ_border_width="1dp"
-                        app:civ_border_color="@color/bg_1"
+                        app:civ_border_color="@color/color_B1BAB6"
                         android:contentDescription="@null"/>
 
                 <TextView
@@ -171,7 +171,7 @@
                     android:id="@+id/layoutBottom"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:background="@color/bg_6"
+                    android:background="@color/color_88000000"
                     android:paddingTop="5dp"
                     android:paddingBottom="5dp"
                     app:layout_constraintBottom_toBottomOf="parent"
@@ -254,7 +254,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
                 android:layout_weight="1"
-                android:background="@color/bg_3"
+                android:background="@color/color_F0F0F0"
                 android:orientation="horizontal">
 
             <RadioGroup

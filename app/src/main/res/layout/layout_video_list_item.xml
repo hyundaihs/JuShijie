@@ -28,14 +28,14 @@
                 android:padding="10dp"
                 android:textSize="14sp"
                 android:textColor="@color/white"
-                android:background="@color/bg_6"/>
+                android:background="@color/color_88000000"/>
     </android.support.constraint.ConstraintLayout>
 
     <TextView
             android:id="@+id/content"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textColor="@color/text_2"
+            android:textColor="@color/color_555555"
             android:textSize="12sp"/>
 
 </LinearLayout>

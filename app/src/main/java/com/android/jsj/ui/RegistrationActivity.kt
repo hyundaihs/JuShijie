@@ -2,6 +2,8 @@ package com.android.jsj.ui
 
 import android.content.Context
 import android.os.Bundle
+import android.text.Editable
+import android.text.TextWatcher
 import android.view.View
 import com.android.jsj.R
 import com.android.jsj.entity.*
@@ -42,12 +44,9 @@ class RegistrationActivity : MyBaseActivity() {
             initFindPswd()
         }
         getVerifyCode.setOnClickListener {
-            if (phone.text.isEmpty()) {
-                phone.error = "手机号码不能为空"
-            } else {
-                getVerifyCode.startCount()
-                getVerifyCode()
-            }
+            it.isEnabled = false
+            getVerifyCode.startCount()
+            getVerifyCode()
         }
         submit.setOnClickListener {
             if (checkData()) {
@@ -59,7 +58,8 @@ class RegistrationActivity : MyBaseActivity() {
         }
 
         address.setOnClickListener {
-            PickerUtil.showAddress(this
+            PickerUtil.showAddress(
+                this
             ) { options1, options2, options3, v ->
                 //返回的分别是三个级别的选中位置
                 prov = provInfoList[options1].title
@@ -68,6 +68,19 @@ class RegistrationActivity : MyBaseActivity() {
                 address.setText("$prov-$city-$area")
             }
         }
+
+        phone.addTextChangedListener(object : TextWatcher {
+            override fun afterTextChanged(s: Editable?) {
+                getVerifyCode.isEnabled = s != null && s.isNotEmpty()
+            }
+
+            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
+            }
+
+            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+            }
+
+        })
     }
 
     private fun getAreas() {
@@ -75,9 +88,12 @@ class RegistrationActivity : MyBaseActivity() {
             setRequestUrl(AREA)
             setErrorCallback(object : KevinRequest.ErrorCallback {
                 override fun onError(context: Context, error: String) {
-                    getErrorDialog(context,"地区信息获取失败，请检查网络后重试！", SweetAlertDialog.OnSweetClickListener {
-                        finish()
-                    })
+                    getErrorDialog(
+                        context,
+                        "地区信息获取失败，请检查网络后重试！",
+                        SweetAlertDialog.OnSweetClickListener {
+                            finish()
+                        })
                 }
             })
             setSuccessCallback(object : KevinRequest.SuccessCallback {
@@ -103,14 +119,14 @@ class RegistrationActivity : MyBaseActivity() {
         goLogin.visibility = View.VISIBLE
         address.visibility = View.VISIBLE
         addressLine.visibility = View.VISIBLE
-        submit.text = "注  册"
+        submit.text = "立即注册"
     }
 
     private fun initFindPswd() {
         goLogin.visibility = View.GONE
         address.visibility = View.GONE
         addressLine.visibility = View.GONE
-        submit.text = "提  交"
+        submit.text = "提交"
     }
 
     private fun checkData(): Boolean {
@@ -137,7 +153,7 @@ class RegistrationActivity : MyBaseActivity() {
             setRequestUrl(SEND_VERF.getInterface(map))
             setErrorCallback(object : KevinRequest.ErrorCallback {
                 override fun onError(context: Context, error: String) {
-                    getErrorDialog(context,error)
+                    getErrorDialog(context, error)
                 }
             })
             setSuccessCallback(object : KevinRequest.SuccessCallback {

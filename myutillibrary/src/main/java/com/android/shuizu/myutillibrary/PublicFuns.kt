@@ -66,10 +66,10 @@ fun Context.sp2px(sp:Float):Float{
     return TypedValue.applyDimension (TypedValue.COMPLEX_UNIT_SP, sp, resources.displayMetrics)
 }
 
-fun AppCompatActivity.initActionBar(act: AppCompatActivity, title: String, showBack: Boolean = true, rightBtn: String? = null, isAdd: Boolean = false,
+fun Any.initActionBar(act: AppCompatActivity, title: String, showBack: Boolean = true, rightBtn: String? = null, isAdd: Boolean = false,
                                     rightClick: View.OnClickListener? = null, leftBtn: String? = null,
                                     leftClick: View.OnClickListener? = null) {
-    act.setSupportActionBar(toolbar)
+    act.setSupportActionBar(act.toolbar)
     act.supportActionBar?.setDisplayHomeAsUpEnabled(showBack)
     act.toolbarTitle.text = title
     act.title = ""

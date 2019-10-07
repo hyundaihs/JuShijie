@@ -25,7 +25,6 @@ class ConcernpageFragment : BaseFragment() {
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-        (activity as AppCompatActivity).initActionBar(activity as AppCompatActivity,"关注",false)
         initViews()
     }
 

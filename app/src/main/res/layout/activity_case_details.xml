@@ -22,6 +22,8 @@
                     android:layout_width="match_parent"
                     android:layout_height="0dp"
                     android:scaleType="fitXY"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintLeft_toLeftOf="parent"
                     app:layout_constraintDimensionRatio="1:1"
                     android:contentDescription="@null"/>
 
@@ -85,7 +87,7 @@
                     android:padding="5dp"
                     android:layout_margin="10dp"
                     android:textSize="14sp"
-                    android:textColor="@color/bg_9"/>
+                    android:textColor="@color/color_CCCCCC"/>
 
             <TextView
                     android:id="@+id/priceTitle"
@@ -128,7 +130,7 @@
                     app:layout_constraintTop_toBottomOf="@+id/addressTitle"
                     android:layout_marginTop="5dp"
                     android:textSize="14sp"
-                    android:textColor="@color/text_1"/>
+                    android:textColor="@color/color_333333"/>
 
             <LinearLayout
                     android:id="@+id/nameTitle"
@@ -136,7 +138,7 @@
                     android:layout_height="wrap_content"
                     app:layout_constraintTop_toBottomOf="@+id/address"
                     android:padding="10dp"
-                    android:background="@color/bg_3"
+                    android:background="@color/color_F0F0F0"
                     android:layout_marginTop="10dp"
                     android:orientation="horizontal">
 
@@ -158,7 +160,7 @@
                         app:layout_constraintLeft_toLeftOf="@id/addressTitle"
                         app:layout_constraintTop_toBottomOf="@+id/addressTitle"
                         android:textSize="14sp"
-                        android:textColor="@color/text_1"/>
+                        android:textColor="@color/color_333333"/>
 
             </LinearLayout>
             <LinearLayout
@@ -167,7 +169,7 @@
                     android:layout_height="wrap_content"
                     app:layout_constraintTop_toBottomOf="@+id/nameTitle"
                     android:padding="10dp"
-                    android:background="@color/bg_3"
+                    android:background="@color/color_F0F0F0"
                     android:layout_marginTop="10dp"
                     android:orientation="horizontal">
 
@@ -189,7 +191,7 @@
                         app:layout_constraintLeft_toLeftOf="@id/addressTitle"
                         app:layout_constraintTop_toBottomOf="@+id/addressTitle"
                         android:textSize="14sp"
-                        android:textColor="@color/text_1"/>
+                        android:textColor="@color/color_333333"/>
 
             </LinearLayout>
 
@@ -203,7 +205,7 @@
                     android:layout_marginTop="10dp"
                     android:drawablePadding="5dp"
                     android:padding="10dp"
-                    android:background="@color/bg_3"
+                    android:background="@color/color_F0F0F0"
                     android:text="案例说明"
                     android:textSize="15sp"
                     android:textColor="@color/black"/>
@@ -217,7 +219,7 @@
                     app:layout_constraintTop_toBottomOf="@+id/pingLunTitle"
                     android:layout_marginTop="5dp"
                     android:textSize="14sp"
-                    android:textColor="@color/text_1"/>
+                    android:textColor="@color/color_333333"/>
 
             <TextView
                     android:id="@+id/caseDetailsTitle"
@@ -228,7 +230,7 @@
                     android:layout_marginTop="10dp"
                     android:drawablePadding="5dp"
                     android:padding="10dp"
-                    android:background="@color/bg_3"
+                    android:background="@color/color_F0F0F0"
                     android:text="案例实景"
                     android:textSize="15sp"
                     android:textColor="@color/black"/>

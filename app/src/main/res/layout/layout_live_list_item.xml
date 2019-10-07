@@ -34,7 +34,7 @@
                 <View
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:background="@color/bg_11"/>
+                        android:background="@color/color_40000000"/>
 
                 <TextView
                         android:id="@+id/liveStatus"

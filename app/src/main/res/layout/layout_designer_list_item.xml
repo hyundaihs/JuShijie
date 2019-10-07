@@ -45,7 +45,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textSize="12sp"
-                    android:textColor="@color/bg_8"/>
+                    android:textColor="@color/color_F6B900"/>
 
         </LinearLayout>
 
@@ -72,14 +72,14 @@
                     android:layout_height="wrap_content"
                     android:text="|"
                     android:textSize="16sp"
-                    android:textColor="@color/text_2"/>
+                    android:textColor="@color/color_555555"/>
 
             <TextView
                     android:id="@+id/work"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textSize="14sp"
-                    android:textColor="@color/text_2"/>
+                    android:textColor="@color/color_555555"/>
 
         </LinearLayout>
     </android.support.constraint.ConstraintLayout>

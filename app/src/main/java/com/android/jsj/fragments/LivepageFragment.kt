@@ -50,7 +50,6 @@ class LivepageFragment : BaseFragment() {
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-        (activity as AppCompatActivity).initActionBar(activity as AppCompatActivity, "直播", false)
         initViews()
     }
 

@@ -1,5 +1,6 @@
 package com.android.jsj.adapters
 
+import android.view.View
 import com.android.jsj.R
 import com.android.jsj.entity.MerchantInfo
 import com.android.jsj.entity.getImageUrl
@@ -23,6 +24,8 @@ class MerchantAdapter(val data: ArrayList<MerchantInfo>) :
             .into(holder.itemView.merchantLogo)
         holder.itemView.merchantName.text = merchantInfo.title
         holder.itemView.merchantCompany.text = merchantInfo.pp_title
+        holder.itemView.liveing_flag.visibility =
+            if (merchantInfo.zbj_zb_status == 1) View.VISIBLE else View.GONE
         val tags = merchantInfo.tags.split(",")
         if (tags.isNotEmpty()) {
             holder.itemView.merchantTag1.text = tags[0]

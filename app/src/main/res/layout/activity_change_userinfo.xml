@@ -31,7 +31,7 @@
                     android:layout_height="wrap_content"
                     android:text="(点击下方图片修改头像)"
                     android:textSize="14sp"
-                    android:textColor="@color/bg_9"/>
+                    android:textColor="@color/color_CCCCCC"/>
         </LinearLayout>
 
         <ImageView
@@ -68,7 +68,7 @@
         <View
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
-                android:background="@color/gray_1"
+                android:background="@color/color_EEEEEE"
                 android:layout_marginTop="10dp"/>
 
         <LinearLayout

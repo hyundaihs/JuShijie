@@ -124,7 +124,7 @@
                     android:layout_marginTop="10dp"
                     android:drawablePadding="5dp"
                     android:padding="10dp"
-                    android:background="@color/bg_3"
+                    android:background="@color/color_F0F0F0"
                     android:text="课程介绍"
                     android:textSize="15sp"
                     android:textColor="@color/black"/>
@@ -145,7 +145,7 @@
                     android:layout_marginTop="10dp"
                     android:drawablePadding="5dp"
                     android:padding="10dp"
-                    android:background="@color/bg_3"
+                    android:background="@color/color_F0F0F0"
                     android:text="线下付款"
                     android:textSize="15sp"
                     android:textColor="@color/black"/>
@@ -158,7 +158,7 @@
                     android:orientation="horizontal"
                     android:layout_margin="10dp"
                     android:padding="10dp"
-                    android:background="@color/bg_3">
+                    android:background="@color/color_F0F0F0">
 
                 <TextView
                         android:layout_width="wrap_content"

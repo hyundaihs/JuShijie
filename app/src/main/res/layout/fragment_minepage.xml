@@ -1,243 +1,227 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout
-        xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:app="http://schemas.android.com/apk/res-auto"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:orientation="vertical">
 
-    <LinearLayout
-            android:id="@+id/layout_2"
-            android:layout_width="0dp"
-            android:layout_height="0dp"
-            android:background="@mipmap/center_bg"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintRight_toRightOf="parent"
-            android:orientation="vertical"
-            app:layout_constraintDimensionRatio="2:1">
+    <include layout="@layout/layout_toolbar" />
 
-        <LinearLayout
+    <android.support.constraint.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+        <View
+                android:id="@+id/evBg"
                 android:layout_width="match_parent"
-                android:layout_height="0dp"
-                android:layout_weight="1"
-                android:gravity="end|bottom"
-                android:orientation="horizontal">
+                android:layout_height="20dp"
+                android:background="@drawable/bg_homepage_f0_to_ff"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
 
-            <ImageView
-                    android:id="@+id/setting"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:src="@mipmap/icon_set"
-                    android:padding="10dp"
-                    android:contentDescription="@null"/>
-
-        </LinearLayout>
-
-        <android.support.constraint.ConstraintLayout
-                android:layout_width="match_parent"
-                android:layout_height="0dp"
-                android:layout_weight="3">
-
-            <LinearLayout
-                    android:id="@+id/layout_user"
-                    android:layout_width="0dp"
-                    android:layout_height="0dp"
-                    android:visibility="gone"
-                    app:layout_constraintLeft_toLeftOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
-                    app:layout_constraintRight_toRightOf="parent"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    android:gravity="center_vertical"
-                    android:orientation="horizontal">
-
-                <de.hdodenhof.circleimageview.CircleImageView
-                        android:id="@+id/userPhoto"
-                        android:layout_width="80dp"
-                        android:layout_height="80dp"
-                        app:civ_border_width="1dp"
-                        android:layout_marginStart="20dp"
-                        app:civ_border_color="@color/bg_1"
-                        android:src="@mipmap/ic_launcher"/>
-
-                <LinearLayout
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="10dp"
-                        android:orientation="vertical">
-
-                    <TextView
-                            android:id="@+id/userName"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="毛晓彤"
-                            android:textColor="@android:color/white"
-                            android:textSize="22sp"/>
-
-                    <TextView
-                            android:id="@+id/applyToMerchant"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="申请成为商家"
-                            android:paddingStart="15dp"
-                            android:paddingEnd="15dp"
-                            android:paddingTop="5dp"
-                            android:paddingBottom="5dp"
-                            android:background="@drawable/rect_corners_white"
-                            android:textColor="@android:color/black"
-                            android:textSize="18sp"/>
-                </LinearLayout>
-            </LinearLayout>
-
-            <LinearLayout
-                    android:id="@+id/layout_merchant"
-                    android:layout_width="0dp"
-                    android:layout_height="0dp"
-                    android:visibility="visible"
-                    app:layout_constraintLeft_toLeftOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
-                    app:layout_constraintRight_toRightOf="parent"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    android:orientation="vertical">
-
-                <android.support.constraint.ConstraintLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="0dp"
-                        android:layout_weight="1">
-
-                    <de.hdodenhof.circleimageview.CircleImageView
-                            android:id="@+id/merchantPhoto"
-                            android:layout_width="0dp"
-                            android:layout_height="0dp"
-                            app:civ_border_width="1dp"
-                            app:layout_constraintLeft_toLeftOf="parent"
-                            android:layout_marginStart="20dp"
-                            app:layout_constraintTop_toTopOf="parent"
-                            app:layout_constraintBottom_toBottomOf="parent"
-                            app:layout_constraintDimensionRatio="1:1"
-                            app:civ_border_color="@color/bg_1"
-                            android:src="@mipmap/ic_launcher"/>
-
-
-                    <TextView
-                            android:id="@+id/merchantName"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="东鹏陶瓷"
-                            android:layout_marginStart="10dp"
-                            app:layout_constraintLeft_toRightOf="@+id/merchantPhoto"
-                            app:layout_constraintTop_toTopOf="@+id/merchantPhoto"
-                            android:textColor="@android:color/white"
-                            android:maxLines="1"
-                            android:textSize="22sp"/>
-
-                    <TextView
-                            android:id="@+id/merchantCompany"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="桂林市东鹏陶瓷科技有限公司  >"
-                            android:paddingStart="10dp"
-                            android:layout_marginStart="10dp"
-                            android:paddingEnd="10dp"
-                            app:layout_constraintLeft_toRightOf="@+id/merchantPhoto"
-                            app:layout_constraintBottom_toBottomOf="@+id/merchantPhoto"
-                            android:maxLines="1"
-                            android:paddingTop="5dp"
-                            android:paddingBottom="5dp"
-                            android:background="@drawable/rect_corners_white_tranl"
-                            android:textColor="@android:color/white"
-                            android:textSize="18sp"/>
-
-
-                </android.support.constraint.ConstraintLayout>
-
-                <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="0dp"
-                        android:layout_weight="1"
-                        android:gravity="center_vertical"
-                        android:paddingTop="20dp"
-                        android:orientation="horizontal">
-
-                    <LinearLayout
-                            android:layout_width="0dp"
-                            android:layout_weight="1"
-                            android:gravity="center"
-                            android:background="@color/bg_4"
-                            android:layout_height="match_parent">
-
-                        <TextView
-                                android:id="@+id/applyLiveRoom"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:text="申请直播间"
-                                android:paddingStart="15dp"
-                                android:drawablePadding="5dp"
-                                android:drawableStart="@mipmap/apply_alive"
-                                android:paddingEnd="15dp"
-                                android:paddingTop="5dp"
-                                android:paddingBottom="5dp"
-                                android:background="@drawable/rect_corners_white"
-                                android:textColor="@color/text_2"
-                                android:textSize="18sp"/>
-                    </LinearLayout>
-
-                    <LinearLayout
-                            android:layout_width="0dp"
-                            android:layout_weight="1"
-                            android:gravity="center"
-                            android:background="@color/bg_4"
-                            android:layout_height="match_parent">
-
-                        <TextView
-                                android:id="@+id/applyVIPMerchant"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:text="申请VIP商家"
-                                android:drawablePadding="5dp"
-                                android:drawableStart="@mipmap/apply_vip"
-                                android:paddingStart="15dp"
-                                android:paddingEnd="15dp"
-                                android:paddingTop="5dp"
-                                android:paddingBottom="5dp"
-                                android:background="@drawable/rect_corners_white"
-                                android:textColor="@color/text_2"
-                                android:textSize="18sp"/>
-                    </LinearLayout>
-
-                </LinearLayout>
-            </LinearLayout>
-
-        </android.support.constraint.ConstraintLayout>
-
-    </LinearLayout>
-
-    <LinearLayout
-            android:layout_width="0dp"
-            android:layout_height="0dp"
-            app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/layout_2"
-            app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintBottom_toBottomOf="parent"
-            android:orientation="vertical">
-
-        <android.support.design.widget.TabLayout
-                android:id="@+id/tabLayout"
+        <TextView
+                android:id="@+id/tipText"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="#FFFFFF"
-                app:tabGravity="fill"
-                app:tabIndicatorColor="@color/colorPrimary"
-                app:tabMode="fixed"
-                app:tabSelectedTextColor="@color/colorPrimary"
-                app:tabTextColor="@color/text_2"/>
+                android:background="@color/color_10FF9C00"
+                android:padding="10dp"
+                android:text="温馨提示：成为认证商家后可申请直播间和发帖功能，赶紧申请认证吧！"
+                android:textColor="@color/color_FF9C00"
+                android:textSize="11sp"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+    </android.support.constraint.ConstraintLayout>
 
-        <android.support.v4.view.ViewPager
-                android:id="@+id/viewpager"
-                android:layout_width="match_parent"
-                android:layout_height="0dp"
-                android:layout_weight="1"
-                android:background="@color/bg_3"/>
+    <android.support.constraint.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="16dp">
 
+        <de.hdodenhof.circleimageview.CircleImageView
+                android:id="@+id/userPhoto"
+                android:layout_width="80dp"
+                android:layout_height="80dp"
+                android:layout_marginStart="20dp"
+                android:src="@mipmap/ic_launcher"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+        <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="15dp"
+                android:gravity="start|center_vertical"
+                android:orientation="vertical"
+                app:layout_constraintBottom_toBottomOf="@id/userPhoto"
+                app:layout_constraintLeft_toRightOf="@id/userPhoto"
+                app:layout_constraintTop_toTopOf="@id/userPhoto">
+
+            <TextView
+                    android:id="@+id/userName"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="432343242"
+                    android:textColor="@color/color_333333"
+                    android:textSize="15sp" />
+
+            <TextView
+                    android:id="@+id/info"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="20dp"
+                    android:drawableEnd="@mipmap/arrow_right"
+                    android:drawablePadding="5dp"
+                    android:text="32425343543"
+                    android:textColor="@color/color_A5A5A5"
+                    android:textSize="12sp" />
+        </LinearLayout>
+
+        <TextView
+                android:id="@+id/applyToMerchant"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/rect_round_purple"
+                android:paddingStart="26dp"
+                android:paddingTop="13dp"
+                android:paddingEnd="26dp"
+                android:paddingBottom="13dp"
+                android:text="认证商家"
+                android:textColor="@color/white"
+                android:textSize="15sp"
+                app:layout_constraintBottom_toBottomOf="@id/userPhoto"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toTopOf="@id/userPhoto" />
+    </android.support.constraint.ConstraintLayout>
+
+    <LinearLayout
+            android:id="@+id/layoutVip"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_horizontal"
+            android:orientation="horizontal"
+            android:paddingBottom="16dp">
+
+        <TextView
+                android:id="@+id/applyLiveRoom"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/rect_round_purple"
+                android:drawableStart="@mipmap/apply_alive"
+                android:drawablePadding="7dp"
+                android:paddingStart="33dp"
+                android:paddingTop="13dp"
+                android:paddingEnd="33dp"
+                android:paddingBottom="13dp"
+                android:text="申请直播间"
+                android:textColor="@color/white"
+                android:textSize="15sp" />
+
+        <TextView
+                android:id="@+id/applyVIPMerchant"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="20dp"
+                android:background="@drawable/rect_round_orange"
+                android:drawableStart="@mipmap/apply_vip"
+                android:drawablePadding="7dp"
+                android:paddingStart="33dp"
+                android:paddingTop="13dp"
+                android:paddingEnd="33dp"
+                android:paddingBottom="13dp"
+                android:text="申请VIP商家"
+                android:textColor="@color/white"
+                android:textSize="15sp" />
     </LinearLayout>
 
-</android.support.constraint.ConstraintLayout>
+    <View
+            android:layout_width="match_parent"
+            android:layout_height="10dp"
+            android:background="@color/color_F0F0F0" />
+
+    <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+        <TextView
+                android:id="@+id/message"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:drawableStart="@mipmap/icon_message"
+                android:drawableEnd="@mipmap/arrow_right"
+                android:drawablePadding="10dp"
+                android:padding="16dp"
+                android:text="消息"
+                android:textColor="@color/color_333333"
+                android:textSize="14sp" />
+
+        <TextView
+                android:id="@+id/appointment"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:drawableStart="@mipmap/icon_appointment"
+                android:drawableEnd="@mipmap/arrow_right"
+                android:drawablePadding="10dp"
+                android:padding="16dp"
+                android:text="用户预约"
+                android:textColor="@color/color_333333"
+                android:textSize="14sp" />
+
+        <TextView
+                android:id="@+id/ranking"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:drawableStart="@mipmap/icon_coupon"
+                android:drawableEnd="@mipmap/arrow_right"
+                android:drawablePadding="10dp"
+                android:padding="16dp"
+                android:text="商家排名"
+                android:textColor="@color/color_333333"
+                android:textSize="14sp" />
+
+        <TextView
+                android:id="@+id/coupon"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:drawableStart="@mipmap/icon_coupon"
+                android:drawableEnd="@mipmap/arrow_right"
+                android:drawablePadding="10dp"
+                android:padding="16dp"
+                android:text="优惠券"
+                android:textColor="@color/color_333333"
+                android:textSize="14sp" />
+
+        <TextView
+                android:id="@+id/feedback"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:drawableStart="@mipmap/icon_feedback"
+                android:drawableEnd="@mipmap/arrow_right"
+                android:drawablePadding="10dp"
+                android:padding="16dp"
+                android:text="意见反馈"
+                android:textColor="@color/color_333333"
+                android:textSize="14sp" />
+
+        <TextView
+                android:id="@+id/setting"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:drawableStart="@mipmap/icon_setting"
+                android:drawableEnd="@mipmap/arrow_right"
+                android:drawablePadding="10dp"
+                android:padding="16dp"
+                android:text="设置"
+                android:textColor="@color/color_333333"
+                android:textSize="14sp" />
+
+        <ImageView
+                android:id="@+id/publishBtn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="end"
+                android:src="@mipmap/publish_btn" />
+    </LinearLayout>
+
+
+</LinearLayout>

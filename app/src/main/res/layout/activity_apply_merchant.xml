@@ -45,7 +45,7 @@
             <View
                     android:layout_width="match_parent"
                     android:layout_height="1dp"
-                    android:background="@color/gray_1"
+                    android:background="@color/color_EEEEEE"
                     android:layout_marginTop="10dp"/>
 
             <TextView
@@ -74,7 +74,7 @@
             <View
                     android:layout_width="match_parent"
                     android:layout_height="1dp"
-                    android:background="@color/gray_1"
+                    android:background="@color/color_EEEEEE"
                     android:layout_marginTop="10dp"/>
 
             <TextView
@@ -103,7 +103,7 @@
             <View
                     android:layout_width="match_parent"
                     android:layout_height="1dp"
-                    android:background="@color/gray_1"
+                    android:background="@color/color_EEEEEE"
                     android:layout_marginTop="10dp"/>
 
             <TextView
@@ -201,7 +201,7 @@
                     android:layout_height="wrap_content"
                     android:text="(六张图片,至少包含一张正门,仅供平台审核使用)"
                     android:textSize="14sp"
-                    android:textColor="@color/bg_9"/>
+                    android:textColor="@color/color_CCCCCC"/>
 
             <android.support.v7.widget.RecyclerView
                     android:id="@+id/mmzpRecyclerView"

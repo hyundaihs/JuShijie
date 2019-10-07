@@ -46,10 +46,10 @@ class HomeMenusActivity : MyBaseActivity() {
         const val LOAD_MENUS8 = 8 //特卖
     }
 
-    private val chooseTypes = ArrayList<ChooseType>()
+//    private val chooseTypes = ArrayList<ChooseType>()
     private val types = ArrayList<Map<String, String>>()
-    private lateinit var typesLayout: List<View>
-    private lateinit var typesViews: List<TextView>
+//    private lateinit var typesLayout: List<View>
+//    private lateinit var typesViews: List<TextView>
     private val currIds = IntArray(3) { 0 }
     private val companyInfoList = ArrayList<CompanyInfo>()
     private val merchantInfoList = ArrayList<MerchantInfo>()
@@ -59,8 +59,8 @@ class HomeMenusActivity : MyBaseActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_home_menus)
-        typesLayout = listOf(layout1, layout2, layout3)
-        typesViews = listOf<TextView>(chooseType1, chooseType2, chooseType3)
+//        typesLayout = listOf(layout1, layout2, layout3)
+//        typesViews = listOf<TextView>(chooseType1, chooseType2, chooseType3)
         initChooseType()
         initViews()
     }
@@ -103,27 +103,27 @@ class HomeMenusActivity : MyBaseActivity() {
                 mkId = 6
             }
         }
-        initTypeViews()
+//        initTypeViews()
     }
 
-    private fun initTypeViews() {
-        for (i in 0 until types.size) {
-            typesLayout[i].visibility = View.VISIBLE
-            typesViews[i].text = types[i]["title"]
-            typesViews[i].setOnClickListener {
-                chooseTypes.clear()
-                chooseTypes.add(ChooseType(0, "不限"))
-                chooseTypes.addAll(JSJApplication.chooseType.getValue(types[i]["id"]!!))
-                PickerUtil.initChooseType(chooseTypes)
-                PickerUtil.showChooseType(it.context, types[i]["title"]) { options1, options2, options3, v ->
-                    currIds[i] = chooseTypes[options1].id
-                    typesViews[i].text = chooseTypes[options1].pickerViewText
-                    menusPageSwipe.isRefreshing = true
-                    refresh()
-                }
-            }
-        }
-    }
+//    private fun initTypeViews() {
+//        for (i in 0 until types.size) {
+//            typesLayout[i].visibility = View.VISIBLE
+//            typesViews[i].text = types[i]["title"]
+//            typesViews[i].setOnClickListener {
+//                chooseTypes.clear()
+//                chooseTypes.add(ChooseType(0, "不限"))
+//                chooseTypes.addAll(JSJApplication.chooseType.getValue(types[i]["id"]!!))
+//                PickerUtil.initChooseType(chooseTypes)
+//                PickerUtil.showChooseType(it.context, types[i]["title"]) { options1, options2, options3, v ->
+//                    currIds[i] = chooseTypes[options1].id
+//                    typesViews[i].text = chooseTypes[options1].pickerViewText
+//                    menusPageSwipe.isRefreshing = true
+//                    refresh()
+//                }
+//            }
+//        }
+//    }
 
     private fun initViews() {
         val m = dp2px(10f).toInt()
@@ -276,15 +276,18 @@ class HomeMenusActivity : MyBaseActivity() {
     }
 
     private fun getPPInfoList(page: Int, isRefresh: Boolean = false) {
-        val map = mapOf(Pair("page_size", "10"), Pair("page", page)).toMutableMap()
+        val map = mapOf(
+            Pair("page_size", "10"),
+            Pair("page", page),
+            Pair("tg", 0)
+        ).toMutableMap()
+        val chooseTypes = JSJApplication.chooseType["14"]
         when (pageKey) {
             LOAD_MENUS1 -> {
-                map["bdls_id"] = currIds[0]
-                map["qbzb_id"] = currIds[1]
-                map["zqybj_id"] = currIds[2]
+                map["ppfl_id"] = if(chooseTypes == null) 0 else chooseTypes[0].id
             }
             LOAD_MENUS2 -> {
-                map["ppfl_id"] = currIds[0]
+                map["ppfl_id"] = if(chooseTypes == null) 0 else chooseTypes[1].id
             }
         }
         KevinRequest.build(this).apply {
@@ -323,29 +326,33 @@ class HomeMenusActivity : MyBaseActivity() {
     px:排序（1：最新，2:最热 ，3：主推 不传默认最新）
      */
     private fun getCompanyInfoList(page: Int, isRefresh: Boolean = false) {
-        val map = mapOf(Pair("page_size", "10"), Pair("page", page), Pair("mk_id", mkId)).toMutableMap()
-        when (pageKey) {
-            LOAD_MENUS3 -> {
-                map["px"] = currIds[0]
-            }
-            LOAD_MENUS5 -> {
-                map["type_id"] = currIds[0]
-                map["zxlx_id"] = currIds[1]
-            }
-            LOAD_MENUS6 -> {
-                map["fengge_id"] = currIds[1]
-                map["sjsdj_id"] = currIds[2]
-            }
-            LOAD_MENUS7 -> {
-                map["jy_id"] = currIds[0]
-                map["sjsdj_id"] = currIds[1]
-                map["jg_id"] = currIds[2]
-            }
-            LOAD_MENUS8 -> {
-                map["px"] = currIds[0]
-                map["jcfl_id"] = currIds[1]
-            }
-        }
+        val map = mapOf(
+            Pair("page_size", "10"),
+            Pair("page", page),
+            Pair("mk_id", mkId)
+        ).toMutableMap()
+//        when (pageKey) {
+//            LOAD_MENUS3 -> {
+//                map["px"] = currIds[0]
+//            }
+//            LOAD_MENUS5 -> {
+//                map["type_id"] = currIds[0]
+//                map["zxlx_id"] = currIds[1]
+//            }
+//            LOAD_MENUS6 -> {
+//                map["fengge_id"] = currIds[1]
+//                map["sjsdj_id"] = currIds[2]
+//            }
+//            LOAD_MENUS7 -> {
+//                map["jy_id"] = currIds[0]
+//                map["sjsdj_id"] = currIds[1]
+//                map["jg_id"] = currIds[2]
+//            }
+//            LOAD_MENUS8 -> {
+//                map["px"] = currIds[0]
+//                map["jcfl_id"] = currIds[1]
+//            }
+//        }
         KevinRequest.build(this).apply {
             setRequestUrl(NEWSLISTS.getInterface(map))
             setErrorCallback(object : KevinRequest.ErrorCallback {

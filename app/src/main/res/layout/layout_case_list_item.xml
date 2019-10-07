@@ -42,7 +42,7 @@
             android:text="中国建材品牌一百强企业"
             android:maxLines="1"
             android:textSize="14sp"
-            android:textColor="@color/text_5"/>
+            android:textColor="@color/color_D6D6D6"/>
 
     <TextView
             android:id="@+id/designer"
@@ -54,7 +54,7 @@
             android:text="中国建材品牌一百强企业"
             android:maxLines="1"
             android:textSize="14sp"
-            android:textColor="@color/text_5"/>
+            android:textColor="@color/color_D6D6D6"/>
 
     <LinearLayout
             android:id="@+id/layout_3"
@@ -65,13 +65,13 @@
             app:layout_constraintLeft_toLeftOf="@+id/name"
             app:layout_constraintTop_toBottomOf="@+id/designer"
             app:layout_constraintBottom_toBottomOf="@+id/logo"
-            android:textColor="@color/text_5">
+            android:textColor="@color/color_D6D6D6">
 
         <TextView
                 android:id="@+id/zan"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textColor="@color/bg_9"
+                android:textColor="@color/color_CCCCCC"
                 android:drawableStart="@mipmap/icon_z_gray"
                 android:textSize="14sp"
                 android:text="12w"/>
@@ -80,7 +80,7 @@
                 android:id="@+id/hot"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textColor="@color/bg_9"
+                android:textColor="@color/color_CCCCCC"
                 android:layout_marginStart="5dp"
                 android:drawableStart="@mipmap/icon_heart"
                 android:textSize="14sp"
@@ -90,7 +90,7 @@
                 android:id="@+id/time"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textColor="@color/bg_9"
+                android:textColor="@color/color_CCCCCC"
                 android:drawableStart="@mipmap/icon_pulish_time"
                 android:textSize="14sp"
                 android:layout_marginStart="5dp"

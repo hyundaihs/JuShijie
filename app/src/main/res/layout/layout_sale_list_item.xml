@@ -41,7 +41,7 @@
             android:text="中国建材品牌一百强企业"
             android:maxLines="1"
             android:textSize="12sp"
-            android:textColor="@color/text_5"/>
+            android:textColor="@color/color_D6D6D6"/>
 
     <TextView
             android:id="@+id/price2"
@@ -53,6 +53,6 @@
             android:text="中国建材品牌一百强企业"
             android:maxLines="1"
             android:textSize="12sp"
-            android:textColor="@color/bg_8"/>
+            android:textColor="@color/color_F6B900"/>
 
 </android.support.constraint.ConstraintLayout>

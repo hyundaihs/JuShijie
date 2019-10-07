@@ -85,7 +85,7 @@
                     android:padding="5dp"
                     android:layout_margin="10dp"
                     android:textSize="14sp"
-                    android:textColor="@color/bg_9"/>
+                    android:textColor="@color/color_CCCCCC"/>
 
             <TextView
                     android:id="@+id/priceTitle"
@@ -108,7 +108,7 @@
                     app:layout_constraintLeft_toRightOf="@id/priceTitle"
                     android:textSize="14sp"
                     android:text="231"
-                    android:textColor="@color/text_5"/>
+                    android:textColor="@color/color_D6D6D6"/>
 
             <TextView
                     android:id="@+id/price2Title"
@@ -130,7 +130,7 @@
                     app:layout_constraintLeft_toRightOf="@id/price2Title"
                     android:textSize="14sp"
                     android:text="1280"
-                    android:textColor="@color/bg_8"/>
+                    android:textColor="@color/color_F6B900"/>
 
             <TextView
                     android:id="@+id/params"
@@ -141,7 +141,7 @@
                     android:layout_marginTop="10dp"
                     android:drawablePadding="5dp"
                     android:padding="10dp"
-                    android:background="@color/bg_3"
+                    android:background="@color/color_F0F0F0"
                     android:text="参数"
                     android:textSize="15sp"
                     android:textColor="@color/black"/>
@@ -166,7 +166,7 @@
                     app:layout_constraintLeft_toRightOf="@id/pinPaiTitle"
                     android:textSize="14sp"
                     android:text="骨气"
-                    android:textColor="@color/text_4"/>
+                    android:textColor="@color/color_606060"/>
 
             <TextView
                     android:id="@+id/typeTitle"
@@ -188,7 +188,7 @@
                     app:layout_constraintLeft_toRightOf="@id/typeTitle"
                     android:textSize="14sp"
                     android:text="C456"
-                    android:textColor="@color/text_4"/>
+                    android:textColor="@color/color_606060"/>
 
             <TextView
                     android:id="@+id/colorTitle"
@@ -210,7 +210,7 @@
                     app:layout_constraintLeft_toRightOf="@id/colorTitle"
                     android:textSize="14sp"
                     android:text="棕色"
-                    android:textColor="@color/text_4"/>
+                    android:textColor="@color/color_606060"/>
 
             <TextView
                     android:id="@+id/sizeTitle"
@@ -232,7 +232,7 @@
                     app:layout_constraintLeft_toRightOf="@id/sizeTitle"
                     android:textSize="14sp"
                     android:text="152/85"
-                    android:textColor="@color/text_4"/>
+                    android:textColor="@color/color_606060"/>
 
             <TextView
                     android:id="@+id/saleDetailsTitle"
@@ -243,7 +243,7 @@
                     android:layout_marginTop="10dp"
                     android:drawablePadding="5dp"
                     android:padding="10dp"
-                    android:background="@color/bg_3"
+                    android:background="@color/color_F0F0F0"
                     android:text="详情"
                     android:textSize="15sp"
                     android:textColor="@color/black"/>

@@ -1,41 +1,27 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-              xmlns:app="http://schemas.android.com/apk/res-auto"
-              android:layout_width="match_parent"
-              android:layout_height="match_parent"
-              android:orientation="vertical">
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+    <include layout="@layout/layout_app_title_flag" />
 
     <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="2"
+            android:layout_height="wrap_content"
             android:gravity="center"
-            android:orientation="vertical">
-
-        <ImageView
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:contentDescription="@null"
-                android:scaleType="fitXY"
-                android:src="@mipmap/login_topbg"/>
-    </LinearLayout>
-
-    <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="3"
-            android:gravity="center"
+            android:orientation="vertical"
             android:paddingStart="40dp"
-            android:paddingEnd="40dp"
-            android:orientation="vertical">
+            android:paddingEnd="40dp">
 
         <EditText
                 android:id="@+id/phone"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@android:color/transparent"
-                android:drawablePadding="5dp"
                 android:drawableStart="@drawable/icon_phone"
+                android:drawablePadding="5dp"
                 android:hint="请输入手机号码"
                 android:imeActionId="6"
                 android:imeOptions="actionUnspecified"
@@ -47,53 +33,43 @@
         <View
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
-                android:background="@color/gray_1"
-                android:layout_marginTop="10dp"/>
+                android:layout_marginTop="35dp"
+                android:background="@color/color_EEEEEE" />
 
 
-        <android.support.constraint.ConstraintLayout
+        <EditText
+                android:id="@+id/verifyCode"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="15dp">
+                android:background="@android:color/transparent"
+                android:drawableStart="@drawable/icon_yzm"
+                android:drawablePadding="5dp"
+                android:hint="请输入验证码"
+                android:imeActionId="6"
+                android:imeOptions="actionUnspecified"
+                android:inputType="phone"
+                android:maxLines="1"
+                android:singleLine="true"
+                android:textSize="14sp" />
 
-            <EditText
-                    android:id="@+id/verifyCode"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:background="@android:color/transparent"
-                    android:drawablePadding="5dp"
-                    android:hint="请输入验证码"
-                    android:drawableStart="@drawable/icon_yzm"
-                    android:imeActionId="6"
-                    android:imeOptions="actionUnspecified"
-                    android:inputType="phone"
-                    android:maxLines="1"
-                    android:singleLine="true"
-                    android:textSize="14sp"/>
+        <com.android.shuizu.myutillibrary.widget.YzmButton
+                android:id="@+id/getVerifyCode"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="end"
+                android:layout_marginTop="15dp"
+                android:padding="5dp"
+                android:enabled="false"
+                android:text="发送验证码"
+                android:textColor="@color/color_send_verify_code"
+                android:textSize="14sp" />
 
-
-            <com.android.shuizu.myutillibrary.widget.YzmButton
-                    android:id="@+id/getVerifyCode"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="获取验证码"
-                    android:textSize="14sp"
-                    android:padding="5dp"
-                    android:textColor="@color/colorPrimary"
-                    app:layout_constraintBottom_toBottomOf="@+id/verifyCode"
-                    app:layout_constraintTop_toTopOf="@+id/verifyCode"
-                    app:layout_constraintRight_toRightOf="@+id/verifyCode"/>
-
-            <View
-                    android:id="@+id/line4"
-                    android:layout_width="0dp"
-                    android:layout_height="1dp"
-                    android:layout_marginTop="10dp"
-                    android:background="@color/gray_1"
-                    app:layout_constraintLeft_toLeftOf="@id/verifyCode"
-                    app:layout_constraintRight_toRightOf="@id/verifyCode"
-                    app:layout_constraintTop_toBottomOf="@id/verifyCode"/>
-        </android.support.constraint.ConstraintLayout>
+        <View
+                android:id="@+id/line4"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginTop="10dp"
+                android:background="@color/color_EEEEEE" />
 
         <EditText
                 android:id="@+id/password"
@@ -101,21 +77,21 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="15dp"
                 android:background="@android:color/transparent"
-                android:drawablePadding="5dp"
                 android:drawableStart="@drawable/icon_password"
+                android:drawablePadding="5dp"
                 android:hint="请输入密码"
                 android:imeActionId="6"
                 android:imeOptions="actionUnspecified"
                 android:inputType="textPassword"
                 android:maxLines="1"
                 android:singleLine="true"
-                android:textSize="14sp"/>
+                android:textSize="14sp" />
 
         <View
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
-                android:background="@color/gray_1"
-                android:layout_marginTop="10dp"/>
+                android:layout_marginTop="35dp"
+                android:background="@color/color_EEEEEE" />
 
         <EditText
                 android:id="@+id/address"
@@ -123,55 +99,45 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="15dp"
                 android:background="@android:color/transparent"
-                android:drawablePadding="5dp"
                 android:drawableStart="@drawable/icon_area"
+                android:drawablePadding="5dp"
+                android:focusable="false"
                 android:hint="请选择注册地区"
                 android:imeActionId="6"
-                android:focusable="false"
                 android:imeOptions="actionUnspecified"
                 android:inputType="text"
                 android:maxLines="1"
                 android:singleLine="true"
-                android:textSize="14sp"/>
+                android:textSize="14sp" />
 
         <View
                 android:id="@+id/addressLine"
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
-                android:background="@color/gray_1"
-                android:layout_marginTop="10dp"/>
+                android:layout_marginTop="35dp"
+                android:background="@color/color_EEEEEE" />
+
         <TextView
                 android:id="@+id/goLogin"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
-                android:textSize="14sp"
                 android:gravity="end"
-                android:textColor="@color/text_1"
-                android:text="已有账号？直接登录"/>
-    </LinearLayout>
-
-
-    <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="1"
-            android:paddingStart="40dp"
-            android:paddingEnd="40dp"
-            android:paddingBottom="40dp"
-            android:orientation="vertical"
-            android:gravity="center">
+                android:text="已有账号？直接登录"
+                android:textColor="@color/color_333333"
+                android:textSize="14sp" />
 
         <TextView
                 android:id="@+id/submit"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="35dp"
                 android:background="@drawable/rect_round_purple"
                 android:gravity="center"
+                android:padding="13dp"
+                android:text="立即注册"
                 android:textColor="@android:color/white"
-                android:text="注  册"
-                android:padding="10dp"
-                android:textSize="16sp"/>
+                android:textSize="15sp" />
 
     </LinearLayout>
 

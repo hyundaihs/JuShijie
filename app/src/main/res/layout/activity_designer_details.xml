@@ -94,7 +94,7 @@
                     android:layout_marginStart="10dp"
                     android:text="反倒是开发单身快乐"
                     android:textSize="14sp"
-                    android:textColor="@color/bg_9"/>
+                    android:textColor="@color/color_CCCCCC"/>
 
 
             <TextView
@@ -108,7 +108,7 @@
                     android:layout_margin="10dp"
                     android:text="反倒是开发单身快乐"
                     android:textSize="14sp"
-                    android:textColor="@color/bg_9"/>
+                    android:textColor="@color/color_CCCCCC"/>
 
             <TextView
                     android:id="@+id/exTitle"
@@ -129,7 +129,7 @@
                     app:layout_constraintTop_toBottomOf="@id/tags"
                     android:text="10年"
                     android:textSize="14sp"
-                    android:textColor="@color/bg_9"/>
+                    android:textColor="@color/color_CCCCCC"/>
 
 
             <TextView
@@ -163,7 +163,7 @@
                     android:layout_marginTop="10dp"
                     android:drawablePadding="5dp"
                     android:padding="10dp"
-                    android:background="@color/bg_3"
+                    android:background="@color/color_F0F0F0"
                     android:text="相关案例"
                     android:textSize="15sp"
                     android:textColor="@color/black"/>

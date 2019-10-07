@@ -59,7 +59,7 @@
                     app:layout_constraintTop_toBottomOf="@+id/companyTitle"
                     android:layout_margin="10dp"
                     android:textSize="14sp"
-                    android:textColor="@color/text_1"/>
+                    android:textColor="@color/color_333333"/>
 
             <LinearLayout
                     android:id="@+id/buttons"
@@ -75,7 +75,7 @@
                         android:id="@+id/zan"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:textColor="@color/bg_9"
+                        android:textColor="@color/color_CCCCCC"
                         android:drawableStart="@mipmap/icon_z_gray"
                         android:drawablePadding="2dp"
                         android:textSize="12sp"
@@ -85,7 +85,7 @@
                         android:id="@+id/gz"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:textColor="@color/bg_9"
+                        android:textColor="@color/color_CCCCCC"
                         android:layout_marginStart="10dp"
                         android:drawableStart="@mipmap/icon_heart"
                         android:drawablePadding="2dp"
@@ -96,7 +96,7 @@
                         android:id="@+id/pl"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:textColor="@color/bg_9"
+                        android:textColor="@color/color_CCCCCC"
                         android:drawableStart="@mipmap/icon_pl"
                         android:drawablePadding="2dp"
                         android:textSize="12sp"
@@ -114,7 +114,7 @@
                     android:layout_marginTop="10dp"
                     android:drawablePadding="5dp"
                     android:padding="10dp"
-                    android:background="@color/bg_3"
+                    android:background="@color/color_F0F0F0"
                     android:text="热门评论"
                     android:textSize="15sp"
                     android:textColor="@color/black"/>
