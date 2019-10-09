@@ -265,7 +265,7 @@ class HomepageFragment : BaseFragment() {
         val map = mapOf(
             Pair("page_size", "10"),
             Pair("page", "1"),
-            Pair("tg", "1")
+            Pair("tg", "2")
         )
         KevinRequest.build(activity as Context).apply {
             setRequestUrl(PPLISTS.getInterface(map))
@@ -294,7 +294,7 @@ class HomepageFragment : BaseFragment() {
         override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
             super.onBindViewHolder(holder, position)
             val merchantInfo = data[position]
-            Picasso.with(holder.itemView.context).load(merchantInfo.pp_file_url.getImageUrl())
+            Picasso.with(holder.itemView.context).load(merchantInfo.file_url.getImageUrl())
                 .resize(200, 200)
                 .into(holder.itemView.merchantLogo)
             holder.itemView.merchantName.text = merchantInfo.title

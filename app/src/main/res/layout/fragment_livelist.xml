@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+    <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+        <com.android.shuizu.myutillibrary.widget.SwipeRefreshAndLoadLayout
+                android:id="@+id/livePageSwipe"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@color/color_F0F0F0">
+
+            <android.support.v4.widget.NestedScrollView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                <com.android.shuizu.myutillibrary.widget.EmptyRecyclerView
+                        android:id="@+id/livePageListView"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"/>
+
+            </android.support.v4.widget.NestedScrollView>
+        </com.android.shuizu.myutillibrary.widget.SwipeRefreshAndLoadLayout>
+
+        <include
+                layout="@layout/layout_list_empty"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"/>
+
+    </RelativeLayout>
+
+</LinearLayout>

@@ -4,23 +4,21 @@ import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.support.v4.app.FragmentManager
 import android.support.v4.app.FragmentPagerAdapter
-import android.support.v7.app.AppCompatActivity
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.android.jsj.R
 import com.android.shuizu.myutillibrary.fragment.BaseFragment
-import com.android.shuizu.myutillibrary.initActionBar
 import kotlinx.android.synthetic.main.fragment_concernpage.*
+import kotlinx.android.synthetic.main.fragment_livepage.*
 
 /**
- * ChaYin
- * Created by ${蔡雨峰} on 2019/7/23/023.
+ * JuShijie
+ * Created by 蔡雨峰 on 2019/10/9.
  */
-class ConcernpageFragment : BaseFragment() {
-
+class LivePageFragment :BaseFragment(){
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        return inflater.inflate(R.layout.fragment_concernpage, container, false)
+        return inflater.inflate(R.layout.fragment_livepage, container, false)
     }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
@@ -30,13 +28,22 @@ class ConcernpageFragment : BaseFragment() {
 
     private fun initViews() {
         val fragments = ArrayList<Fragment>()
-        val titles = listOf("我的饰界", "商家", "资讯", "案例")
-        fragments.add(MyWorldFragment())
-        fragments.add(MerchantFragment())
-        fragments.add(NewsFragment())
-        fragments.add(CaseFragment())
-        viewpagerConcern.adapter = MyPagerAdapter(childFragmentManager, fragments, titles)
-        tabLayoutConcern.setupWithViewPager(viewpagerConcern)//此方法就是让tablayout和ViewPager联动
+        val keys = listOf(
+            LiveListFragment.LOCAL,
+            LiveListFragment.All
+        )
+        val titles = listOf("本地直播", "全部直播")
+
+        for (i in 0 until keys.size) {
+            val liveListFragment = LiveListFragment()
+            val bundle = Bundle()
+            bundle.putInt(LiveListFragment.PAGE_KEY, keys[i])
+            liveListFragment.arguments = bundle
+            fragments.add(liveListFragment)
+        }
+
+        viewpagerLivePage.adapter = MyPagerAdapter(childFragmentManager, fragments, titles)
+        tabLayoutLivePage.setupWithViewPager(viewpagerLivePage)//此方法就是让tablayout和ViewPager联动
     }
 
     private class MyPagerAdapter(fm: FragmentManager?, val fragments: List<Fragment>, val titles: List<String>) :
@@ -46,7 +53,7 @@ class ConcernpageFragment : BaseFragment() {
             return fragments.size
         }
 
-        override fun getItem(position: Int): android.support.v4.app.Fragment {
+        override fun getItem(position: Int): Fragment {
             return fragments[position]
         }
 

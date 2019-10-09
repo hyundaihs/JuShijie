@@ -1,90 +1,62 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-        xmlns:android="http://schemas.android.com/apk/res/android"
-        android:orientation="vertical"
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:orientation="vertical"
         android:paddingTop="20dp">
 
     <TextView
+            android:id="@+id/layoutTitle"
             android:layout_width="match_parent"
             android:layout_height="50dp"
-            android:gravity="center"
-            android:text="直播"
-            android:maxLines="1"
             android:background="@color/white"
+            android:gravity="center"
+            android:maxLines="1"
+            android:text="直播"
             android:textColor="#333333"
-            android:textSize="18sp" />
-
-    <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal">
-
-        <LinearLayout
-                android:layout_width="0dp"
-                android:layout_weight="1"
-                android:layout_height="wrap_content"
-                android:gravity="center"
-                android:padding="10dp">
-
-            <TextView
-                    android:id="@+id/chooseAddress"
-                    android:layout_width="wrap_content"
-                    android:gravity="center"
-                    android:drawablePadding="5dp"
-                    android:drawableEnd="@mipmap/down"
-                    android:layout_height="wrap_content"
-                    android:text="区域"/>
-
-        </LinearLayout>
-
-        <LinearLayout
-                android:layout_width="0dp"
-                android:layout_weight="1"
-                android:gravity="center"
-                android:padding="10dp"
-                android:layout_height="wrap_content">
-
-            <TextView
-                    android:id="@+id/chooseMerchant"
-                    android:layout_width="wrap_content"
-                    android:drawableEnd="@mipmap/down"
-                    android:drawablePadding="5dp"
-                    android:layout_height="wrap_content"
-                    android:gravity="center"
-                    android:text="商家类型"/>
-        </LinearLayout>
-    </LinearLayout>
+            android:textSize="18sp"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
     <RelativeLayout
+            android:id="@+id/layoutTab"
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="wrap_content"
+            android:background="@color/white"
+            app:layout_constraintTop_toBottomOf="@id/layoutTitle">
 
-        <include
-                layout="@layout/layout_list_empty"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_centerInParent="true"/>
-
-        <com.android.shuizu.myutillibrary.widget.SwipeRefreshAndLoadLayout
-                android:id="@+id/livePageSwipe"
+        <View
+                android:id="@+id/evBg"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:background="@color/color_F0F0F0">
+                android:layout_height="20dp"
+                android:background="@drawable/bg_homepage_f0_to_ff" />
 
-            <android.support.v4.widget.NestedScrollView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
-
-                <com.android.shuizu.myutillibrary.widget.EmptyRecyclerView
-                        android:id="@+id/livePageListView"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"/>
-
-            </android.support.v4.widget.NestedScrollView>
-        </com.android.shuizu.myutillibrary.widget.SwipeRefreshAndLoadLayout>
-
+        <android.support.design.widget.TabLayout
+                android:id="@+id/tabLayoutLivePage"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@android:color/transparent"
+                app:tabGravity="fill"
+                app:tabIndicatorColor="@color/color_5660F5"
+                app:tabMode="fixed"
+                app:tabSelectedTextColor="@color/color_5660F5"
+                app:tabTextColor="@color/color_555555" />
     </RelativeLayout>
 
-</LinearLayout>
+    <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/color_E8E8E8"
+            app:layout_constraintTop_toBottomOf="@id/layoutTab" />
+
+
+    <android.support.v4.view.ViewPager
+            android:id="@+id/viewpagerLivePage"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:background="@color/color_F0F0F0"
+            app:layout_constraintTop_toBottomOf="@+id/layoutTab" />
+
+</android.support.constraint.ConstraintLayout>

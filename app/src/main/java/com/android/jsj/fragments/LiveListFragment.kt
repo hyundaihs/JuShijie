@@ -3,7 +3,6 @@ package com.android.jsj.fragments
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
-import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.DefaultItemAnimator
 import android.support.v7.widget.GridLayoutManager
 import android.view.LayoutInflater
@@ -20,7 +19,6 @@ import com.android.shuizu.myutillibrary.adapter.GridDivider
 import com.android.shuizu.myutillibrary.adapter.MyBaseAdapter
 import com.android.shuizu.myutillibrary.dp2px
 import com.android.shuizu.myutillibrary.fragment.BaseFragment
-import com.android.shuizu.myutillibrary.initActionBar
 import com.android.shuizu.myutillibrary.request.KevinRequest
 import com.android.shuizu.myutillibrary.utils.CalendarUtil
 import com.android.shuizu.myutillibrary.utils.DifferType
@@ -29,7 +27,7 @@ import com.android.shuizu.myutillibrary.utils.getMessageDialog
 import com.android.shuizu.myutillibrary.widget.SwipeRefreshAndLoadLayout
 import com.google.gson.Gson
 import com.squareup.picasso.Picasso
-import kotlinx.android.synthetic.main.fragment_livepage.*
+import kotlinx.android.synthetic.main.fragment_livelist.*
 import kotlinx.android.synthetic.main.layout_list_empty.*
 import kotlinx.android.synthetic.main.layout_live_list_item.view.*
 
@@ -37,28 +35,30 @@ import kotlinx.android.synthetic.main.layout_live_list_item.view.*
  * ChaYin
  * Created by ${蔡雨峰} on 2019/7/23/023.
  */
-class LivepageFragment : BaseFragment() {
+class LiveListFragment : BaseFragment() {
 
+    companion object {
+        const val PAGE_KEY = "live_type"
+        const val LOCAL = 1 //本地直播
+        const val All = 2
+
+    }
+
+    private var pageKey = LOCAL
     private val liveInfoList = ArrayList<LiveInfo>()
     private val liveAdapter = LiveAdapter(liveInfoList)
-    private val chooseTypes = ArrayList<ChooseType>()
-    private var currType = 0
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        return inflater.inflate(R.layout.fragment_livepage, container, false)
+        return inflater.inflate(R.layout.fragment_livelist, container, false)
     }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
+        pageKey = arguments!!.getInt(PAGE_KEY,LOCAL)
         initViews()
     }
 
     private fun initViews() {
-        chooseTypes.clear()
-        chooseTypes.add(ChooseType(0, "类型不限"))
-        chooseTypes.addAll(chooseType.getValue("14"))
-        PickerUtil.initChooseType(chooseTypes)
-
         val gridLayoutManager = GridLayoutManager(context, 2)
         livePageListView.layoutManager = gridLayoutManager
         //水平分割线
@@ -107,20 +107,6 @@ class LivepageFragment : BaseFragment() {
             }
         }
         refresh()
-        chooseAddress.setOnClickListener {
-            PickerUtil.showAddress(context) { options1, options2, options3, v ->
-                chooseAddress.text = chooseTypes[options1].pickerViewText
-            }
-        }
-        chooseMerchant.setOnClickListener {
-            PickerUtil.showChooseType(context, "商家类型") { options1, options2, options3, v ->
-                currType = chooseTypes[options1].id
-                chooseMerchant.text = chooseTypes[options1].pickerViewText
-                livePageSwipe.isRefreshing = true
-                refresh()
-            }
-        }
-
     }
 
 
@@ -133,12 +119,10 @@ class LivepageFragment : BaseFragment() {
     }
 
     private fun getLiveList(page: Int, isRefresh: Boolean = false) {
-        D("page = $page")
         val map = mapOf(
             Pair("page_size", "10"),
             Pair("page", page),
-            Pair("ppfl_id", currType),
-            Pair("gz", "0")
+            Pair("bdqb", if(pageKey == LOCAL) 1 else 2)
         )
         KevinRequest.build(activity as Context).apply {
             setRequestUrl(ZBLB.getInterface(map))

@@ -1,15 +1,11 @@
 package com.android.jsj.ui
 
-import android.os.Build
 import android.os.Bundle
 import android.os.Handler
 import android.os.Message
 import android.support.v4.app.Fragment
 import com.android.jsj.R
-import com.android.jsj.fragments.ConcernpageFragment
-import com.android.jsj.fragments.HomepageFragment
-import com.android.jsj.fragments.LivepageFragment
-import com.android.jsj.fragments.MinepageFragment
+import com.android.jsj.fragments.*
 import com.android.shuizu.myutillibrary.MyBaseActivity
 import com.ashokvarma.bottomnavigation.BottomNavigationBar
 import com.ashokvarma.bottomnavigation.BottomNavigationItem
@@ -102,7 +98,7 @@ class HomeActivity : MyBaseActivity(), BottomNavigationBar.OnTabSelectedListener
         if (fragments[position] == null) {
             fragments[position] = when (position) {
                 0 -> HomepageFragment()
-                1 -> LivepageFragment()
+                1 -> LivePageFragment()
                 2 -> ConcernpageFragment()
                 3 -> MinepageFragment()
                 else -> MinepageFragment()
